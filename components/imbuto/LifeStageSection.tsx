@@ -55,9 +55,9 @@ export function LifeStageSection() {
           {ages.map((item, index) => (
             <StaggerItem key={`${item.age}-feature`}>
               <div className={`rounded-[28px] p-6 shadow-sm ${
-                index === 0 ? "bg-[#d9ea52] text-[#0b2f3b]" :
-                index === 1 ? "bg-white text-[#0b2f3b]" :
-                index === 2 ? "bg-[#d6a7f4] text-[#161616]" :
+                index === 0 ? "bg-[#ed9b37] text-[#0b2f3b]" :
+                index === 1 ? "bg-[white] text-[#0b2f3b]" :
+                index === 2 ? "bg-[#52b3a9] text-[#161616]" :
                 "bg-[#e9f0ec] text-[#0b2f3b]"
               }`}>
                 <div className="flex items-start justify-between gap-4">

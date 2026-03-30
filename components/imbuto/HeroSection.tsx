@@ -16,12 +16,12 @@ export function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 pb-4 pt-8 md:pb-4 md:pt-8">
         <Reveal className="max-w-3xl" delay={0.05} y={24}>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md ">
             <Sparkles className="h-4 w-4" />
             Community spaces for learning, wellbeing, creativity, and leadership
           </div>
 
-          <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.03em] md:text-6xl">
+          <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.03em] md:text-6xl text-[var(--color-yellow)]/85">
             A safe space to learn, grow, and lead.
           </h1>
 
@@ -30,11 +30,11 @@ export function HeroSection() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[#E16A3D]/30 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]">
+            <button className="group inline-flex items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-[#E16A3D]/30 transition hover:-translate-y-0.5 hover:bg-[#cf5d34] ![font-family:'Ruchill']">
               Find a Hub
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/15">
+            <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/15 ![font-family:'Ruchill']">
               Explore Programs
             </button>
           </div>

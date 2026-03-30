@@ -6,9 +6,9 @@ import { Reveal } from "./motion";
 
 export function PillarsSection() {
   return (
-    <section className="overflow-hidden py-24">
+    <section className="bg-[#053e52] overflow-hidden py-24">
       <Reveal className="mx-auto max-w-7xl px-6">
-        <div className="overflow-hidden rounded-[40px] bg-[#043E52] px-6 py-8 text-white shadow-[0_30px_90px_rgba(15,23,42,0.12)] md:px-10 md:py-10">
+        <div className="overflow-hidden rounded-[40px] bg-[#2b6274]/20 px-6 py-8 text-white shadow-[0_30px_90px_rgba(15,23,42,0.12)] md:px-10 md:py-10">
           <div className="flex flex-col gap-6 border-b border-white/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="text-sm font-medium uppercase tracking-[0.26em] text-[#FFA45D]">Programme pillars</div>

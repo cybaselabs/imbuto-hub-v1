@@ -6,7 +6,7 @@ import { Reveal, StaggerGrid, StaggerItem } from "./motion";
 
 export function HubsSection() {
   return (
-    <section className="overflow-hidden py-24">
+    <section className="bg-[#c05d24] overflow-hidden py-24">
       <Reveal className="mx-auto max-w-7xl px-6">
         <div className="overflow-hidden rounded-[40px] bg-[#120f52] px-5 py-6 text-white shadow-[0_30px_90px_rgba(15,23,42,0.16)] md:px-7 md:py-7">
           <div className="grid gap-4 xl:grid-cols-[1.6fr_0.95fr]">

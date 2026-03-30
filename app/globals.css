@@ -1,15 +1,178 @@
 @import "tailwindcss";
 
+/* =========================
+   RUCHILL (HEADINGS / NAV)
+========================= */
+@font-face {
+  font-family: "Ruchill";
+  src: url("/fonts/Ruchill.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   AILERON (ALL WEIGHTS)
+========================= */
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Heavy.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italics */
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-Italic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-LightItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-BoldItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-HeavyItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-BlackItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-ThinItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-UltraLight.otf") format("opentype");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-UltraLightItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aileron";
+  src: url("/fonts/Aileron-SemiBoldItalic.otf") format("opentype");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* =========================
+   THEME
+========================= */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand palette */
+  --color-primary: #2b6274;
+  --color-dark: #102c35;
+  --color-teal: #52b3a9;
+  --color-yellow: #f5c346;
+  --color-orange: #ed9b37;
+  --color-orange-dark: #c05d24;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--color-primary);
+  --color-dark: var(--color-dark);
+  --color-teal: var(--color-teal);
+  --color-yellow: var(--color-yellow);
+  --color-orange: var(--color-orange);
+  --color-orange-dark: var(--color-orange-dark);
+
+  --font-heading: "Ruchill", serif;
+  --font-body: "Aileron", Arial, sans-serif;
+  --font-sans: "Aileron", Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +182,71 @@
   }
 }
 
+/* =========================
+   GLOBAL STYLES
+========================= */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Aileron", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================
+   HEADINGS → RUCHILL
+========================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: "Ruchill", serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+/* =========================
+   TEXT → AILERON
+========================= */
+/* p,
+li,
+span,
+a,
+button,
+input,
+textarea,
+label {
+  font-family: "Aileron", Arial, sans-serif;
+} */
+
+p {
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+/* =========================
+   NAV → RUCHILL
+========================= */
+.nav-font,
+.nav-font span,
+.nav-font a,
+.nav-font button {
+  font-family: "Ruchill", serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 1;
 }
