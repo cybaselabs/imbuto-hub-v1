@@ -11,44 +11,128 @@ import {
   Trophy,
   Users,
 } from "lucide-react";
-import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  XIcon,
+  YoutubeIcon,
+} from "./icons";
 import { image } from "framer-motion/client";
 
-export const heroImage =
-  "public://images/imbuto-hero.jpg";
-export const aboutImage = "images/55137475546_055ffa64da_k.jpg";  
+// export const heroImage = "images/55137473511_81bbe538ab_k.jpg";
+export const heroImage = "images/imbutohub.png";
+export const aboutImage = "images/55137475546_055ffa64da_k.jpg";
 export const featureImage =
   "`https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/205.jpg";
 export const lifeStageImage = "images/55137476261_97dc06c8bf_k.jpg";
 export const lifeStagImage_2 = "images/54513810799_7d0c00742c_k.jpg";
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop";  
+("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop");
 export const ctaImage = "images/55137870940_234fc85fe2_k.jpg";
-export const hubsImage = "images/54945709915_c6b625f130_k.jpg"
-export const hubsImage_2 = "images/55136596177_ae05fc0d97_k.jpg"
+export const hubsImage = "images/54945709915_c6b625f130_k.jpg";
+export const hubsImage_2 = "images/55136596177_ae05fc0d97_k.jpg";
 
 export const quickActions = [
-  { title: "Find a Hub", icon: MapPinned, subtitle: "Discover the nearest Imbuto Hub in your community." },
-  { title: "Explore Programs", icon: Compass, subtitle: "Browse opportunities for learning, wellbeing, and growth." },
-  { title: "Register Interest", icon: Sparkles, subtitle: "Tell us what you need and we will guide you to the right path." },
-  { title: "Get Involved", icon: HandHeart, subtitle: "Volunteer, mentor, partner, or support a programme." },
+  {
+    title: "Find a Hub",
+    icon: MapPinned,
+    subtitle: "Discover the nearest Imbuto Hub in your community.",
+  },
+  {
+    title: "Explore Programs",
+    icon: Compass,
+    subtitle: "Browse opportunities for learning, wellbeing, and growth.",
+  },
+  {
+    title: "Register Interest",
+    icon: Sparkles,
+    subtitle: "Tell us what you need and we will guide you to the right path.",
+  },
+  {
+    title: "Get Involved",
+    icon: HandHeart,
+    subtitle: "Volunteer, mentor, partner, or support a programme.",
+  },
 ];
 
 export const pillars = [
-  { title: "Early Childhood Development", blurb: "Play-based early learning and family support that help children start strong.", icon: BookOpen, image: "images/54513984590_0fcde5be3d_k.jpg" },
-  { title: "Education & Personal Development", blurb: "Reading culture, mentorship, and life skills for success in school and beyond.", icon: Users, image: "images/54945400951_90ba3d130b_k.jpg" },
-  { title: "Digital Literacy & Innovation", blurb: "Practical digital skills, ICT access, and future-ready learning.", icon: Sparkles, image: "images/52552727843_776ae789f1_k.jpg" },
-  { title: "Health & Wellbeing", blurb: "Counselling, mental health awareness, and support for healthy choices.", icon: HeartPulse, image: "images/ecadfe9f73f23947.jpeg" },
-  { title: "Sports & Recreation", blurb: "Safe sport and play that build discipline, confidence, and teamwork.", icon: Trophy, image: "images/52548376321_dda8370097_k.jpg" },
-  { title: "Creative Arts & Culture", blurb: "Spaces to create, express, and grow through arts, culture, and storytelling.", icon: Palette, image: "images/55137656258_b872b35591_k.jpg" },
-  { title: "Skills, Entrepreneurship & Job Readiness", blurb: "Skills training and support to prepare for work and business.", icon: Briefcase, image: "images/54513896658_550ab2509d_k.jpg" },
-  { title: "Leadership & Civic Engagement", blurb: "Leadership development and active citizenship for community impact.", icon: Flag, image: "images/54513896658_550ab2509d_k.jpg" },
+  {
+    title: "Early Childhood Development",
+    blurb:
+      "Play-based early learning and family support that help children start strong.",
+    icon: BookOpen,
+    image: "images/54513984590_0fcde5be3d_k.jpg",
+  },
+  {
+    title: "Education & Personal Development",
+    blurb:
+      "Reading culture, mentorship, and life skills for success in school and beyond.",
+    icon: Users,
+    image: "images/54945400951_90ba3d130b_k.jpg",
+  },
+  {
+    title: "Digital Literacy & Innovation",
+    blurb: "Practical digital skills, ICT access, and future-ready learning.",
+    icon: Sparkles,
+    image: "images/52552727843_776ae789f1_k.jpg",
+  },
+  {
+    title: "Health & Wellbeing",
+    blurb:
+      "Counselling, mental health awareness, and support for healthy choices.",
+    icon: HeartPulse,
+    image: "images/ecadfe9f73f23947.jpeg",
+  },
+  {
+    title: "Sports & Recreation",
+    blurb:
+      "Safe sport and play that build discipline, confidence, and teamwork.",
+    icon: Trophy,
+    image: "images/52548376321_dda8370097_k.jpg",
+  },
+  {
+    title: "Creative Arts & Culture",
+    blurb:
+      "Spaces to create, express, and grow through arts, culture, and storytelling.",
+    icon: Palette,
+    image: "images/55137656258_b872b35591_k.jpg",
+  },
+  {
+    title: "Skills, Entrepreneurship & Job Readiness",
+    blurb: "Skills training and support to prepare for work and business.",
+    icon: Briefcase,
+    image: "images/54513896658_550ab2509d_k.jpg",
+  },
+  {
+    title: "Leadership & Civic Engagement",
+    blurb:
+      "Leadership development and active citizenship for community impact.",
+    icon: Flag,
+    image: "images/54513896658_550ab2509d_k.jpg",
+  },
 ];
 
 export const ages = [
-  { age: "1–6 years", title: "Strong foundations", desc: "Early learning, play, and parent or caregiver support." },
-  { age: "7–12 years", title: "Discovery", desc: "Reading culture, skills discovery, safe play, and confidence building." },
-  { age: "13–18 years", title: "Growth", desc: "Mentorship, digital skills, wellbeing, creativity, sport, and leadership." },
-  { age: "18 and beyond", title: "Purpose", desc: "Skills training, entrepreneurship support, job readiness, and leadership." },
+  {
+    age: "1–6 years",
+    title: "Strong foundations",
+    desc: "Early learning, play, and parent or caregiver support.",
+  },
+  {
+    age: "7–12 years",
+    title: "Discovery",
+    desc: "Reading culture, skills discovery, safe play, and confidence building.",
+  },
+  {
+    age: "13–18 years",
+    title: "Growth",
+    desc: "Mentorship, digital skills, wellbeing, creativity, sport, and leadership.",
+  },
+  {
+    age: "18 and beyond",
+    title: "Purpose",
+    desc: "Skills training, entrepreneurship support, job readiness, and leadership.",
+  },
 ];
 
 export const stats = [
@@ -59,22 +143,67 @@ export const stats = [
 ];
 
 export const partners = [
-  { name: "Partner 1", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview.webp" },
-  { name: "Partner 2", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-1.webp" },
-  { name: "Partner 3", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-2.webp" },
-  { name: "Partner 4", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-3.webp" },
-  { name: "Partner 5", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-4.webp" },
-  { name: "Partner 6", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-5.webp" },
-  { name: "Partner 7", logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-6.webp" },
+  {
+    name: "Partner 1",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview.webp",
+  },
+  {
+    name: "Partner 2",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-1.webp",
+  },
+  {
+    name: "Partner 3",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-2.webp",
+  },
+  {
+    name: "Partner 4",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-3.webp",
+  },
+  {
+    name: "Partner 5",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-4.webp",
+  },
+  {
+    name: "Partner 6",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-5.webp",
+  },
+  {
+    name: "Partner 7",
+    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-6.webp",
+  },
 ];
 
 export const hubCards = [
-  { name: "Kigali Imbuto Hub", location: "Kigali City", tone: "bg-[#f6edd8] text-[#173d3f]" },
-  { name: "Musanze Imbuto Hub", location: "Musanze, Northern Province", tone: "bg-[#dceef8] text-[#173d3f]" },
-  { name: "Huye Imbuto Hub", location: "Huye, Southern Province", tone: "bg-[#d9ea52] text-[#111827]" },
-  { name: "Rubavu Imbuto Hub", location: "Rubavu, Western Province", tone: "bg-white text-[#111827]" },
-  { name: "Nyagatare Imbuto Hub", location: "Nyagatare, Eastern Province", tone: "bg-[#d6a7f4] text-[#111827]" },
-  { name: "Rwamagana Imbuto Hub", location: "Rwamagana, Eastern Province", tone: "bg-[#ff5b2e] text-white" },
+  {
+    name: "Kigali Imbuto Hub",
+    location: "Kigali City",
+    tone: "bg-[#f6edd8] text-[#173d3f]",
+  },
+  {
+    name: "Musanze Imbuto Hub",
+    location: "Musanze, Northern Province",
+    tone: "bg-[#dceef8] text-[#173d3f]",
+  },
+  {
+    name: "Huye Imbuto Hub",
+    location: "Huye, Southern Province",
+    tone: "bg-[#d9ea52] text-[#111827]",
+  },
+  {
+    name: "Rubavu Imbuto Hub",
+    location: "Rubavu, Western Province",
+    tone: "bg-white text-[#111827]",
+  },
+  {
+    name: "Nyagatare Imbuto Hub",
+    location: "Nyagatare, Eastern Province",
+    tone: "bg-[#d6a7f4] text-[#111827]",
+  },
+  {
+    name: "Rwamagana Imbuto Hub",
+    location: "Rwamagana, Eastern Province",
+    tone: "bg-[#ff5b2e] text-white",
+  },
 ];
 
 export const pillarBackgrounds = [

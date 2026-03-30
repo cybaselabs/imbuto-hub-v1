@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-[#043E52] pb-4 pt-8 text-white md:pb-24 md:pt-28">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-cover bg-center opacity-25" style={{ backgroundImage: `url('${heroImage}')` }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${heroImage}')` }} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,164,93,0.35),transparent_30%),radial-gradient(circle_at_left_center,rgba(1,106,109,0.5),transparent_35%),linear-gradient(90deg,rgba(4,62,82,0.94)_0%,rgba(4,62,82,0.72)_45%,rgba(4,62,82,0.38)_100%)]" />
         <div className="absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#E16A3D]/20 blur-3xl" />
         <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-[#016A6D]/30 blur-3xl" />
