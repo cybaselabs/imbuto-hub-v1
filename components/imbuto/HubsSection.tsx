@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { featureImage, hubCards } from "./data";
+import { featureImage, hubCards, hubsImage, hubsImage_2 } from "./data";
 import { Reveal, StaggerGrid, StaggerItem } from "./motion";
 
 export function HubsSection() {
@@ -24,7 +24,7 @@ export function HubsSection() {
               </div>
 
               <div className="relative min-h-[340px] overflow-hidden rounded-[30px] bg-[#dceef8]">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${featureImage}')` }} />
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${hubsImage}')` }} />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#120f52]/20 via-transparent to-transparent" />
               </div>
             </Reveal>
@@ -32,17 +32,17 @@ export function HubsSection() {
             <Reveal className="grid gap-4" delay={0.1}>
               <div className="rounded-[30px] bg-white p-4 text-slate-900 shadow-sm ring-1 ring-black/5">
                 <div className="overflow-hidden rounded-[22px] bg-[#dceef8]">
-                  <div className="h-40 bg-cover bg-center" style={{ backgroundImage: `url('${featureImage}')` }} />
+                  <div className="h-40 bg-cover bg-top" style={{ backgroundImage: `url('${hubsImage_2}')` }} />
                 </div>
                 <div className="px-1 pb-1 pt-4">
-                  <div className="text-2xl font-semibold text-[#111827]">Featured hub network</div>
+                  <div className="text-2xl font-semibold text-[#111827] ![font-family:'Ruchill']">Featured hub network</div>
                   <p className="mt-2 text-sm leading-6 text-slate-600">A growing national footprint connecting local communities to opportunity, learning, and wellbeing.</p>
                 </div>
               </div>
 
               <div className="rounded-[30px] bg-[#016A6D] p-6 text-white shadow-sm">
                 <div className="text-sm uppercase tracking-[0.24em] text-white/70">Hub locations</div>
-                <div className="mt-3 text-3xl font-semibold leading-tight">Browse hubs by name and district.</div>
+                <div className="mt-3 text-3xl font-semibold leading-tight ![font-family:'Ruchill']">Browse hubs by name and district.</div>
                 <div className="mt-4 text-sm leading-7 text-white/80">This section can later link each card directly to its hub detail page.</div>
               </div>
             </Reveal>
@@ -53,7 +53,7 @@ export function HubsSection() {
               <StaggerItem key={hub.name}>
                 <div className={`rounded-[30px] p-6 shadow-sm transition hover:-translate-y-1 ${hub.tone}`}>
                   <div className="flex items-start justify-between gap-4">
-                    <div className="max-w-[220px] text-3xl font-semibold leading-none tracking-[-0.04em]">{hub.name}</div>
+                    <div className="max-w-[220px] text-3xl font-semibold leading-none tracking-[-0.04em] ![font-family:'Ruchill']">{hub.name}</div>
                     <ArrowRight className="mt-1 h-7 w-7 opacity-70" />
                   </div>
                   <p className="mt-8 max-w-xs text-base leading-7 opacity-80">{hub.location}</p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, ChevronRight, Sparkles, Users } from "lucide-react";
-import { featureImage } from "./data";
+import { featureImage, aboutImage } from "./data";
 import { Reveal, StaggerGrid, StaggerItem } from "./motion";
 
 const featureBullets = [
@@ -23,7 +23,7 @@ export function AboutSection() {
             <div className="absolute inset-0 bg-[linear-gradient(145deg,#043E52,#016A6D)]" />
             <div
               className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-[1.04]"
-              style={{ backgroundImage: `url('${featureImage}')` }}
+              style={{ backgroundImage: `url('${aboutImage}')` }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(4,62,82,0.35))]" />
 

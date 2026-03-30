@@ -12,13 +12,19 @@ import {
   Users,
 } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./icons";
+import { image } from "framer-motion/client";
 
 export const heroImage =
-  "https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=1800&auto=format&fit=crop";
+  "public://images/imbuto-hero.jpg";
+export const aboutImage = "images/55137475546_055ffa64da_k.jpg";  
 export const featureImage =
-  "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/205.jpg";
-export const ctaImage =
-  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1800&auto=format&fit=crop";
+  "`https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/205.jpg";
+export const lifeStageImage = "images/55137476261_97dc06c8bf_k.jpg";
+export const lifeStagImage_2 = "images/54513810799_7d0c00742c_k.jpg";
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop";  
+export const ctaImage = "images/55137870940_234fc85fe2_k.jpg";
+export const hubsImage = "images/54945709915_c6b625f130_k.jpg"
+export const hubsImage_2 = "images/55136596177_ae05fc0d97_k.jpg"
 
 export const quickActions = [
   { title: "Find a Hub", icon: MapPinned, subtitle: "Discover the nearest Imbuto Hub in your community." },
@@ -28,14 +34,14 @@ export const quickActions = [
 ];
 
 export const pillars = [
-  { title: "Early Childhood Development", blurb: "Play-based early learning and family support that help children start strong.", icon: BookOpen },
-  { title: "Education & Personal Development", blurb: "Reading culture, mentorship, and life skills for success in school and beyond.", icon: Users },
-  { title: "Digital Literacy & Innovation", blurb: "Practical digital skills, ICT access, and future-ready learning.", icon: Sparkles },
-  { title: "Health & Wellbeing", blurb: "Counselling, mental health awareness, and support for healthy choices.", icon: HeartPulse },
-  { title: "Sports & Recreation", blurb: "Safe sport and play that build discipline, confidence, and teamwork.", icon: Trophy },
-  { title: "Creative Arts & Culture", blurb: "Spaces to create, express, and grow through arts, culture, and storytelling.", icon: Palette },
-  { title: "Skills, Entrepreneurship & Job Readiness", blurb: "Skills training and support to prepare for work and business.", icon: Briefcase },
-  { title: "Leadership & Civic Engagement", blurb: "Leadership development and active citizenship for community impact.", icon: Flag },
+  { title: "Early Childhood Development", blurb: "Play-based early learning and family support that help children start strong.", icon: BookOpen, image: "images/54513984590_0fcde5be3d_k.jpg" },
+  { title: "Education & Personal Development", blurb: "Reading culture, mentorship, and life skills for success in school and beyond.", icon: Users, image: "images/54945400951_90ba3d130b_k.jpg" },
+  { title: "Digital Literacy & Innovation", blurb: "Practical digital skills, ICT access, and future-ready learning.", icon: Sparkles, image: "images/52552727843_776ae789f1_k.jpg" },
+  { title: "Health & Wellbeing", blurb: "Counselling, mental health awareness, and support for healthy choices.", icon: HeartPulse, image: "images/ecadfe9f73f23947.jpeg" },
+  { title: "Sports & Recreation", blurb: "Safe sport and play that build discipline, confidence, and teamwork.", icon: Trophy, image: "images/52548376321_dda8370097_k.jpg" },
+  { title: "Creative Arts & Culture", blurb: "Spaces to create, express, and grow through arts, culture, and storytelling.", icon: Palette, image: "images/55137656258_b872b35591_k.jpg" },
+  { title: "Skills, Entrepreneurship & Job Readiness", blurb: "Skills training and support to prepare for work and business.", icon: Briefcase, image: "images/54513896658_550ab2509d_k.jpg" },
+  { title: "Leadership & Civic Engagement", blurb: "Leadership development and active citizenship for community impact.", icon: Flag, image: "images/54513896658_550ab2509d_k.jpg" },
 ];
 
 export const ages = [

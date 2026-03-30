@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { ages, featureImage } from "./data";
+import { ages, featureImage , lifeStageImage, lifeStagImage_2} from "./data";
 import { Reveal, StaggerGrid, StaggerItem } from "./motion";
 
 export function LifeStageSection() {
@@ -27,7 +27,7 @@ export function LifeStageSection() {
             </div>
 
             <div className="relative min-h-[320px] overflow-hidden rounded-[28px] bg-white/40">
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${featureImage}')` }} />
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${lifeStageImage}')` }} />
               <div className="absolute inset-0 bg-gradient-to-t from-[#043E52]/15 via-transparent to-transparent" />
             </div>
           </Reveal>
@@ -35,7 +35,7 @@ export function LifeStageSection() {
           <Reveal className="grid gap-4" delay={0.1}>
             <div className="rounded-[28px] bg-white p-4 shadow-sm ring-1 ring-slate-200/70">
               <div className="overflow-hidden rounded-[22px] bg-[#dff0eb]">
-                <div className="h-44 bg-cover bg-center" style={{ backgroundImage: `url('${featureImage}')` }} />
+                <div className="h-44 bg-cover bg-center" style={{ backgroundImage: `url('${lifeStagImage_2}')` }} />
               </div>
               <div className="px-1 pb-1 pt-4">
                 <div className="text-2xl font-semibold text-[#043E52]">Whole-person growth</div>
@@ -43,7 +43,7 @@ export function LifeStageSection() {
               </div>
             </div>
 
-            <div className="rounded-[28px] bg-[#016A6D] p-6 text-white shadow-sm">
+            <div className="rounded-[28px] bg-[#c05d24] p-6 text-white shadow-sm">
               <div className="text-sm uppercase tracking-[0.24em] text-white/70">Across all stages</div>
               <div className="mt-3 text-3xl font-semibold leading-tight">A connected journey, not isolated programmes.</div>
               <div className="mt-4 text-sm leading-7 text-white/80">From ages 1–6, 7–12, 13–18, and 18+, every step opens the next one.</div>
