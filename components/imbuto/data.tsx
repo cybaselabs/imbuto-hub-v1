@@ -19,6 +19,7 @@ import {
   YoutubeIcon,
 } from "./icons";
 import { image } from "framer-motion/client";
+import { color } from "framer-motion";
 
 // export const heroImage = "images/55137473511_81bbe538ab_k.jpg";
 export const heroImage = "images/imbutohub.png";
@@ -37,21 +38,25 @@ export const quickActions = [
     title: "Find a Hub",
     icon: MapPinned,
     subtitle: "Discover the nearest Imbuto Hub in your community.",
+    color: "bg-[#E16A3D]",
   },
   {
     title: "Explore Programs",
     icon: Compass,
     subtitle: "Browse opportunities for learning, wellbeing, and growth.",
+    color: "bg-[#E16A3D]",
   },
   {
     title: "Register Interest",
     icon: Sparkles,
     subtitle: "Tell us what you need and we will guide you to the right path.",
+    color: "bg-[#E16A3D]",
   },
   {
     title: "Get Involved",
     icon: HandHeart,
     subtitle: "Volunteer, mentor, partner, or support a programme.",
+    color: "bg-[#E16A3D]",
   },
 ];
 
