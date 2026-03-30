@@ -25,7 +25,7 @@ export function PillarsSection() {
             </button>
           </div>
 
-          <div className="mt-8 p-5 overflow-hidden rounded-[32px] bg-white/5 p-2 ring-1 ring-white/10">
+          <div className="mt-8 overflow-hidden rounded-[32px] bg-white/5 ring-1 ring-white/10">
             <div className="flex snap-x  snap-mandatory gap-4 overflow-x-auto px-2 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {pillars.map((pillar, idx) => {
                 const Icon = pillar.icon;
