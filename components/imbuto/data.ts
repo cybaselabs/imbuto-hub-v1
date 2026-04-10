@@ -12,9 +12,9 @@ import {
   Users,
 } from "lucide-react";
 
-export const heroImage = "/images/imbutohub.png";
-export const aboutImage = "/images/55137475546_055ffa64da_k.jpg";
-export const lifeStageImage = "/images/55137476261_97dc06c8bf_k.jpg";
+export const heroImage = "/images/herosection.jpg";
+export const aboutImage = "/images/54945681330_6035d49ddf_o.jpg";
+export const lifeStageImage = "/images/leadership.jpg";
 export const lifeStageImage2 = "/images/54513810799_7d0c00742c_k.jpg";
 export const hubsImage = "/images/54945709915_c6b625f130_k.jpg";
 export const hubsImage2 = "/images/55136596177_ae05fc0d97_k.jpg";
@@ -49,7 +49,7 @@ export const pillars = [
     blurb:
       "Play-based early learning and family support that help children start strong.",
     icon: BookOpen,
-    image: "/images/54513984590_0fcde5be3d_k.jpg",
+    image: "/images/EarlyChildhood.jpg",
   },
   {
     title: "Education & Personal Development",
