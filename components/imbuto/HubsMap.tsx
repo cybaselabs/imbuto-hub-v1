@@ -10,6 +10,7 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { hubsImage } from "./data";
 
 type Hub = {
   id: string;
@@ -19,6 +20,7 @@ type Hub = {
   lat: number;
   lng: number;
   summary: string;
+  shortName: string;
 };
 
 type HubsMapProps = {
@@ -93,6 +95,7 @@ export function HubsMap({
         />
 
         {hubs.map((hub) => {
+          console.log("Rendering marker for hub:",hub.shortName);
           const isActive = hub.id === activeHubId;
 
           return (
