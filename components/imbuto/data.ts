@@ -144,6 +144,7 @@ export const hubs = [
     lng: 30.0619,
     summary:
       "Learning, wellbeing, creativity, and youth opportunity in the capital.",
+    shortName: "Kigali",
   },
   {
     id: "musanze",
@@ -154,6 +155,7 @@ export const hubs = [
     lng: 29.6349,
     summary:
       "A youth-centred hub supporting growth, skills, and community connection.",
+    shortName: "Musanze",
   },
   {
     id: "huye",
@@ -164,16 +166,17 @@ export const hubs = [
     lng: 29.7394,
     summary:
       "A space for learning, support, and life-stage development in the south.",
+    shortName: "Huye",
   },
   {
     id: "rubavu",
     name: "Rubavu Imbuto Hub",
     location: "Western Province",
     region: "Western Rwanda",
-    lat: -1.6792,
-    lng: 29.2583,
-    summary:
-      "Community-rooted programming close to Rwanda’s western corridor.",
+    lat: -1.688938,
+    lng: 29.293046,
+    summary: "Community-rooted programming close to Rwanda’s western corridor.",
+    shortName: "Rubavu",
   },
   {
     id: "nyagatare",
@@ -184,9 +187,9 @@ export const hubs = [
     lng: 30.3256,
     summary:
       "A growing access point for opportunity, wellbeing, and youth engagement.",
+    shortName: "Nyagatare",
   },
 ];
-
 
 export const partners = [
   {

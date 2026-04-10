@@ -49,7 +49,7 @@ function FlyToHub({ center }: { center: LatLngTuple }) {
 
 function createPinIcon(isActive: boolean) {
   return L.icon({
-    iconUrl: "/images/gps.png",
+    iconUrl: "/images/pin.png",
     iconSize: isActive ? [42, 42] : [34, 34],
     iconAnchor: isActive ? [21, 42] : [17, 34],
     popupAnchor: [0, -36],
@@ -63,7 +63,7 @@ export function HubsMap({
 }: HubsMapProps) {
   const activeHub = useMemo(
     () => hubs.find((hub) => hub.id === activeHubId) ?? hubs[0],
-    [hubs, activeHubId]
+    [hubs, activeHubId],
   );
 
   const [isMounted, setIsMounted] = useState(false);
@@ -88,7 +88,7 @@ export function HubsMap({
         <FlyToHub center={[activeHub.lat, activeHub.lng]} />
 
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
@@ -105,8 +105,10 @@ export function HubsMap({
                 click: () => onActiveHubChange(hub.id),
               }}
             >
-              <Tooltip direction="top" offset={[0, -8]} opacity={1}>
-                <div className="text-xs font-medium">{hub.name}</div>
+              <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent>
+                <div className="text-xs font-semibold text-[#102c35]">
+                  {hub.shortName}
+                </div>
               </Tooltip>
             </Marker>
           );
