@@ -95,7 +95,6 @@ export function HubsMap({
         />
 
         {hubs.map((hub) => {
-          console.log("Rendering marker for hub:",hub.shortName);
           const isActive = hub.id === activeHubId;
 
           return (
