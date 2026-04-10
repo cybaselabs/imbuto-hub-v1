@@ -1,5 +1,6 @@
 "use client";
 
+import { Container } from "./Container";
 import { ages, lifeStageImage } from "./data";
 
 export function LifeStageSection() {
@@ -57,12 +58,10 @@ export function LifeStageSection() {
                   <span className="text-xl opacity-70">→</span>
                 </div>
 
-                {/* <h4 className="mt-6 text-[2rem] leading-none tracking-[-0.04em]">
+                <h4 className="mt-6 text-[2rem] leading-none tracking-[-0.04em]">
                   {item.title}
-                </h4> */}
-                <div className="relative z-10 mt-3 max-w-[250px] text-[23px] leading-[1.02] tracking-[-0.04em] font-semibold">
-                  {item.title}
-                </div>
+                </h4>
+
                 <p className="mt-6 max-w-xs text-base leading-7 opacity-80">
                   {item.desc}
                 </p>

@@ -1,68 +1,101 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { featureImage, hubCards, hubsImage, hubsImage_2 } from "./data";
-import { Reveal, StaggerGrid, StaggerItem } from "./motion";
+import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { Container } from "./Container";
+import { hubs } from "./data";
+
+const HubsMap = dynamic(() => import("./HubsMap").then((mod) => mod.HubsMap), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[520px] w-full overflow-hidden rounded-[26px] bg-[#eaf3ef] animate-pulse" />
+  ),
+});
 
 export function HubsSection() {
+  const [activeHubId, setActiveHubId] = useState(hubs[0]?.id ?? "");
+
+  const activeHub = useMemo(
+    () => hubs.find((hub) => hub.id === activeHubId) ?? hubs[0],
+    [activeHubId],
+  );
+
+  if (!activeHub) return null;
+
   return (
-    <section className="bg-[#c05d24] overflow-hidden py-24">
-      <Reveal className="mx-auto max-w-7xl px-6">
-        <div className="overflow-hidden rounded-[40px] bg-[#120f52] px-5 py-6 text-white shadow-[0_30px_90px_rgba(15,23,42,0.16)] md:px-7 md:py-7">
-          <div className="grid gap-4 xl:grid-cols-[1.6fr_0.95fr]">
-            <Reveal className="grid gap-4 rounded-[34px] bg-white/6 p-6 md:grid-cols-[0.95fr_1.05fr] md:p-8" delay={0.04}>
-              <div className="flex flex-col justify-between">
-                <div>
-                  <div className="text-sm font-medium uppercase tracking-[0.26em] text-[#FFA45D]">Hub network</div>
-                  <h2 className="mt-4 max-w-md text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">Hubs. One national vision.</h2>
-                  <p className="mt-5 max-w-md text-base leading-8 text-white/72">Explore Imbuto Hubs across Rwanda and quickly scan hub names and locations in a more visual, editorial layout.</p>
-                </div>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <button className="rounded-full bg-[#E16A3D] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#E16A3D]/20 transition hover:bg-[#cf5d34]">View All Hubs</button>
-                  <button className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-semibold text-white/90 backdrop-blur-md transition hover:bg-white/15">Find a Hub</button>
-                </div>
+    <section className="bg-[#f7f7f2] py-20 md:py-24 lg:py-28">
+      <Container>
+        <div className="relative overflow-hidden rounded-[40px] bg-white px-6 py-8 shadow-[0_24px_70px_rgba(16,44,53,0.08)] ring-1 ring-slate-200/70 md:px-8 md:py-10 lg:px-10 lg:py-12">
+          <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#ed9b37]/16 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-0 left-6 h-40 w-40 rounded-full bg-[#52b3a9]/16 blur-3xl" />
+
+          <div className="relative grid gap-8 xl:grid-cols-[0.85fr_1.15fr] xl:items-center xl:gap-10">
+            <div className="max-w-xl">
+              <div className="text-sm uppercase tracking-[0.24em] text-[#E16A3D]">
+                Hub network
               </div>
 
-              <div className="relative min-h-[340px] overflow-hidden rounded-[30px] bg-[#dceef8]">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${hubsImage}')` }} />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#120f52]/20 via-transparent to-transparent" />
-              </div>
-            </Reveal>
+              <h2 className="mt-4 text-4xl leading-tight tracking-[-0.04em] text-[#102c35] md:text-5xl">
+                Find an Imbuto Hub near you.
+              </h2>
 
-            <Reveal className="grid gap-4" delay={0.1}>
-              <div className="rounded-[30px] bg-white p-4 text-slate-900 shadow-sm ring-1 ring-black/5">
-                <div className="overflow-hidden rounded-[22px] bg-[#dceef8]">
-                  <div className="h-40 bg-cover bg-top" style={{ backgroundImage: `url('${hubsImage_2}')` }} />
-                </div>
-                <div className="px-1 pb-1 pt-4">
-                  <div className="text-2xl font-semibold text-[#111827] ![font-family:'Ruchill']">Featured hub network</div>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">A growing national footprint connecting local communities to opportunity, learning, and wellbeing.</p>
-                </div>
+              <p className="mt-5 text-base leading-8 text-slate-600 md:text-lg">
+                Explore the growing Imbuto Hub network across Rwanda and
+                discover where learning, wellbeing, creativity, and opportunity
+                are taking root.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]">
+                  Explore all hubs
+                </button>
+                <button className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]">
+                  Find a Hub
+                </button>
               </div>
 
-              <div className="rounded-[30px] bg-[#016A6D] p-6 text-white shadow-sm">
-                <div className="text-sm uppercase tracking-[0.24em] text-white/70">Hub locations</div>
-                <div className="mt-3 text-3xl font-semibold leading-tight ![font-family:'Ruchill']">Browse hubs by name and district.</div>
-                <div className="mt-4 text-sm leading-7 text-white/80">This section can later link each card directly to its hub detail page.</div>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {hubs.map((hub) => {
+                  const isActive = hub.id === activeHubId;
+
+                  return (
+                    <button
+                      key={hub.id}
+                      type="button"
+                      onMouseEnter={() => setActiveHubId(hub.id)}
+                      onFocus={() => setActiveHubId(hub.id)}
+                      className={`rounded-[20px] px-4 py-4 text-left ring-1 transition ${
+                        isActive
+                          ? "bg-[#102c35] text-white ring-[#102c35]"
+                          : "bg-[#f7f7f2] text-[#102c35] ring-slate-200/70 hover:bg-[#f1f6f4]"
+                      }`}
+                    >
+                      <div className="text-base">{hub.name}</div>
+                      <div
+                        className={`mt-1 text-sm ${
+                          isActive ? "text-white/70" : "text-slate-500"
+                        }`}
+                      >
+                        {hub.location}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
-            </Reveal>
+            </div>
+
+            <div className="relative">
+              <div className="mt-5 relative overflow-hidden rounded-[32px] bg-[#eaf3ef] p-4 shadow-sm ring-1 ring-slate-200/70">
+                <HubsMap
+                  hubs={hubs}
+                  activeHubId={activeHubId}
+                  onActiveHubChange={setActiveHubId}
+                />
+              </div>
+            </div>
           </div>
-
-          <StaggerGrid className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3" delay={0.14}>
-            {hubCards.map((hub) => (
-              <StaggerItem key={hub.name}>
-                <div className={`rounded-[30px] p-6 shadow-sm transition hover:-translate-y-1 ${hub.tone}`}>
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="max-w-[220px] text-3xl font-semibold leading-none tracking-[-0.04em] ![font-family:'Ruchill']">{hub.name}</div>
-                    <ArrowRight className="mt-1 h-7 w-7 opacity-70" />
-                  </div>
-                  <p className="mt-8 max-w-xs text-base leading-7 opacity-80">{hub.location}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
         </div>
-      </Reveal>
+      </Container>
     </section>
   );
 }

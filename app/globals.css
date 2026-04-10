@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import "leaflet/dist/leaflet.css";
 /* =========================
    RUCHILL (HEADINGS / NAV)
 ========================= */
@@ -141,6 +141,12 @@
   font-style: italic;
   font-weight: 600;
   font-display: swap;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 /* =========================
