@@ -5,7 +5,7 @@ export function Header() {
       <div className="mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-full border border-white/20 bg-[var(--color-dark)]/80 px-4 py-3 text-white shadow-2xl backdrop-blur-xl md:px-6">
         <div className="flex items-center">
           <Image
-            src="/images/Logo-07.png"
+            src="/images/Imbutohublogo_v2.png"
             alt="Imbuto Hub Logo"
             width={100}
             height={40}
