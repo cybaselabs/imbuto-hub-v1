@@ -1,4 +1,3 @@
-
 "use client";
 
 import { ArrowRight, ChevronRight, Compass } from "lucide-react";
@@ -50,7 +49,8 @@ export function ActionSection() {
                 Choose the next step that fits you best.
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">
-                Whether you want to discover a hub, explore programmes, register your interest, or find ways to get involved, start here.
+                Ready to discover a Hub, explore programmes, or join the
+                journey? Start here.
               </p>
             </div>
 
@@ -70,13 +70,14 @@ export function ActionSection() {
               const Icon = item.icon;
               const a = accents[idx % accents.length];
               return (
-                
                 <div
                   key={item.title}
                   className="group relative overflow-hidden rounded-[32px] border border-slate-200/80 bg-white p-6 text-[#102c35] shadow-[0_18px_60px_rgba(16,44,53,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(16,44,53,0.12)]"
                 >
                   <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(255,164,93,0.12),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(82,179,169,0.12),transparent_40%)]" />
-                  <div className={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${a.bg} ${a.text} ring-1 ${a.ring} transition ${a.hover}`}>
+                  <div
+                    className={`relative flex h-12 w-12 items-center justify-center rounded-2xl ${a.bg} ${a.text} ring-1 ${a.ring} transition ${a.hover}`}
+                  >
                     <Icon className="h-5 w-5" />
                   </div>
                   {/* <h3 className="relative mt-6 text-[30px] leading-[1.02] tracking-[-0.03em] text-[#102c35]">

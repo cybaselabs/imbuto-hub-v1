@@ -17,8 +17,8 @@ function HeroStats() {
           </div>
           <div className="mt-6 h-px w-14 bg-white/20" />
           <p className="mt-6 max-w-[220px] text-lg leading-8 text-white/65">
-            Young people across Rwanda gaining access to learning, skills, and
-            opportunity.
+            Empowering young people across Rwanda with access to learning,
+            skills, and opportunity.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ function HeroStats() {
           </div>
           <div className="mt-5 h-px w-10 bg-white/20" />
           <p className="mt-5 max-w-[190px] text-base leading-7 text-white/62">
-            From early childhood through adulthood — every stage, every need.
+            Every stage. Every need. From early childhood to adulthood.
           </p>
         </div>
 
@@ -93,11 +93,11 @@ export function HeroSection() {
               A safe space to learn, grow, and lead.
             </h1>
             <p className="mt-6 max-w-[640px] text-base leading-8 text-white/80 md:text-lg md:leading-9">
-              Imbuto Hubs are inclusive community spaces across Rwanda where
-              children, youth, and families access learning, skills development,
-              wellbeing support, sports, creativity, and leadership
-              opportunities, all under one roof and embedded in the life of
-              their community.
+              Imbuto Hubs are vibrant community spaces across Rwanda where
+              children, youth, and families come together to learn, grow,
+              create, play, and thrive. At the heart of their communities, they
+              nurture skills, wellbeing, sports, talent, and leadership, all
+              under one roof.
             </p>
           </div>
 

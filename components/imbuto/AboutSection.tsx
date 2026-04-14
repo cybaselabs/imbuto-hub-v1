@@ -1,4 +1,3 @@
-
 "use client";
 
 import { ArrowRight, ChevronRight, Sparkles, Users } from "lucide-react";
@@ -48,7 +47,10 @@ export function AboutSection() {
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {bullets.map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200/70">
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200/70"
+                  >
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[rgba(237,155,55,0.15)] text-[#c05d24]">
                       <ChevronRight className="h-4 w-4" />
                     </div>
@@ -58,7 +60,11 @@ export function AboutSection() {
               </div>
 
               <p className="mt-6 max-w-2xl text-lg leading-9 text-slate-600">
-                Imbuto Hubs are community-centred spaces designed to support individuals from early childhood through adulthood. Each hub brings together learning, digital skills, wellbeing support, sports, creativity, and pathways to jobs and entrepreneurship, in a safe and welcoming environment embedded in the heart of the community.
+                Imbuto Hubs are community-centred spaces supporting every stage
+                of life, from early childhood to adulthood. They offer learning,
+                digital skills, wellbeing, sports, creativity, and pathways to
+                jobs and entrepreneurship in a safe, welcoming environment at
+                the heart of your community.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-5">
