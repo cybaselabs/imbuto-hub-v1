@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/cybaselabs/imbuto-site
+  IMAGE: ghcr.io/Cybase-Labs/imbuto-site
 
 jobs:
   build-and-deploy:
@@ -34,8 +34,7 @@ jobs:
           context: .
           push: true
           tags: ${{ env.IMAGE }}:latest
-          cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache
-          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache,mode=max
+          no-cache: true
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1
@@ -44,13 +43,13 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u cybaselabs --password-stdin
-            docker pull ghcr.io/cybaselabs/imbuto-site:latest
+            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u Cybase-Labs --password-stdin
+            docker pull ghcr.io/Cybase-Labs/imbuto-site:latest
             docker stop imbuto-site 2>/dev/null || true
             docker rm imbuto-site 2>/dev/null || true
             docker run -d \
               --name imbuto-site \
               --restart unless-stopped \
               -p 1014:3000 \
-              ghcr.io/cybaselabs/imbuto-site:latest
+              ghcr.io/Cybase-Labs/imbuto-site:latest
             docker image prune -f
