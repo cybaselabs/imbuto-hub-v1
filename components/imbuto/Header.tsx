@@ -19,7 +19,7 @@ export function Header() {
             src="/images/Imbutohublogo_v2.png"
             alt="Imbuto Hub Logo"
             width={100}
-            height={100}
+            height={40}
             className="w-auto"
             priority
           />
