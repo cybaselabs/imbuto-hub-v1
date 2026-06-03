@@ -53,7 +53,7 @@ function HeroStats() {
           </div>
         </div>
 
-        <button className="col-span-1 rounded-[28px] bg-[#E56E3C] px-4 py-1 text-left shadow-xl shadow-[#E56E3C]/30 transition hover:bg-[#C05D24]">
+        {/* <button className="col-span-1 rounded-[28px] bg-[#E56E3C] px-4 py-1 text-left shadow-xl shadow-[#E56E3C]/30 transition hover:bg-[#C05D24]">
           <div className="flex items-center justify-between gap-4">
             <div className="text-[30px] leading-[1.02] text-white">
               Your future starts here.
@@ -62,7 +62,7 @@ function HeroStats() {
               <ArrowRight className="h-5 w-5" />
             </div>
           </div>
-        </button>
+        </button> */}
       </div>
     </div>
   );
@@ -86,18 +86,18 @@ export function HeroSection() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
               <Sparkles className="h-4 w-4" />
-              Community spaces for learning, wellbeing, creativity, and
+              Community spaces for learning, wellbeing, creativity, sports, and
               leadership
             </div>
             <h1 className="mt-6 max-w-[11ch] text-5xl leading-[0.96] tracking-[-0.04em] text-[#f5c346]/90 md:text-7xl lg:text-[82px]">
-              A safe space to learn, grow, and lead.
+              A safe space to learn, grow, and thrive.
             </h1>
             <p className="mt-6 max-w-[640px] text-base leading-8 text-white/80 md:text-lg md:leading-9">
               Imbuto Hubs are vibrant community spaces across Rwanda where
               children, youth, and families come together to learn, grow,
               create, play, and thrive. At the heart of their communities, they
-              nurture skills, wellbeing, sports, talent, and leadership, all
-              under one roof.
+              nurture skills, wellbeing, talent, leadership, and a culture of
+              sports all under one roof!
             </p>
           </div>
 

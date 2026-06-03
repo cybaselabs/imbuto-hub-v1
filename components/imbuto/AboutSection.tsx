@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, ChevronRight, Sparkles, Users } from "lucide-react";
+import Link from "next/link";
 import { Container } from "./Container";
 import { aboutImage } from "./data";
 
@@ -68,10 +69,13 @@ export function AboutSection() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-5">
-                <button className="group inline-flex items-center gap-2 rounded-full bg-[#043E52] px-6 py-3.5 text-sm text-white shadow-lg transition hover:bg-[#032c3b]">
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2 rounded-full bg-[#043E52] px-6 py-3.5 text-sm text-white shadow-lg transition hover:bg-[#032c3b]"
+                >
                   Learn More About Imbuto Hubs
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

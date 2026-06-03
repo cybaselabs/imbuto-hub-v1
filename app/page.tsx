@@ -1,4 +1,3 @@
-
 import { Header } from "../components/imbuto/Header";
 import { HeroSection } from "../components/imbuto/HeroSection";
 import { ActionSection } from "../components/imbuto/ActionSection";
@@ -16,9 +15,9 @@ export default function Page() {
     <main className="bg-[#f7f7f2]">
       <Header />
       <HeroSection />
+      <PillarsSection />
       <ActionSection />
       <AboutSection />
-      <PillarsSection />
       <LifeStageSection />
       <StatsSection />
       <HubsSection />

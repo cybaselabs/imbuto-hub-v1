@@ -51,7 +51,7 @@ function HeroStats() {
           <div className="mt-2 text-center text-base text-white/72 ![font-family:'Ruchill']">
             Community Events
           </div>
-        </div>        
+        </div>
 
         <button className="col-span-1 rounded-[28px] bg-[#E56E3C] px-6 py-6 text-left shadow-xl shadow-[#E56E3C]/30 transition hover:bg-[#C05D24] min-h-[110px]">
           <div className="flex items-center justify-between gap-4">
@@ -139,15 +139,15 @@ export function HeroSection() {
             </div>
 
             <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.03em] md:text-6xl text-[var(--color-yellow)]/85">
-              A safe space to learn, grow, and lead.
+              A safe space to learn, grow, and thrive..
             </h1>
 
             <p className="mt-4 max-w-xl text-sm leading-7 text-white/80 md:text-base">
               Imbuto Hubs are inclusive community spaces across Rwanda where
-              children, youth, and families access learning, skills
-              development, wellbeing support, sports, creativity, and
-              leadership opportunities, all under one roof and embedded in the
-              life of their community.
+              children, youth, and families access learning, skills development,
+              wellbeing support, sports, creativity, and leadership
+              opportunities, all under one roof and embedded in the life of
+              their community.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">

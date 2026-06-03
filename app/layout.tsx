@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: "Imbuto Hubs",
     template: "%s | Imbuto Hubs",
@@ -22,8 +22,7 @@ export const metadata = {
 
   openGraph: {
     title: "Imbuto Hubs",
-    description:
-      "A safe space to learn, grow, and lead across Rwanda.",
+    description: "A safe space to learn, grow, and thrive. across Rwanda.",
     url: "https://imbutofoundation.org/", // update later
     siteName: "Imbuto Hubs",
     images: [
@@ -49,7 +48,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

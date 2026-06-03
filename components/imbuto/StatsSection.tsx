@@ -3,21 +3,45 @@
 import { Container } from "./Container";
 import { stats } from "./data";
 
-export function StatsSection() {
+export function StatsSection({ variant = "dark" }: { variant?: "dark" | "light" }) {
+  const isLight = variant === "light";
+
   return (
-    <section className="relative overflow-hidden bg-[#043E52] py-20 text-white md:py-24 lg:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,164,93,0.22),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(1,106,109,0.42),transparent_28%)]" />
+    <section
+      className={`relative overflow-hidden py-20 md:py-24 lg:py-28 ${
+        isLight ? "bg-[#f7f7f2] text-[#102c35]" : "bg-[#043E52] text-white"
+      }`}
+    >
+      <div
+        className={`absolute inset-0 ${
+          isLight
+            ? "bg-[radial-gradient(circle_at_top_left,rgba(237,155,55,0.14),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(82,179,169,0.16),transparent_28%)]"
+            : "bg-[radial-gradient(circle_at_top_left,rgba(255,164,93,0.22),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(1,106,109,0.42),transparent_28%)]"
+        }`}
+      />
       <Container className="relative">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-sm uppercase tracking-[0.26em] text-[#FFA45D]">
+            <div
+              className={`text-sm uppercase tracking-[0.26em] ${
+                isLight ? "text-[#c05d24]" : "text-[#FFA45D]"
+              }`}
+            >
               Facts & figures
             </div>
-            <h2 className="mt-4 text-4xl tracking-[-0.04em] text-white md:text-5xl">
+            <h2
+              className={`mt-4 text-4xl tracking-[-0.04em] md:text-5xl ${
+                isLight ? "text-[#102c35]" : "text-white"
+              }`}
+            >
               National reach. Human impact.
             </h2>
           </div>
-          <p className="max-w-xl text-sm leading-7 text-white/72 md:text-base">
+          <p
+            className={`max-w-xl text-sm leading-7 md:text-base ${
+              isLight ? "text-slate-700" : "text-white/72"
+            }`}
+          >
             Behind every number is a person, a family, and a community moving
             forward with greater access, confidence, and opportunity.
           </p>
@@ -27,12 +51,24 @@ export function StatsSection() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-md"
+              className={`rounded-[28px] border p-7 backdrop-blur-md ${
+                isLight
+                  ? "border-slate-200/80 bg-white shadow-sm"
+                  : "border-white/10 bg-white/5"
+              }`}
             >
-              <div className="text-5xl tracking-[-0.05em] text-white md:text-6xl">
+              <div
+                className={`text-5xl tracking-[-0.05em] md:text-6xl ${
+                  isLight ? "text-[#043E52]" : "text-white"
+                }`}
+              >
                 {stat.value}
               </div>
-              <div className="mt-4 text-sm uppercase tracking-[0.22em] text-white/65">
+              <div
+                className={`mt-4 text-sm uppercase tracking-[0.22em] ${
+                  isLight ? "text-slate-500" : "text-white/65"
+                }`}
+              >
                 {stat.label}
               </div>
             </div>

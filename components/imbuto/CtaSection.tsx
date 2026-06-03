@@ -20,7 +20,7 @@ export function CtaSection() {
           Your place in this story starts here.
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/85">
-          Whether you are a young person looking for opportunity, a professional ready to mentor, or an organisation that wants to invest in Rwanda's future, there is a role for you in Imbuto Hubs.
+          Whether you are a young person looking for opportunity, a professional ready to mentor, or an organisation that wants to invest in Rwanda&apos;s future, there is a role for you in Imbuto Hubs.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <button className="rounded-full bg-white px-6 py-3.5 text-sm text-[#043E52] shadow-2xl transition hover:-translate-y-0.5">

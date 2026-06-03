@@ -45,9 +45,10 @@ export const quickActions = [
 
 export const pillars = [
   {
-    title: "Early Childhood Development",
+    title: "Early Childhood Development & Family",
+    shortTitle: "ECD&F",
     blurb:
-      "Play-based early learning and family support that help children start strong.",
+      "A safe, nurturing space where young children learn through play, care, and early stimulation.",
     icon: BookOpen,
     image: "/images/EarlyChildhood.jpg",
   },
@@ -128,66 +129,77 @@ export const ages = [
 ];
 
 export const stats = [
-  { value: "12", label: "Hubs across Rwanda" },
-  { value: "35,000+", label: "Young people reached" },
-  { value: "2,500+", label: "Mentorship sessions delivered" },
-  { value: "150+", label: "Community events hosted" },
+  { value: "12", label: "Hubs Nationwide" },
+  { value: "926,824", label: "Youth Empowered Through Youth Forums" },
+  // { value: "2,500+", label: "Mentorship sessions delivered" },
+  // { value: "150+", label: "Community events hosted" },
 ];
 
 export const hubs = [
   {
     id: "kigali",
-    name: "Kigali Imbuto Hub",
+    name: "Imbuto Hub Kigali",
     location: "Kigali City",
     region: "Central Rwanda",
     lat: -1.9441,
     lng: 30.0619,
     summary:
       "Learning, wellbeing, creativity, and youth opportunity in the capital.",
-    shortName: "Kigali",
+    shortName: "Imbuto Hub Kigali",
   },
   {
     id: "musanze",
-    name: "Musanze Imbuto Hub",
+    name: "Imbuto Hub Musanze",
     location: "Northern Province",
     region: "Northern Rwanda",
     lat: -1.4996,
     lng: 29.6349,
     summary:
       "A youth-centred hub supporting growth, skills, and community connection.",
-    shortName: "Musanze",
+    shortName: "Imbuto Hub Musanze",
   },
   {
     id: "huye",
-    name: "Huye Imbuto Hub",
+    name: "Imbuto Hub Huye",
     location: "Southern Province",
     region: "Southern Rwanda",
     lat: -2.5967,
     lng: 29.7394,
     summary:
       "A space for learning, support, and life-stage development in the south.",
-    shortName: "Huye",
+    shortName: "Imbuto Hub Huye",
   },
   {
     id: "rubavu",
-    name: "Rubavu Imbuto Hub",
+    name: "Imbuto Hub Rubavu",
     location: "Western Province",
     region: "Western Rwanda",
     lat: -1.688938,
     lng: 29.293046,
     summary: "Community-rooted programming close to Rwanda’s western corridor.",
-    shortName: "Rubavu",
+    shortName: "Imbuto Hub Rubavu",
   },
   {
     id: "nyagatare",
-    name: "Nyagatare Imbuto Hub",
+    name: "Imbuto Hub Nyagatare",
     location: "Eastern Province",
     region: "Eastern Rwanda",
     lat: -1.297,
     lng: 30.3256,
     summary:
       "A growing access point for opportunity, wellbeing, and youth engagement.",
-    shortName: "Nyagatare",
+    shortName: "Imbuto Hub Nyagatare",
+  },
+  {
+    id: "bugesera",
+    name: "Imbuto Hub Bugesera",
+    location: "Eastern Province",
+    region: "Eastern Rwanda",
+    lat: -2.148616,
+    lng: 30.0874138,
+    summary:
+      "A growing access point for opportunity, wellbeing, and youth engagement.",
+    shortName: "Imbuto Hub Bugesera",
   },
 ];
 
