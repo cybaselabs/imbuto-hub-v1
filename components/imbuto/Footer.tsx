@@ -1,6 +1,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { Container } from "./Container";
 
 export function Footer() {
@@ -54,12 +55,18 @@ export function Footer() {
               Imbuto Hubs create safe, inspiring spaces where children, youth, and families access learning, wellbeing, creativity, mentorship, and opportunity across Rwanda.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <button className="rounded-full bg-[#E16A3D] px-5 py-3 text-sm text-white shadow-lg shadow-[#E16A3D]/25 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]">
+              <Link
+                href="/hubs#hub-map"
+                className="rounded-full bg-[#E16A3D] px-5 py-3 text-sm text-white shadow-lg shadow-[#E16A3D]/25 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]"
+              >
                 Find a Hub
-              </button>
-              <button className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white backdrop-blur-md transition hover:bg-white/15">
+              </Link>
+              <Link
+                href="/get-involved"
+                className="rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white backdrop-blur-md transition hover:bg-white/15"
+              >
                 Get Involved
-              </button>
+              </Link>
             </div>
           </div>
 

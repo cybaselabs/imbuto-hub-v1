@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Container } from "./Container";
 import { hubs } from "./data";
 
@@ -46,12 +47,18 @@ export function HubsSection() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <button className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]">
+                <Link
+                  href="/hubs"
+                  className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]"
+                >
                   Explore all hubs
-                </button>
-                <button className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]">
+                </Link>
+                <Link
+                  href="/hubs#hub-map"
+                  className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]"
+                >
                   Find a Hub
-                </button>
+                </Link>
               </div>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">

@@ -1,6 +1,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { Container } from "./Container";
 import { ctaImage } from "./data";
 
@@ -23,15 +24,24 @@ export function CtaSection() {
           Whether you are a young person looking for opportunity, a professional ready to mentor, or an organisation that wants to invest in Rwanda&apos;s future, there is a role for you in Imbuto Hubs.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <button className="rounded-full bg-white px-6 py-3.5 text-sm text-[#043E52] shadow-2xl transition hover:-translate-y-0.5">
+          <Link
+            href="/get-involved#story"
+            className="rounded-full bg-white px-6 py-3.5 text-sm text-[#043E52] shadow-2xl transition hover:-translate-y-0.5"
+          >
             Join a Hub
-          </button>
-          <button className="rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15">
+          </Link>
+          <Link
+            href="/get-involved#volunteer"
+            className="rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15"
+          >
             Volunteer or Mentor
-          </button>
-          <button className="rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15">
+          </Link>
+          <Link
+            href="/get-involved#partner"
+            className="rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15"
+          >
             Partner With Us
-          </button>
+          </Link>
         </div>
       </Container>
     </section>

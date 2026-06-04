@@ -19,10 +19,6 @@ export function PartnersSection() {
           </div>
 
           <div className="mt-10 flex items-center gap-4 md:gap-6">
-            <button className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-white text-[#043E52] shadow-sm transition hover:-translate-y-0.5 hover:border-[#016A6D]">
-              <span aria-hidden="true">←</span>
-            </button>
-
             <StaggerGrid
               className="grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7"
               delay={0.08}
@@ -42,10 +38,6 @@ export function PartnersSection() {
                 </StaggerItem>
               ))}
             </StaggerGrid>
-
-            <button className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-white text-[#043E52] shadow-sm transition hover:-translate-y-0.5 hover:border-[#016A6D]">
-              <span aria-hidden="true">→</span>
-            </button>
           </div>
         </div>
       </Reveal>

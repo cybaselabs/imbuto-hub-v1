@@ -14,7 +14,7 @@ export function AboutSection() {
   ];
 
   return (
-    <section className="relative pb-20 pt-5 md:pb-24 md:pt-12 lg:pb-28 lg:pt-5">
+    <section className="relative pb-0 pt-5 md:pb-24 md:pt-12 lg:pb-20 lg:pt-5">
       <Container>
         <div className="relative rounded-[40px] border border-slate-200/70 bg-[#f7f7f2] px-6 py-8 shadow-[0_30px_90px_rgba(16,44,53,0.08)] md:px-8 md:py-10 lg:px-10 lg:py-12">
           <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#ed9b37]/20 blur-3xl" />

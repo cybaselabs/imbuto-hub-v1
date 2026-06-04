@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { ages, lifeStageImage } from "./data";
 
 export function LifeStageSection() {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-20 md:px-8 md:py-24 lg:px-10 lg:py-28 xl:px-14 2xl:px-20">
-      <div className="relative overflow-hidden rounded-[40px] bg-[#f7f7f2] py-10 md:py-12 lg:py-14">
+    <section className="mx-auto max-w-[1440px] lg:pb-25 px-6 md:px-8 md:py-0  lg:px-10  lg:py-0 xl:px-14 2xl:px-20">
+      <div className="relative overflow-hidden rounded-[40px] bg-[#f7f7f2]">
         <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#ed9b37]/16 blur-3xl" />
         <div className="pointer-events-none absolute bottom-0 left-6 h-40 w-40 rounded-full bg-[#52b3a9]/16 blur-3xl" />
 
@@ -27,12 +28,18 @@ export function LifeStageSection() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <button className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]">
+                <Link
+                  href="/programs"
+                  className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]"
+                >
                   Explore age groups
-                </button>
-                <button className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]">
+                </Link>
+                <Link
+                  href="/hubs#hub-map"
+                  className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]"
+                >
                   Find a Hub
-                </button>
+                </Link>
               </div>
             </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Container } from "./Container";
 import { pillars } from "./data";
 import { ProgrammeCard, programmeCardAccents } from "./ProgrammeCard";
@@ -28,10 +29,13 @@ export function PillarsSection() {
             </p>
           </div>
 
-          <button className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm text-[#043E52] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#f8f4e7]">
+          <Link
+            href="/programs"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm text-[#043E52] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#f8f4e7]"
+          >
             Explore All Programs
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
 
         <div className="mt-10 overflow-visible">

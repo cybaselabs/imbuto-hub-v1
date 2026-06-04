@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, ChevronRight, Compass } from "lucide-react";
+import Link from "next/link";
 import { Container } from "./Container";
 import { quickActions } from "./data";
 
@@ -55,13 +56,19 @@ export function ActionSection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="group inline-flex items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm text-white shadow-xl shadow-[#E16A3D]/20 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]">
+              <Link
+                href="/hubs#hub-map"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm text-white shadow-xl shadow-[#E16A3D]/20 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]"
+              >
                 Find a Hub
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </button>
-              <button className="inline-flex items-center gap-2 rounded-full border border-[#102c35]/10 bg-white px-6 py-3.5 text-sm text-[#102c35] shadow-sm transition hover:bg-slate-50">
+              </Link>
+              <Link
+                href="/programs"
+                className="inline-flex items-center gap-2 rounded-full border border-[#102c35]/10 bg-white px-6 py-3.5 text-sm text-[#102c35] shadow-sm transition hover:bg-slate-50"
+              >
                 Explore Programs
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -70,8 +77,9 @@ export function ActionSection() {
               const Icon = item.icon;
               const a = accents[idx % accents.length];
               return (
-                <div
+                <Link
                   key={item.title}
+                  href={item.href}
                   className="group relative overflow-hidden rounded-[32px] border border-slate-200/80 bg-white p-6 text-[#102c35] shadow-[0_18px_60px_rgba(16,44,53,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(16,44,53,0.12)]"
                 >
                   <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(255,164,93,0.12),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(82,179,169,0.12),transparent_40%)]" />
@@ -93,7 +101,7 @@ export function ActionSection() {
                     Explore
                     <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

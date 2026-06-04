@@ -23,21 +23,25 @@ export const ctaImage = "/images/55137870940_234fc85fe2_k.jpg";
 export const quickActions = [
   {
     title: "Find a Hub",
+    href: "/hubs#hub-map",
     icon: MapPinned,
     subtitle: "Discover the nearest Imbuto Hub in your community.",
   },
   {
     title: "Explore Programs",
+    href: "/programs",
     icon: Compass,
     subtitle: "Browse opportunities for learning, wellbeing, and growth.",
   },
   {
     title: "Register Interest",
+    href: "/get-involved#story",
     icon: Sparkles,
     subtitle: "Tell us what you need and we will guide you to the right path.",
   },
   {
     title: "Get Involved",
+    href: "/get-involved",
     icon: HandHeart,
     subtitle: "Volunteer, mentor, partner, or support a programme.",
   },

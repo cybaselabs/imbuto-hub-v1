@@ -41,9 +41,9 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <button className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-white/85 md:block">
+            <span className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-white/85 md:block">
               EN / RW
-            </button>
+            </span>
             <Link
               href="/hubs"
               className="rounded-full bg-[#ed9b37] px-5 py-2.5 text-sm text-white shadow-lg shadow-[#ed9b37]/25 transition hover:-translate-y-0.5 hover:bg-[#c05d24]"

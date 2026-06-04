@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const programmeCardAccents = [
   {
@@ -39,6 +40,7 @@ type ProgrammeCardProps = {
   icon: LucideIcon;
   accent?: (typeof programmeCardAccents)[number];
   layout?: "carousel" | "grid";
+  href?: string;
 };
 
 export function ProgrammeCard({
@@ -48,6 +50,7 @@ export function ProgrammeCard({
   icon: Icon,
   accent = programmeCardAccents[0],
   layout = "carousel",
+  href = "/programs",
 }: ProgrammeCardProps) {
   const sizeClass =
     layout === "carousel"
@@ -55,7 +58,8 @@ export function ProgrammeCard({
       : "w-full";
 
   return (
-    <div
+    <Link
+      href={href}
       className={`group relative overflow-hidden rounded-[32px] border ${accent.border} ${sizeClass} bg-white/10 shadow-[0_26px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:rotate-[0.4deg] hover:shadow-[0_34px_100px_rgba(0,0,0,0.26)]`}
     >
       <div
@@ -98,6 +102,6 @@ export function ProgrammeCard({
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
