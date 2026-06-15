@@ -41,6 +41,7 @@ type ProgrammeCardProps = {
   accent?: (typeof programmeCardAccents)[number];
   layout?: "carousel" | "grid";
   href?: string;
+  tone?: "dark" | "light";
 };
 
 export function ProgrammeCard({
@@ -50,17 +51,25 @@ export function ProgrammeCard({
   icon: Icon,
   accent = programmeCardAccents[0],
   layout = "carousel",
-  href = "/programs",
+  href = "/Programmes",
+  tone = "dark",
 }: ProgrammeCardProps) {
   const sizeClass =
     layout === "carousel"
       ? "min-w-[300px] max-w-[300px] snap-start md:min-w-[340px] md:max-w-[340px]"
       : "w-full";
+  const isLight = tone === "light";
+  const cardClass = isLight
+    ? "bg-[#285d6a] shadow-[0_24px_70px_rgba(16,44,53,0.12)] hover:shadow-[0_32px_90px_rgba(16,44,53,0.18)]"
+    : "bg-white/10 shadow-[0_26px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm hover:shadow-[0_34px_100px_rgba(0,0,0,0.26)]";
+  const bodyTextClass = "text-white";
+  const descriptionTextClass = "text-white/72";
+  const linkTextClass = "text-[#f5c346]";
 
   return (
     <Link
       href={href}
-      className={`group relative overflow-hidden rounded-[32px] border ${accent.border} ${sizeClass} bg-white/10 shadow-[0_26px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm transition duration-300 hover:-translate-y-2 hover:rotate-[0.4deg] hover:shadow-[0_34px_100px_rgba(0,0,0,0.26)]`}
+      className={`group relative overflow-hidden rounded-[32px] border ${accent.border} ${sizeClass} ${cardClass} transition duration-300 hover:-translate-y-2 hover:rotate-[0.4deg]`}
     >
       <div
         className={`pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 ${accent.glow}`}
@@ -93,11 +102,11 @@ export function ProgrammeCard({
         </div>
       </div>
 
-      <div className="relative flex min-h-[210px] flex-col p-6 text-white">
-        <div className="max-w-[28ch] text-sm leading-7 text-white/72">
+      <div className={`relative flex min-h-[210px] flex-col p-6 ${bodyTextClass}`}>
+        <div className={`max-w-[28ch] text-sm leading-7 ${descriptionTextClass}`}>
           {description}
         </div>
-        <div className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-[#f5c346]">
+        <div className={`mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold ${linkTextClass}`}>
           Learn more
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </div>

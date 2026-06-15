@@ -13,12 +13,12 @@ function HeroStats() {
             35K+
           </div>
           <div className="mt-4 text-[30px] leading-[1.02] text-white">
-            Youth Reached
+            Projected Youth Reach
           </div>
           <div className="mt-6 h-px w-14 bg-white/20" />
           <p className="mt-6 max-w-[220px] text-lg leading-8 text-white/65">
             Empowering young people across Rwanda with access to learning,
-            skills, and opportunity.
+            sports, wellbeing, skills, and opportunity.
           </p>
         </div>
 
@@ -27,7 +27,7 @@ function HeroStats() {
             12
           </div>
           <div className="mt-3 text-center text-base text-white/75">
-            Hubs Nationwide
+            Planned Hubs
           </div>
         </div>
 
@@ -49,7 +49,7 @@ function HeroStats() {
             150+
           </div>
           <div className="mt-2 text-center text-base text-white/72">
-            Community Events
+            Projected Events
           </div>
         </div>
 
@@ -76,7 +76,13 @@ export function HeroSection() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${heroImage}')` }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,164,93,0.28),transparent_30%),radial-gradient(circle_at_left_center,rgba(1,106,109,0.42),transparent_34%),linear-gradient(90deg,rgba(4,62,82,0.95)_0%,rgba(4,62,82,0.78)_44%,rgba(4,62,82,0.42)_100%)]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 10% 0, #ffa45d47, #0000 10%), radial-gradient(circle at 0, #016a6d6b, #0000 1%), linear-gradient(90deg, #043e52f2 0%, #043e52c7 1%, #043e526b 100%)",
+          }}
+        />
         <div className="absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#E16A3D]/20 blur-3xl" />
         <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-[#016A6D]/30 blur-3xl" />
       </div>
@@ -84,13 +90,12 @@ export function HeroSection() {
       <Container className="relative pb-10 pt-14 md:pb-12 md:pt-16">
         <div className="grid gap-14 lg:grid-cols-[1fr_0.9fr] lg:items-center xl:gap-20">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
-              <Sparkles className="h-4 w-4" />
-              Community spaces for learning, wellbeing, creativity, sports, and
-              leadership
-            </div>
+            {/* <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/90 px-4 py-2 text-sm text-[#043E52] shadow-lg shadow-black/10 backdrop-blur-md">
+              <Sparkles className="h-4 w-4 text-[#ed9b37]" />
+              Rooted in community
+            </div> */}
             <h1 className="mt-6 max-w-[11ch] text-5xl leading-[0.96] tracking-[-0.04em] text-[#f5c346]/90 md:text-7xl lg:text-[82px]">
-              A safe space to learn, grow, and thrive.
+              Rooted in community
             </h1>
             <p className="mt-6 max-w-[640px] text-base leading-8 text-white/80 md:text-lg md:leading-9">
               Imbuto Hubs are vibrant community spaces across Rwanda where

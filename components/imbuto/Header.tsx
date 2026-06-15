@@ -6,10 +6,10 @@ export function Header() {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Programs", href: "/programs" },
+    { label: "Programmes", href: "/Programmes" },
     { label: "Hubs", href: "/hubs" },
     { label: "Impact", href: "/impact" },
-    { label: "Events", href: "/events" },
+    // { label: "Events", href: "/events" },
     { label: "Get Involved", href: "/get-involved" },
   ];
 
@@ -19,7 +19,7 @@ export function Header() {
         <div className="flex items-center justify-between rounded-full border border-white/20 bg-[#102c35]/80 px-4 py-3 text-white shadow-2xl backdrop-blur-xl md:px-6">
           <Link href="/" aria-label="Imbuto Hubs home">
             <Image
-              src="/images/Imbutohublogo_v2.png"
+              src="/images/updated-IMBUTO LOGO-03.png"
               alt="Imbuto Hub Logo"
               width={100}
               height={40}
@@ -42,7 +42,20 @@ export function Header() {
 
           <div className="flex items-center gap-3">
             <span className="hidden rounded-full border border-white/20 px-4 py-2 text-sm text-white/85 md:block">
-              EN / RW
+              <Link
+                href="/apply"
+                className="transition hover:text-white"
+              >
+                Youth Registration
+              </Link>
+            </span>
+            <span className="block rounded-full border border-white/20 px-4 py-2 text-sm text-white/85 md:hidden">
+              <Link
+                href="/apply"
+                className="transition hover:text-white"
+              >
+                Apply
+              </Link>
             </span>
             <Link
               href="/hubs"

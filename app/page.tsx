@@ -16,12 +16,12 @@ export default function Page() {
       <Header />
       <HeroSection />
       <PillarsSection />
-      <ActionSection />
-      <AboutSection />
+      {/* <AboutSection /> */}
       <LifeStageSection />
       <StatsSection />
       <HubsSection />
       <PartnersSection />
+      {/* <ActionSection /> */}
       <CtaSection />
       <Footer />
     </main>

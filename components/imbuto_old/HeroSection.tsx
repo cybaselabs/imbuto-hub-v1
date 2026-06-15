@@ -157,7 +157,7 @@ export function HeroSection() {
               </button>
 
               <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/15 ![font-family:'Ruchill']">
-                Explore Programs
+                Explore Programmes
               </button>
             </div>
           </Reveal>

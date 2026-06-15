@@ -7,55 +7,110 @@ import { Container } from "./Container";
 
 const galleryItems = [
   {
-    title: "Learning in community",
-    image: "/images/54945400951_90ba3d130b_k.jpg",
+    title: "Gallery 01",
+    image: "/images/gallery/55270242117_a0626afba8_k.jpg",
   },
   {
-    title: "Skills for the future",
-    image: "/images/52552727843_776ae789f1_k.jpg",
+    title: "Gallery 02",
+    image: "/images/gallery/55270243822_a464e83a11_k.jpg",
   },
   {
-    title: "Sports and confidence",
-    image: "/images/52548376321_dda8370097_k.jpg",
+    title: "Gallery 03",
+    image: "/images/gallery/55270243927_c03172e4db_k.jpg",
   },
   {
-    title: "Creative expression",
-    image: "/images/55137656258_b872b35591_k.jpg",
+    title: "Gallery 04",
+    image: "/images/gallery/55270244022_af6d12cfa8_k.jpg",
   },
   {
-    title: "Mentorship moments",
-    image: "/images/54513896658_550ab2509d_k.jpg",
+    title: "Gallery 05",
+    image: "/images/gallery/55270247032_959f5cdf93_k.jpg",
   },
   {
-    title: "A place to belong",
-    image: "/images/55137473511_81bbe538ab_k.jpg",
+    title: "Gallery 06",
+    image: "/images/gallery/55271155091_6d4af2592d_k.jpg",
   },
   {
-    title: "Youth dialogue",
-    image: "/images/55137475546_055ffa64da_k.jpg",
+    title: "Gallery 07",
+    image: "/images/gallery/55271155416_4f2ced31ee_k.jpg",
   },
   {
-    title: "Community exchange",
-    image: "/images/55137476261_97dc06c8bf_k.jpg",
+    title: "Gallery 08",
+    image: "/images/gallery/55271156911_4b28732802_6k.jpg",
   },
   {
-    title: "Future ready skills",
-    image: "/images/54513810799_7d0c00742c_k.jpg",
+    title: "Gallery 09",
+    image: "/images/gallery/55271161021_b50277f8b3_k.jpg",
+  },
+  {
+    title: "Gallery 10",
+    image: "/images/gallery/55271161526_942df49b81_k.jpg",
+  },
+  {
+    title: "Gallery 11",
+    image: "/images/gallery/55271288843_036382434d_k.jpg",
+  },
+  {
+    title: "Gallery 12",
+    image: "/images/gallery/55271290113_2c0970d501_k.jpg",
+  },
+  {
+    title: "Gallery 13",
+    image: "/images/gallery/55271290738_148fbbb5cb_k.jpg",
+  },
+  {
+    title: "Gallery 14",
+    image: "/images/gallery/55271291243_45ec2e250e_k.jpg",
+  },
+  {
+    title: "Gallery 15",
+    image: "/images/gallery/55271386409_9ea9f85483_k.jpg",
+  },
+  {
+    title: "Gallery 16",
+    image: "/images/gallery/55271386784_668efc3eb6_k.jpg",
+  },
+  {
+    title: "Gallery 17",
+    image: "/images/gallery/55271386979_b31ba24b7e_k.jpg",
+  },
+  {
+    title: "Gallery 18",
+    image: "/images/gallery/55271387454_2049631a0c_k.jpg",
+  },
+  {
+    title: "Gallery 19",
+    image: "/images/gallery/55271387884_4de4c887a3_k.jpg",
+  },
+  {
+    title: "Gallery 20",
+    image: "/images/gallery/55271389639_c61707ed44_k.jpg",
+  },
+  {
+    title: "Gallery 21",
+    image: "/images/gallery/55271391719_b0b65dbf4c_k.jpg",
+  },
+  {
+    title: "Gallery 22",
+    image: "/images/gallery/55271392754_cff5c5bf22_k.jpg",
+  },
+  {
+    title: "Gallery 23",
+    image: "/images/gallery/55271392924_a1247a06ed_k.jpg",
+  },
+  {
+    title: "Gallery 24",
+    image: "/images/gallery/55271554100_90f68fe6ac_k.jpg",
+  },
+  {
+    title: "Gallery 25",
+    image: "/images/gallery/55271554820_65e5db3ed7_k.jpg",
+  },
+  {
+    title: "Gallery 26",
+    image: "/images/gallery/55271563510_75dc1f389e_k%20(1).jpg",
   },
 ];
-
-const overlayItems: Record<number, { title: string; label: string }> = {
-  3: { title: "Story 04", label: "Mentorship" },
-  6: { title: "Story 07", label: "Community" },
-};
-
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-sm uppercase tracking-[0.28em] text-[#c05d24]">
-      {children}
-    </div>
-  );
-}
 
 export function ImpactGallery() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -124,10 +179,7 @@ export function ImpactGallery() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 overflow-hidden rounded-[28px] sm:grid-cols-2 lg:grid-cols-3">
-          {galleryItems.map((item, index) => {
-            const overlay = overlayItems[index];
-
-            return (
+          {galleryItems.map((item, index) => (
               <button
                 key={item.title}
                 type="button"
@@ -143,19 +195,8 @@ export function ImpactGallery() {
                   className="object-cover transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
-                {overlay ? (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/62 text-center text-white">
-                    <div className="text-2xl font-semibold tracking-[-0.03em]">
-                      {overlay.title}
-                    </div>
-                    <div className="mt-5 text-sm uppercase tracking-[0.24em] text-white/82">
-                      {overlay.label}
-                    </div>
-                  </div>
-                ) : null}
               </button>
-            );
-          })}
+          ))}
         </div>
       </Container>
 

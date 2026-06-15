@@ -2,21 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import {
-  ArrowRight,
-  CheckCircle2,
-  HandHeart,
-  Sparkles,
-  X,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, HandHeart, Sparkles, X } from "lucide-react";
 import { Header } from "../../components/imbuto/Header";
 import { Footer } from "../../components/imbuto/Footer";
 import { Container } from "../../components/imbuto/Container";
-import {
-  heroImage,
-  hubs,
-  pillars,
-} from "../../components/imbuto/data";
+import { heroImage, hubs, pillars } from "../../components/imbuto/data";
 
 type FormType = "volunteer" | "partner" | "support" | "registration";
 
@@ -173,10 +163,21 @@ function TextField({
   );
 }
 
-function SelectField({ label, options }: { label: string; options: string[] }) {
+function SelectField({
+  label,
+  options,
+  optional = false,
+}: {
+  label: string;
+  options: string[];
+  optional?: boolean;
+}) {
   return (
     <label className="block">
-      <FieldLabel>{label}</FieldLabel>
+      <FieldLabel>
+        {label}
+        {optional ? " (optional)" : ""}
+      </FieldLabel>
       <select className={inputClass}>
         {options.map((option) => (
           <option key={option}>{option}</option>
@@ -186,12 +187,48 @@ function SelectField({ label, options }: { label: string; options: string[] }) {
   );
 }
 
-function TextAreaField({ label, rows = 5 }: { label: string; rows?: number }) {
+function TextAreaField({
+  label,
+  rows = 5,
+  optional = false,
+}: {
+  label: string;
+  rows?: number;
+  optional?: boolean;
+}) {
   return (
     <label className="block">
-      <FieldLabel>{label}</FieldLabel>
+      <FieldLabel>
+        {label}
+        {optional ? " (optional)" : ""}
+      </FieldLabel>
       <textarea rows={rows} className={textAreaClass} />
     </label>
+  );
+}
+
+function CheckboxGroup({
+  label,
+  options,
+}: {
+  label: string;
+  options: string[];
+}) {
+  return (
+    <fieldset className="block">
+      <FieldLabel>{label}</FieldLabel>
+      <div className="mt-3 grid gap-3 rounded-[24px] border border-slate-200 bg-white p-4 sm:grid-cols-2">
+        {options.map((option) => (
+          <label
+            key={option}
+            className="flex items-center gap-3 text-sm text-slate-700"
+          >
+            <input type="checkbox" className="h-4 w-4 shrink-0" />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
   );
 }
 
@@ -331,51 +368,222 @@ function SupportForm() {
   );
 }
 
-function RegistrationForm() {
+export function RegistrationForm() {
+  const steps = [
+    {
+      title: "Personal details",
+      description: "Start with the participant's basic information.",
+      content: (
+        <>
+          <TextField label="Registration number" optional />
+          <TextField label="Date of registration" type="date" />
+          <TextField label="Full name" />
+          <TextField label="Age" type="number" />
+          <SelectField label="Gender" options={["Female", "Male", "Other"]} />
+          <TextField label="Phone number" />
+          <TextField label="National ID number" optional />
+        </>
+      ),
+    },
+    {
+      title: "Address and hub",
+      description:
+        "Tell us where the participant lives and which hub they prefer.",
+      content: (
+        <>
+          <SelectField
+            label="District"
+            options={["Bugesera", "Nyarugenge", "Musanze", "Huye", "Rubavu"]}
+          />
+          <TextField label="Sector" />
+          <TextField label="Cell" />
+          <TextField label="Village" />
+          <SelectField label="Hub of interest" options={hubOptions} />
+        </>
+      ),
+    },
+    {
+      title: "Education",
+      description: "Share the current education status.",
+      content: (
+        <>
+          <CheckboxGroup
+            label="Tick one"
+            options={["Student", "School Dropout"]}
+          />
+          <TextField label="If student, name of school" optional />
+          <TextField label="Current class/level" optional />
+          <div className="md:col-span-2">
+            <TextAreaField
+              label="If school dropout, what was the last year/grade completed?"
+              rows={3}
+              optional
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Training interest",
+      description: "Choose the preferred vocational training path.",
+      content: (
+        <>
+          <CheckboxGroup
+            label="Tick one"
+            options={[
+              "Hairdressing and Beauty",
+              "Tailoring and Fashion",
+              "IT and Computer Applications",
+            ]}
+          />
+          <CheckboxGroup
+            label="Preferred training schedule"
+            options={["Morning", "Afternoon"]}
+          />
+          <div className="md:col-span-2">
+            <TextAreaField
+              label="Why are you interested in this training?"
+              rows={4}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Contacts",
+      description:
+        "Add guardian information where applicable and an emergency contact.",
+      content: (
+        <>
+          <TextField label="Parent/guardian name" optional />
+          <TextField label="Relationship to participant" optional />
+          <TextField label="Parent/guardian phone number" optional />
+          <TextField label="Emergency contact name" />
+          <TextField label="Emergency contact phone number" />
+        </>
+      ),
+    },
+    {
+      title: "Consent and declaration",
+      description: "Confirm accuracy and photography or videography consent.",
+      content: (
+        <>
+          <div className="md:col-span-2">
+            <Consent>
+              I confirm that the information provided above is accurate.
+            </Consent>
+          </div>
+          <TextField label="Participant signature" />
+          <TextField label="Date" type="date" />
+          <div className="md:col-span-2 rounded-[24px] bg-white p-4 text-sm leading-7 text-slate-700 ring-1 ring-slate-200">
+            I consent to being photographed, filmed, and/or recorded during
+            Imbuto Hub activities, programmes, and events. I understand that
+            these images, videos, and recordings may be used by Imbuto Hubs for
+            communication, educational, promotional, reporting, and
+            documentation purposes across print, digital, and social media
+            platforms. I understand that no compensation will be provided for
+            such use.
+          </div>
+          <CheckboxGroup
+            label="Consent choice"
+            options={["I consent", "I do not consent"]}
+          />
+          <TextField label="Consent signature" />
+          <TextField label="Consent date" type="date" />
+        </>
+      ),
+    },
+  ];
+  const [currentStep, setCurrentStep] = useState(0);
+  const activeStep = steps[currentStep];
+  const isFirstStep = currentStep === 0;
+  const isLastStep = currentStep === steps.length - 1;
+
   return (
-    <FormGrid>
-      <TextField label="First name" />
-      <TextField label="Last name" />
-      <SelectField
-        label="Age band"
-        options={["Under 12", "12-17", "18-24", "25 and above"]}
-      />
-      <SelectField
-        label="Province"
-        options={["Kigali City", "Northern", "Southern", "Eastern", "Western"]}
-      />
-      <SelectField
-        label="District"
-        options={[
-          "Kigali",
-          "Musanze",
-          "Huye",
-          "Rubavu",
-          "Nyagatare",
-          "Bugesera",
-        ]}
-      />
-      <TextField label="Phone number" optional />
-      <TextField label="Email" type="email" optional />
-      <SelectField label="Hub of interest" options={hubOptions} />
-      <SelectField label="Programme of interest" options={programmeOptions} />
-      <div className="md:col-span-2">
-        <TextAreaField label="For a child under 12, parent or guardian name and contact details" />
+    <div>
+      <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        {steps.map((step, index) => {
+          const isActive = index === currentStep;
+          const isComplete = index < currentStep;
+
+          return (
+            <button
+              key={step.title}
+              type="button"
+              onClick={() => setCurrentStep(index)}
+              className={`rounded-[18px] px-3 py-3 text-left text-xs transition ${
+                isActive
+                  ? "bg-[#102c35] text-white"
+                  : isComplete
+                    ? "bg-[#dff5f2] text-[#0f5b58]"
+                    : "bg-[#f7f7f2] text-slate-500 ring-1 ring-slate-200"
+              }`}
+            >
+              <span className="block font-semibold">Step {index + 1}</span>
+              <span className="mt-1 block leading-5">{step.title}</span>
+            </button>
+          );
+        })}
       </div>
-      <SelectField
-        label="Preferred language"
-        options={["English", "Kinyarwanda"]}
-      />
-      <div className="md:col-span-2">
-        <Consent>
-          I agree that my information may be used to connect me to Imbuto Hub
-          services.
-        </Consent>
+
+      <div className="mt-8 rounded-[30px] bg-[#f7f7f2] p-5 ring-1 ring-slate-200 md:p-7">
+        <div className="flex flex-col gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c05d24]">
+              Step {currentStep + 1} of {steps.length}
+            </div>
+            <h3 className="mt-2 text-3xl tracking-[-0.04em] text-[#102c35]">
+              {activeStep.title}
+            </h3>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+              {activeStep.description}
+            </p>
+          </div>
+          <div className="h-2 w-full overflow-hidden rounded-full bg-white sm:w-44">
+            <div
+              className="h-full rounded-full bg-[#ed9b37] transition-all"
+              style={{
+                width: `${((currentStep + 1) / steps.length) * 100}%`,
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {activeStep.content}
+        </div>
       </div>
-      <div className="md:col-span-2">
-        <SubmitButton>Submit Registration</SubmitButton>
+
+      <div
+        className={`mt-6 flex flex-wrap items-center gap-3 ${
+          isFirstStep ? "justify-end" : "justify-between"
+        }`}
+      >
+        {!isFirstStep ? (
+          <button
+            type="button"
+            onClick={() => setCurrentStep((step) => Math.max(step - 1, 0))}
+            className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm text-[#102c35] transition hover:bg-slate-50"
+          >
+            Back
+          </button>
+        ) : null}
+        {isLastStep ? (
+          <SubmitButton>Submit Youth Registration</SubmitButton>
+        ) : (
+          <button
+            type="button"
+            onClick={() =>
+              setCurrentStep((step) => Math.min(step + 1, steps.length - 1))
+            }
+            className="inline-flex items-center gap-2 rounded-full bg-[#ed9b37] px-6 py-3.5 text-sm text-white shadow-lg shadow-[#ed9b37]/25 transition hover:-translate-y-0.5 hover:bg-[#c05d24]"
+          >
+            Next
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        )}
       </div>
-    </FormGrid>
+    </div>
   );
 }
 
@@ -480,20 +688,6 @@ export function GetInvolvedPageClient() {
               programme, your contribution helps expand opportunity for
               Rwanda&apos;s young people.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <CtaButton
-                onClick={() => setActiveForm("registration")}
-                variant="light"
-              >
-                Submit Interest
-              </CtaButton>
-              <CtaButton
-                onClick={() => setActiveForm("volunteer")}
-                variant="outline"
-              >
-                Apply Now
-              </CtaButton>
-            </div>
           </div>
         </Container>
       </section>
@@ -556,86 +750,47 @@ export function GetInvolvedPageClient() {
         </Container>
       </section>
 
-      <section id="partner" className="py-20 md:py-24">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-            <div>
-              <SectionEyebrow>Partner With Us</SectionEyebrow>
-              <h2 className="mt-4 max-w-2xl text-3xl tracking-[-0.04em] md:text-5xl">
-                Rwanda&apos;s future is built through partnership.
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-700">
-                Organisations and institutions can partner with Imbuto Hubs to
-                deliver programmes, sponsor activities, provide resources, or
-                co-create opportunities for youth and communities.
-              </p>
-              <div className="mt-8">
-                <CtaButton onClick={() => setActiveForm("partner")}>
-                  Submit Partnership Inquiry
-                </CtaButton>
-              </div>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2">
-              {partnerTypes.map((partner) => (
-                <div
-                  key={partner.title}
-                  className="rounded-2xl border border-slate-200/80 bg-white px-5 py-4 text-[#102c35] shadow-sm"
-                >
-                  <h3 className="text-base font-semibold">{partner.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-700">
-                    {partner.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
       <section id="support" className="bg-white py-20 md:py-24">
         <Container>
           <div className="overflow-hidden rounded-[36px] bg-[#043E52] text-white shadow-[0_28px_90px_rgba(3,31,41,0.18)]">
             <div className="p-8 md:p-10">
               <div className="text-sm uppercase tracking-[0.28em] text-[#f5c346]">
-                  Support a Programme / Donate
-                </div>
-                <h2 className="mt-4 max-w-2xl text-3xl tracking-[-0.04em] md:text-5xl">
-                  Every contribution grows something.
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-white/78">
-                  Support can include equipment, programme funding, volunteer
-                  time, training, or services that strengthen hub delivery and
-                  reach. Your contribution helps keep core programmes accessible
-                  and free for participants.
-                </p>
-                <div className="mt-7 grid gap-3 sm:grid-cols-5">
-                  {supportPartnerOptions.map((option) => (
-                    <div
-                      key={option.title}
-                      className="rounded-2xl border border-white/15 bg-white/10 p-4 text-white"
-                    >
-                      <h3 className="text-base font-semibold">
-                        {option.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-white/72">
-                        {option.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-5 text-sm leading-7 text-white/76">
-                  Donation processing platform and payment gateway to be
-                  confirmed by Imbuto Foundation before this section goes live.
-                </div>
-                <div className="mt-8">
-                  <CtaButton
-                    onClick={() => setActiveForm("support")}
-                    variant="light"
+                Support a Programme / Donate
+              </div>
+              <h2 className="mt-4 max-w-2xl text-3xl tracking-[-0.04em] md:text-5xl">
+                Every contribution grows something.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-white/78">
+                Support can include equipment, programme funding, volunteer
+                time, training, or services that strengthen hub delivery and
+                reach. Your contribution helps keep core programmes accessible
+                and free for participants.
+              </p>
+              <div className="mt-7 grid gap-3 sm:grid-cols-5">
+                {supportPartnerOptions.map((option) => (
+                  <div
+                    key={option.title}
+                    className="rounded-2xl border border-white/15 bg-white/10 p-4 text-white"
                   >
-                    Support Imbuto Hubs
-                  </CtaButton>
-                </div>
+                    <h3 className="text-base font-semibold">{option.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-white/72">
+                      {option.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-5 text-sm leading-7 text-white/76">
+                Donation processing platform and payment gateway to be confirmed
+                by Imbuto Foundation before this section goes live.
+              </div>
+              <div className="mt-8">
+                <CtaButton
+                  onClick={() => setActiveForm("support")}
+                  variant="light"
+                >
+                  Support Imbuto Hubs
+                </CtaButton>
+              </div>
             </div>
           </div>
         </Container>

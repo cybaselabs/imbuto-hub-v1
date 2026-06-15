@@ -2,9 +2,13 @@
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { Container } from "./Container";
 import { hubs } from "./data";
+
+const statusStyles = {
+  Operational: "bg-[#dff5f2] text-[#0f5b58]",
+  "In Development": "bg-[#fff1e3] text-[#a6511f]",
+};
 
 const HubsMap = dynamic(() => import("./HubsMap").then((mod) => mod.HubsMap), {
   ssr: false,
@@ -41,24 +45,18 @@ export function HubsSection() {
               </h2>
 
               <p className="mt-5 text-base leading-8 text-slate-600 md:text-lg">
-                Explore the growing Imbuto Hub network across Rwanda and
-                discover where learning, wellbeing, creativity, and opportunity
-                are taking root.
+                Two hubs are currently operational in Bugesera and Nyarugenge
+                (Maison de Jeunes), with three more hubs in development across
+                Rwanda.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/hubs"
-                  className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]"
-                >
-                  Explore all hubs
-                </Link>
-                <Link
-                  href="/hubs#hub-map"
-                  className="rounded-full border border-[#016A6D]/20 bg-white px-5 py-3 text-sm text-[#016A6D] shadow-sm transition hover:bg-[#f8fffd]"
-                >
-                  Find a Hub
-                </Link>
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="rounded-full bg-[#dff5f2] px-3 py-1 text-xs font-semibold text-[#0f5b58]">
+                  2 operational
+                </span>
+                <span className="rounded-full bg-[#fff1e3] px-3 py-1 text-xs font-semibold text-[#a6511f]">
+                  3 in development
+                </span>
               </div>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -85,6 +83,17 @@ export function HubsSection() {
                       >
                         {hub.location}
                       </div>
+                      <span
+                        className={`mt-3 inline-flex rounded-full px-3 py-1 text-[11px] font-semibold ${
+                          isActive
+                            ? "bg-white/12 text-white"
+                            : statusStyles[
+                                hub.status as keyof typeof statusStyles
+                              ]
+                        }`}
+                      >
+                        {hub.status}
+                      </span>
                     </button>
                   );
                 })}

@@ -57,18 +57,13 @@ export function ActionSection() {
 
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/hubs#hub-map"
+                href="/apply"
                 className="group inline-flex items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm text-white shadow-xl shadow-[#E16A3D]/20 transition hover:-translate-y-0.5 hover:bg-[#cf5d34]"
               >
-                Find a Hub
+                Register for a programme
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
               </Link>
-              <Link
-                href="/programs"
-                className="inline-flex items-center gap-2 rounded-full border border-[#102c35]/10 bg-white px-6 py-3.5 text-sm text-[#102c35] shadow-sm transition hover:bg-slate-50"
-              >
-                Explore Programs
-              </Link>
+             
             </div>
           </div>
 

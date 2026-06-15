@@ -1,43 +1,38 @@
 import {
-  BookOpen,
-  Briefcase,
   Compass,
-  Flag,
   HandHeart,
-  HeartPulse,
   MapPinned,
-  Palette,
   Sparkles,
-  Trophy,
-  Users,
 } from "lucide-react";
+import { programmes } from "./programmes";
 
-export const heroImage = "/images/herosection.jpg";
-export const aboutImage = "/images/54945681330_6035d49ddf_o.jpg";
-export const lifeStageImage = "/images/leadership.jpg";
+export const heroImage = "/images/55271563510_75dc1f389e_k.jpg";
+export const programmeImage = "/images/gallery/55271554100_90f68fe6ac_k.jpg";
+export const aboutImage = "/images/gallery/55271389639_c61707ed44_k.jpg";
+export const lifeStageImage = "/images/gallery/55271554100_90f68fe6ac_k.jpg";
 export const lifeStageImage2 = "/images/54513810799_7d0c00742c_k.jpg";
 export const hubsImage = "/images/54945709915_c6b625f130_k.jpg";
-export const hubsImage2 = "/images/55136596177_ae05fc0d97_k.jpg";
-export const ctaImage = "/images/55137870940_234fc85fe2_k.jpg";
+export const hubsImage2 = "/images/55271563510_75dc1f389e_k.jpg";
+export const ctaImage = "/images/gallery/55271389639_c61707ed44_k.jpg";
 
 export const quickActions = [
   {
-    title: "Find a Hub",
-    href: "/hubs#hub-map",
+    title: "Register for a programme",
+    href: "/apply",
     icon: MapPinned,
-    subtitle: "Discover the nearest Imbuto Hub in your community.",
+    subtitle: "Join an Imbuto Hub programme that fits your goals.",
   },
   {
-    title: "Explore Programs",
-    href: "/programs",
+    title: "Explore Programmes",
+    href: "/Programmes",
     icon: Compass,
     subtitle: "Browse opportunities for learning, wellbeing, and growth.",
   },
   {
-    title: "Register Interest",
-    href: "/get-involved#story",
+    title: "Register for a course",
+    href: "/apply",
     icon: Sparkles,
-    subtitle: "Tell us what you need and we will guide you to the right path.",
+    subtitle: "Tell us what you want to learn and we will guide you.",
   },
   {
     title: "Get Involved",
@@ -47,63 +42,14 @@ export const quickActions = [
   },
 ];
 
-export const pillars = [
-  {
-    title: "Early Childhood Development & Family",
-    shortTitle: "ECD&F",
-    blurb:
-      "A safe, nurturing space where young children learn through play, care, and early stimulation.",
-    icon: BookOpen,
-    image: "/images/EarlyChildhood.jpg",
-  },
-  {
-    title: "Education & Personal Development",
-    blurb:
-      "Reading culture, mentorship, and life skills for success in school and beyond.",
-    icon: Users,
-    image: "/images/54945400951_90ba3d130b_k.jpg",
-  },
-  {
-    title: "Digital Literacy & Innovation",
-    blurb: "Practical digital skills, ICT access, and future-ready learning.",
-    icon: Sparkles,
-    image: "/images/52552727843_776ae789f1_k.jpg",
-  },
-  {
-    title: "Health & Wellbeing",
-    blurb:
-      "Counselling, mental health awareness, and support for healthy choices.",
-    icon: HeartPulse,
-    image: "/images/ecadfe9f73f23947.jpeg",
-  },
-  {
-    title: "Sports & Recreation",
-    blurb:
-      "Safe sport and play that build discipline, confidence, and teamwork.",
-    icon: Trophy,
-    image: "/images/52548376321_dda8370097_k.jpg",
-  },
-  {
-    title: "Creative Arts & Culture",
-    blurb:
-      "Spaces to create, express, and grow through arts, culture, and storytelling.",
-    icon: Palette,
-    image: "/images/55137656258_b872b35591_k.jpg",
-  },
-  {
-    title: "Skills, Entrepreneurship & Job Readiness",
-    blurb: "Skills training and support to prepare for work and business.",
-    icon: Briefcase,
-    image: "/images/54513896658_550ab2509d_k.jpg",
-  },
-  {
-    title: "Leadership & Civic Engagement",
-    blurb:
-      "Leadership development and active citizenship for community impact.",
-    icon: Flag,
-    image: "/images/54513896658_550ab2509d_k.jpg",
-  },
-];
+export const pillars = programmes.map((programme) => ({
+  title: programme.title,
+  shortTitle: programme.shortTitle,
+  blurb: programme.summary,
+  icon: programme.icon,
+  image: programme.image,
+  href: `/Programmes/${programme.slug}`,
+}));
 
 export const ages = [
   {
@@ -133,23 +79,36 @@ export const ages = [
 ];
 
 export const stats = [
-  { value: "12", label: "Hubs Nationwide" },
-  { value: "926,824", label: "Youth Empowered Through Youth Forums" },
-  // { value: "2,500+", label: "Mentorship sessions delivered" },
+  { value: "2", label: "Operational Hubs" },
+  { value: "3", label: "Hubs In Development" },
+  { value: "926,824", label: "Mentorship sessions delivered" },
   // { value: "150+", label: "Community events hosted" },
 ];
 
 export const hubs = [
   {
-    id: "kigali",
-    name: "Imbuto Hub Kigali",
-    location: "Kigali City",
-    region: "Central Rwanda",
-    lat: -1.9441,
-    lng: 30.0619,
+    id: "bugesera",
+    name: "Imbuto Hub Bugesera",
+    location: "Eastern Province",
+    region: "Eastern Rwanda",
+    lat: -2.148616,
+    lng: 30.0874138,
+    status: "Operational",
     summary:
-      "Learning, wellbeing, creativity, and youth opportunity in the capital.",
-    shortName: "Imbuto Hub Kigali",
+      "An operational hub supporting learning, wellbeing, sports, and community opportunity in Bugesera.",
+    shortName: "Imbuto Hub Bugesera",
+  },
+  {
+    id: "nyarugenge",
+    name: "Imbuto Hub Nyarugenge (Maison de Jeunes)",
+    location: "Kigali City",
+    region: "Kigali, Rwanda",
+    lat: -1.9507,
+    lng: 30.0608,
+    status: "Operational",
+    summary:
+      "An operational youth space at Maison de Jeunes, connecting young people to programmes and community support.",
+    shortName: "Nyarugenge Maison de Jeunes",
   },
   {
     id: "musanze",
@@ -158,8 +117,9 @@ export const hubs = [
     region: "Northern Rwanda",
     lat: -1.4996,
     lng: 29.6349,
+    status: "In Development",
     summary:
-      "A youth-centred hub supporting growth, skills, and community connection.",
+      "A hub in development to expand youth-centred learning, skills, and community connection in the north.",
     shortName: "Imbuto Hub Musanze",
   },
   {
@@ -169,8 +129,9 @@ export const hubs = [
     region: "Southern Rwanda",
     lat: -2.5967,
     lng: 29.7394,
+    status: "In Development",
     summary:
-      "A space for learning, support, and life-stage development in the south.",
+      "A hub in development to support learning, wellbeing, and life-stage development in the south.",
     shortName: "Imbuto Hub Huye",
   },
   {
@@ -180,60 +141,24 @@ export const hubs = [
     region: "Western Rwanda",
     lat: -1.688938,
     lng: 29.293046,
-    summary: "Community-rooted programming close to Rwanda’s western corridor.",
+    status: "In Development",
+    summary:
+      "A hub in development for community-rooted programming close to Rwanda's western corridor.",
     shortName: "Imbuto Hub Rubavu",
-  },
-  {
-    id: "nyagatare",
-    name: "Imbuto Hub Nyagatare",
-    location: "Eastern Province",
-    region: "Eastern Rwanda",
-    lat: -1.297,
-    lng: 30.3256,
-    summary:
-      "A growing access point for opportunity, wellbeing, and youth engagement.",
-    shortName: "Imbuto Hub Nyagatare",
-  },
-  {
-    id: "bugesera",
-    name: "Imbuto Hub Bugesera",
-    location: "Eastern Province",
-    region: "Eastern Rwanda",
-    lat: -2.148616,
-    lng: 30.0874138,
-    summary:
-      "A growing access point for opportunity, wellbeing, and youth engagement.",
-    shortName: "Imbuto Hub Bugesera",
   },
 ];
 
 export const partners = [
   {
     name: "Partner 1",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview.webp",
+    logo: "/images/partners/Coat_of_arms_of_Rwanda.svg",
   },
   {
     name: "Partner 2",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-1.webp",
+    logo: "/images/partners/RSSBlogo.png",
   },
   {
     name: "Partner 3",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-2.webp",
-  },
-  {
-    name: "Partner 4",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-3.webp",
-  },
-  {
-    name: "Partner 5",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-4.webp",
-  },
-  {
-    name: "Partner 6",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-5.webp",
-  },
-  {
-    name: "Partner 7",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-6.webp",
+    logo: "/images/partners/imbutofoundationlogo.png",
   },
 ];

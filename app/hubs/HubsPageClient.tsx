@@ -10,7 +10,6 @@ import {
   Filter,
   MapPinned,
   Search,
-  Sparkles,
 } from "lucide-react";
 import { Header } from "../../components/imbuto/Header";
 import { Footer } from "../../components/imbuto/Footer";
@@ -38,11 +37,6 @@ const statusMeta = {
     className: "bg-[#fff1e3] text-[#a6511f]",
     description: "Hub is being built or programmes are being set up.",
   },
-  Planned: {
-    icon: Sparkles,
-    className: "bg-[#f8e7a8] text-[#7b5714]",
-    description: "Hub is confirmed and coming soon to this location.",
-  },
 };
 
 const provinceOptions = [
@@ -57,17 +51,13 @@ const statusOptions = [
   "All statuses",
   "Operational",
   "In Development",
-  "Planned",
 ];
 const programmeOptions = [
   "All programmes",
-  "Education & Personal Development",
+  "Early Childhood Development & Family",
   "Digital Literacy & Innovation",
   "Health & Wellbeing",
   "Sports & Recreation",
-  "Creative Arts & Culture",
-  "Skills, Entrepreneurship & Job Readiness",
-  "Leadership & Civic Engagement",
 ];
 
 const facilitiesPool = [
@@ -82,25 +72,22 @@ const facilitiesPool = [
 ];
 
 const programmePool = [
-  "Education & Personal Development",
+  "Early Childhood Development & Family",
   "Digital Literacy & Innovation",
   "Health & Wellbeing",
   "Sports & Recreation",
-  "Creative Arts & Culture",
-  "Leadership & Civic Engagement",
 ];
 
 const hubDetails = hubs.map((hub, index) => {
-  const status =
-    index < 4 ? "Operational" : index === 4 ? "In Development" : "Planned";
   const facilities = facilitiesPool.slice(index % 3, (index % 3) + 5);
-  const programmes = programmePool.slice(index % 2, (index % 2) + 5);
+  const programmes = programmePool;
 
   return {
     ...hub,
-    district: hub.name.replace("Imbuto Hub ", ""),
+    district: hub.name
+      .replace("Imbuto Hub ", "")
+      .replace(" (Maison de Jeunes)", ""),
     province: hub.location,
-    status,
     facilities,
     programmes,
   };
@@ -183,56 +170,10 @@ export function HubsPageClient() {
               Find the nearest Imbuto Hub and explore what is available. Filter
               by province, district, hub status, and programme type.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a
-                href="#hub-map"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm text-[#043E52] shadow-2xl transition hover:-translate-y-0.5"
-              >
-                Use the Map
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href="#hub-list"
-                className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15"
-              >
-                View Hubs
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
+            
           </div>
         </Container>
       </section>
-
-      <section className="bg-white py-20 md:py-24">
-        <Container>
-          <h2 className="max-w-2xl text-4xl tracking-[-0.04em] md:text-5xl text-[#c05d24">
-            Map Status Labels
-          </h2>
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-            {Object.entries(statusMeta).map(([label, meta]) => {
-              const Icon = meta.icon;
-
-              return (
-                <div
-                  key={label}
-                  className="rounded-[26px] border border-slate-200/80 bg-[#f7f7f2] p-6 shadow-sm"
-                >
-                  <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${meta.className}`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h2 className="mt-5 text-2xl tracking-[-0.03em]">{label}</h2>
-                  <p className="mt-3 text-sm leading-7 text-slate-700">
-                    {meta.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
       <section id="hub-map" className="py-20 md:py-24">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
@@ -351,38 +292,6 @@ export function HubsPageClient() {
                 ))
               )}
             </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,#E16A3D_0%,#FFA45D_48%,#043E52_130%)]" />
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-overlay"
-          style={{ backgroundImage: `url('${ctaImage}')` }}
-        />
-        <Container className="relative max-w-6xl text-center text-white">
-          <div className="text-sm uppercase tracking-[0.28em] text-white/75">
-            Visit an Imbuto Hub
-          </div>
-          <h2 className="mx-auto mt-4 max-w-3xl text-5xl tracking-[-0.05em] md:text-6xl">
-            Find the hub closest to your next opportunity.
-          </h2>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <a
-              href="#hub-map"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm text-[#043E52] shadow-2xl transition hover:-translate-y-0.5"
-            >
-              Use the Map
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#hub-list"
-              className="inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-md transition hover:bg-white/15"
-            >
-              View Hubs
-              <ArrowRight className="h-4 w-4" />
-            </a>
           </div>
         </Container>
       </section>

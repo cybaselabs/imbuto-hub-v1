@@ -20,7 +20,7 @@ export function PillarsSection() {
               </h2>
             </div>
             <button className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#043E52] shadow-sm transition hover:-translate-y-0.5">
-              Explore All Programs
+              Explore All Programmes
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>

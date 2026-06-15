@@ -171,14 +171,6 @@ export default function AboutPage() {
               every stage of life in a single trusted space embedded within
               their community.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <CtaLink href="#" variant="light">
-                View Programs
-              </CtaLink>
-              <CtaLink href="#" variant="outline">
-                Find a Hub Near You
-              </CtaLink>
-            </div>
           </div>
         </Container>
       </section>
@@ -203,7 +195,7 @@ export default function AboutPage() {
 
             <div>
               <SectionEyebrow>Founding Philosophy</SectionEyebrow>
-              <h2 className="mt-4 max-w-2xl text-4xl tracking-[-0.04em] md:text-5xl">
+              <h2 className="mt-4 max-w-2xl font-sans text-4xl font-semibold leading-tight tracking-normal md:text-5xl">
                 Imbuto means seed.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-9 text-slate-700">
@@ -211,12 +203,12 @@ export default function AboutPage() {
                 right conditions, every young Rwandan has the potential to grow
                 into something extraordinary.
               </p>
-              <blockquote className="mt-8 border-l-4 border-[#ed9b37] pl-6 text-2xl leading-10 text-[#102c35] md:text-3xl md:leading-[1.35]">
+              <blockquote className="mt-8 border-l-4 border-[#ed9b37] pl-6 font-sans text-xl font-medium leading-9 text-[#102c35] md:text-2xl md:leading-10">
                 &quot;A seed well planted, watered, nurtured, and given all the
                 necessary support successfully grows into a healthy plant, one
                 that reaches high and stands tall.&quot;
               </blockquote>
-              <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.18em] text-[#2b6274]">
+              <p className="mt-6 max-w-xl text-sm font-semibold leading-7 tracking-normal text-[#2b6274]">
                 H.E. Mrs Jeannette Kagame, First Lady of Rwanda & Chairperson,
                 Imbuto Foundation
               </p>
@@ -227,7 +219,17 @@ export default function AboutPage() {
 
       <section className="bg-white py-20 md:py-24">
         <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="rounded-[28px] border border-slate-200/80 bg-[#102c35] p-8 text-white md:p-10">
+              <SectionEyebrow>Motto</SectionEyebrow>
+              <h2 className="mt-4 text-4xl tracking-[-0.04em] text-[#f5c346]">
+                Rooted in community.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-white/78">
+                Imbuto Hubs are grounded in the people, families, and local
+                partnerships that shape each community&apos;s growth.
+              </p>
+            </div>
             <div className="rounded-[28px] border border-slate-200/80 bg-[#f7f7f2] p-8 md:p-10">
               <SectionEyebrow>Vision</SectionEyebrow>
               <h2 className="mt-4 text-4xl tracking-[-0.04em]">
@@ -239,12 +241,12 @@ export default function AboutPage() {
                 their community and the nation&apos;s sustainable development.
               </p>
             </div>
-            <div className="rounded-[28px] border border-slate-200/80 bg-[#102c35] p-8 text-white md:p-10">
+            <div className="rounded-[28px] border border-slate-200/80 bg-[#dff5f2] p-8 md:p-10">
               <SectionEyebrow>Mission</SectionEyebrow>
-              <h2 className="mt-4 text-4xl tracking-[-0.04em] text-[#f5c346]">
+              <h2 className="mt-4 text-4xl tracking-[-0.04em] text-[#102c35]">
                 Safe spaces for full potential.
               </h2>
-              <p className="mt-5 text-base leading-8 text-white/78">
+              <p className="mt-5 text-base leading-8 text-slate-700">
                 To support the development of a healthy, educated, and
                 prosperous society by providing safe, inclusive community spaces
                 where young Rwandans can access the programmes, skills,
@@ -253,15 +255,111 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+
+          <div className="mt-16 md:mt-20">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,720px)_1fr] lg:items-end">
+              <h2 className="max-w-xl text-4xl tracking-[-0.04em] md:text-5xl">
+                Values
+              </h2>
+            </div>
+
+            <div className="mt-8 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-5">
+              {values.map((value) => {
+                const Icon = value.icon;
+
+                return (
+                  <div
+                    key={value.title}
+                    className="flex min-h-[272px] flex-col rounded-[28px] border border-slate-200/80 bg-[#f7f7f2] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#52b3a9]/18 text-[#2b6274]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-6 text-2xl tracking-[-0.03em] text-[#102c35]">
+                      {value.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {value.text}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </Container>
       </section>
 
-      <section className="bg-[#f7f7f2] py-20 md:py-24">
+      <section className="relative overflow-hidden bg-[#fff1e3] py-20 md:py-24">
+        <div className="pointer-events-none absolute -left-20 top-10 h-64 w-64 rounded-full bg-[#ed9b37]/24 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-[#52b3a9]/24 blur-3xl" />
         <Container className="max-w-[1392px]">
-          <div className="space-y-16 md:space-y-20">
-            <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+          <div className="relative space-y-16 md:space-y-20">
+            <div className="grid gap-8 rounded-[36px] border border-white/70 bg-white/70 p-6 shadow-[0_28px_90px_rgba(16,44,53,0.10)] backdrop-blur-sm md:p-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch lg:p-10">
+              <div className="flex min-h-[320px] flex-col justify-between rounded-[28px] bg-[#102c35] p-7 text-white md:p-8">
+                <div>
+                  <div className="inline-flex rounded-full bg-[#f5c346]/18 px-4 py-2 text-xs uppercase tracking-[0.22em] text-[#f5c346]">
+                    Why Imbuto Hubs Exist
+                  </div>
+                  <h2 className="mt-6 max-w-xl text-4xl tracking-[-0.04em] text-white md:text-5xl">
+                    A brighter answer to connected challenges.
+                  </h2>
+                </div>
+                <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
+                  <div className="rounded-2xl bg-white/10 p-4">
+                    Health
+                    <span className="mt-1 block text-white/60">Support</span>
+                  </div>
+                  <div className="rounded-2xl bg-white/10 p-4">
+                    Skills
+                    <span className="mt-1 block text-white/60">Pathways</span>
+                  </div>
+                  <div className="rounded-2xl bg-white/10 p-4">
+                    Safe spaces
+                    <span className="mt-1 block text-white/60">Access</span>
+                  </div>
+                  <div className="rounded-2xl bg-white/10 p-4">
+                    Community
+                    <span className="mt-1 block text-white/60">Trust</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <div className="rounded-[28px] bg-[#f7f7f2] p-6 shadow-sm ring-1 ring-white/80 md:p-7">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fde4dc] text-[#c05d24]">
+                    <Lightbulb className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 text-2xl tracking-[-0.03em] text-[#102c35]">
+                    The challenge
+                  </h3>
+                  <p className="mt-4 text-base leading-8 text-slate-700">
+                    Across Rwanda, young people and families face challenges
+                    that stand between them and their potential. These include
+                    limited access to health education and mental health
+                    support, youth unemployment and skills mismatches,
+                    fragmented services that rarely connect education with
+                    opportunity, and too few safe spaces for out-of-school
+                    youth.
+                  </p>
+                </div>
+                <div className="rounded-[28px] bg-[#dff5f2] p-6 shadow-sm ring-1 ring-white/80 md:p-7">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#2b6274]">
+                    <Handshake className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 text-2xl tracking-[-0.03em] text-[#102c35]">
+                    The response
+                  </h3>
+                  <p className="mt-4 text-base leading-8 text-slate-700">
+                    Imbuto Hubs respond to these challenges not by addressing
+                    them in isolation, but by bringing them together in one
+                    trusted, community-centred space.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
               <div>
-                {/* <SectionEyebrow>Why Imbuto Hubs Exist</SectionEyebrow> */}
                 <h2 className="max-w-xl text-4xl tracking-[-0.04em] md:text-5xl">
                   Why Imbuto Hubs Exist
                 </h2>
@@ -281,66 +379,7 @@ export default function AboutPage() {
                   community-centred space.
                 </p>
               </div>
-            </div>
-
-            <div>
-              <h2 className="max-w-xl text-4xl tracking-[-0.04em] md:text-5xl">
-                Each Imbuto Hub:
-              </h2>
-
-              <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                {modelItems.map((item) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <div
-                      key={item.text}
-                      className="flex gap-4 rounded-2xl border border-slate-200/80 bg-white px-4 py-4 shadow-sm"
-                    >
-                      <div
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${item.tone}`}
-                      >
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <p className="text-sm leading-7 text-slate-700">
-                        {item.text}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div>
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,720px)_1fr] lg:items-end">
-                <h2 className="max-w-xl text-4xl tracking-[-0.04em] md:text-5xl">
-                  Values
-                </h2>
-              </div>
-
-              <div className="mt-8 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-5">
-                {values.map((value) => {
-                  const Icon = value.icon;
-
-                  return (
-                    <div
-                      key={value.title}
-                      className="flex min-h-[272px] flex-col rounded-[28px] border border-slate-200/80 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-                    >
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#52b3a9]/18 text-[#2b6274]">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <h3 className="mt-6 text-2xl tracking-[-0.03em] text-[#102c35]">
-                        {value.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-slate-600">
-                        {value.text}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            </div> */}
           </div>
         </Container>
       </section>
@@ -423,26 +462,25 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,#E16A3D_0%,#FFA45D_48%,#043E52_130%)]" />
+      <section className="relative isolate overflow-hidden bg-[#043E52] py-24">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-overlay"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${ctaImage}')` }}
         />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,62,82,0.94)_0%,rgba(4,62,82,0.78)_48%,rgba(4,62,82,0.56)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(0deg,rgba(225,106,61,0.42)_0%,rgba(225,106,61,0)_100%)]" />
         <Container className="relative max-w-6xl text-center text-white">
-          <div className="text-sm uppercase tracking-[0.28em] text-white/75">
+          <div className="text-sm uppercase tracking-[0.28em] text-[#f5c346]">
             Take the next step
           </div>
-          <h2 className="mx-auto mt-4 max-w-3xl text-5xl tracking-[-0.05em] md:text-6xl">
+          <h2 className="mx-auto mt-4 max-w-3xl text-5xl tracking-[-0.05em] text-white md:text-6xl">
             Discover, participate, or partner with Imbuto Hubs.
           </h2>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <CtaLink href="#" variant="light">
-              Explore Programs
+              Explore Programmes
             </CtaLink>
-            <CtaLink href="#" variant="outline">
-              Find a Hub Near You
-            </CtaLink>
+
             <CtaLink href="#" variant="outline">
               Partner With Us
             </CtaLink>

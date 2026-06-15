@@ -327,12 +327,13 @@ export default function EventsPage() {
         </Container>
       </section>
 
-      <section id="newsletter" className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(225,106,61,0.94)_0%,rgba(255,164,93,0.84)_48%,rgba(4,62,82,0.72)_130%)]" />
+      <section id="newsletter" className="relative isolate overflow-hidden bg-[#043E52] py-24">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${ctaImage}')` }}
         />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,62,82,0.94)_0%,rgba(4,62,82,0.78)_48%,rgba(4,62,82,0.56)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(0deg,rgba(225,106,61,0.42)_0%,rgba(225,106,61,0)_100%)]" />
         <Container className="relative">
           <div className="grid gap-8 text-white lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>

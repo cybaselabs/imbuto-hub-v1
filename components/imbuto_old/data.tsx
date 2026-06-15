@@ -41,7 +41,7 @@ export const quickActions = [
     color: "bg-[#E16A3D]",
   },
   {
-    title: "Explore Programs",
+    title: "Explore Programmes",
     icon: Compass,
     subtitle: "Browse opportunities for learning, wellbeing, and growth.",
     color: "bg-[#E16A3D]",

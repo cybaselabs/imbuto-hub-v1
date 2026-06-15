@@ -22,7 +22,7 @@ export function Header() {
             About
           </span>
           <span className="cursor-pointer transition hover:text-white">
-            Programs
+            Programmes
           </span>
           <span className="cursor-pointer transition hover:text-white">
             Hubs

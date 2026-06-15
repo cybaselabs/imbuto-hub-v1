@@ -1,9 +1,14 @@
 "use client";
 
+import { DivideCircleIcon } from "lucide-react";
 import { Container } from "./Container";
 import { stats } from "./data";
 
-export function StatsSection({ variant = "dark" }: { variant?: "dark" | "light" }) {
+export function StatsSection({
+  variant = "dark",
+}: {
+  variant?: "dark" | "light";
+}) {
   const isLight = variant === "light";
 
   return (
@@ -27,14 +32,14 @@ export function StatsSection({ variant = "dark" }: { variant?: "dark" | "light" 
                 isLight ? "text-[#c05d24]" : "text-[#FFA45D]"
               }`}
             >
-              Facts & figures
+              Projected facts & figures
             </div>
             <h2
               className={`mt-4 text-4xl tracking-[-0.04em] md:text-5xl ${
                 isLight ? "text-[#102c35]" : "text-white"
               }`}
             >
-              National reach. Human impact.
+              Planned reach. Human impact.
             </h2>
           </div>
           <p
@@ -42,8 +47,9 @@ export function StatsSection({ variant = "dark" }: { variant?: "dark" | "light" 
               isLight ? "text-slate-700" : "text-white/72"
             }`}
           >
-            Behind every number is a person, a family, and a community moving
-            forward with greater access, confidence, and opportunity.
+            Every number is a story in motion: a child learning, an artist
+            creating, an athlete growing, a dream taking shape, a family finding
+            support, and a community moving forward together.
           </p>
         </div>
 

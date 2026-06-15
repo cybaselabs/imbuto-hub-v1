@@ -128,7 +128,7 @@ export function HubsMap({
 
   return (
     <div className="h-full min-h-[520px] w-full overflow-hidden rounded-[26px] bg-white">
-      <div ref={mapElementRef} className="h-full w-full" />
+      <div ref={mapElementRef} className="h-full min-h-[520px] w-full" />
     </div>
   );
 }

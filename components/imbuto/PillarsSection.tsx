@@ -3,8 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Container } from "./Container";
-import { pillars } from "./data";
-import { ProgrammeCard, programmeCardAccents } from "./ProgrammeCard";
+import { ProgrammeCardsGrid } from "./ProgrammeCardsGrid";
 
 export function PillarsSection() {
   return (
@@ -22,37 +21,24 @@ export function PillarsSection() {
             <h2 className="mt-5 max-w-3xl text-4xl leading-[1.02] tracking-[-0.04em] text-white md:text-5xl">
               What we offer
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/70 md:text-lg">
+            {/* <p className="mt-4 max-w-2xl text-base leading-8 text-white/70 md:text-lg">
               A brighter, more energetic way to browse the Imbuto Hubs
               experience — still structured, but more expressive and
               youth-centred.
-            </p>
+            </p> */}
           </div>
 
-          <Link
-            href="/programs"
+          {/* <Link
+            href="/Programmes"
             className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm text-[#043E52] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#f8f4e7]"
           >
-            Explore All Programs
+            Explore All Programmes
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </Link> */}
         </div>
 
-        <div className="mt-10 overflow-visible">
-          <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {pillars.map((pillar, idx) => {
-              return (
-                <ProgrammeCard
-                  key={pillar.title}
-                  title={pillar.title}
-                  description={pillar.blurb}
-                  image={pillar.image}
-                  icon={pillar.icon}
-                  accent={programmeCardAccents[idx % programmeCardAccents.length]}
-                />
-              );
-            })}
-          </div>
+        <div className="mt-10">
+          <ProgrammeCardsGrid limit={4} />
         </div>
       </Container>
     </section>

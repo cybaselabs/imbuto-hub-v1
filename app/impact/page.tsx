@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarDays,
-  MapPinned,
-  MessageCircle,
   Sparkles,
-  Users,
 } from "lucide-react";
 import { Header } from "../../components/imbuto/Header";
 import { Footer } from "../../components/imbuto/Footer";
@@ -20,21 +16,6 @@ export const metadata: Metadata = {
   description:
     "Explore human impact, stories, facts, figures, and media from the Imbuto Hubs network across Rwanda.",
 };
-
-const impactFacts = [
-  {
-    value: "12",
-    label: "Hubs Nationwide",
-    icon: MapPinned,
-    tone: "bg-[#fff1e3] text-[#c05d24]",
-  },
-  {
-    value: "926,824",
-    label: "Youth Empowered Through Youth Forums",
-    icon: Users,
-    tone: "bg-[#dff5f2] text-[#0f5b58]",
-  },
-];
 
 function CtaLink({
   href,
@@ -99,61 +80,14 @@ export default function ImpactPage() {
               statistic is a young person who showed up, took a chance, and
               discovered what they were capable of.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
+            {/* <div className="mt-9 flex flex-wrap gap-4">
               <CtaLink href="#stories" variant="light">
                 Read Impact
               </CtaLink>
               <CtaLink href="#share-story" variant="outline">
                 Share Your Story
               </CtaLink>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative z-10 -mt-20 bg-transparent md:-mt-10">
-        <Container>
-          <div className="rounded-[36px] border border-white/70 bg-[#f7f7f2] p-6 text-[#102c35] shadow-[0_28px_90px_rgba(3,31,41,0.16)] md:p-8 lg:p-10">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] uppercase tracking-[0.26em] text-[#2b6274] shadow-sm">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Facts & Figures
-                </div>
-                <h2 className="mt-5 max-w-2xl text-4xl tracking-[-0.04em] md:text-5xl">
-                  National reach. Human impact.
-                </h2>
-              </div>
-              <p className="max-w-xl text-sm leading-7 text-slate-700 md:text-base">
-                Behind every number is a person, a family, and a community
-                moving forward with greater access, confidence, and opportunity.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {impactFacts.map((fact) => {
-                const Icon = fact.icon;
-
-                return (
-                  <div
-                    key={fact.label}
-                    className="rounded-[26px] border border-slate-200/80 bg-white p-6 shadow-sm"
-                  >
-                    <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-2xl ${fact.tone}`}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div className="mt-6 text-5xl tracking-[-0.05em] text-[#043E52]">
-                      {fact.value}
-                    </div>
-                    <div className="mt-4 text-sm uppercase tracking-[0.2em] text-slate-500">
-                      {fact.label}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            </div> */}
           </div>
         </Container>
       </section>
@@ -162,14 +96,15 @@ export default function ImpactPage() {
 
       <ImpactGallery />
 
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(225,106,61,0.94)_0%,rgba(255,164,93,0.84)_48%,rgba(4,62,82,0.64)_130%)]" />
+      <section className="relative isolate overflow-hidden bg-[#043E52] py-24">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-overlay"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${ctaImage}')` }}
         />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,62,82,0.94)_0%,rgba(4,62,82,0.78)_48%,rgba(4,62,82,0.56)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(0deg,rgba(225,106,61,0.42)_0%,rgba(225,106,61,0)_100%)]" />
         <Container className="relative max-w-6xl text-center text-white">
-          <h2 className="mx-auto max-w-3xl text-5xl tracking-[-0.05em] md:text-6xl">
+          <h2 className="mx-auto max-w-3xl text-5xl tracking-[-0.05em] text-white md:text-6xl">
             A place to belong and build.
           </h2>
           <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/85 md:text-lg">
