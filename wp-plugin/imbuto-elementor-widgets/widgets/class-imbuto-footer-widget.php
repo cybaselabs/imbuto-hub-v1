@@ -3,6 +3,8 @@
 namespace Imbuto\ElementorWidgets;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 use Elementor\Widget_Base;
 
 if (!defined('ABSPATH')) {
@@ -42,6 +44,14 @@ class Footer_Widget extends Widget_Base
             'label' => esc_html__('Content', 'imbuto-elementor-widgets'),
         ]);
 
+        $this->add_control('logo', [
+            'label' => esc_html__('Logo', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::MEDIA,
+            'default' => [
+                'url' => image_url('updated-IMBUTO LOGO-03.png'),
+            ],
+        ]);
+
         $this->add_control('title', [
             'label' => esc_html__('Title', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXTAREA,
@@ -51,21 +61,79 @@ class Footer_Widget extends Widget_Base
         $this->add_control('description', [
             'label' => esc_html__('Description', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXTAREA,
-            'default' => 'Imbuto Hubs create safe, inspiring spaces where children, youth, and families access learning, wellbeing, creativity, mentorship, and opportunity across Rwanda.',
+            'default' => 'Imbuto Hubs create safe, inspiring spaces where children, youth, and families access learning, sports, wellbeing, and opportunity across Rwanda.',
+        ]);
+
+        $this->add_control('connect_label', [
+            'label' => esc_html__('Connect Label', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::TEXT,
+            'default' => 'Connect',
         ]);
 
         $this->add_control('email', [
             'label' => esc_html__('Email', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
-            'default' => 'info@imbutofoundation.org',
+            'default' => 'Info@imbutohubs.com',
         ]);
 
-        $this->add_control('phone', [
-            'label' => esc_html__('Phone', 'imbuto-elementor-widgets'),
+        $socials = new Repeater();
+
+        $socials->add_control('label', [
+            'label' => esc_html__('Label', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
-            'default' => '+250 XXX XXX XXX',
+            'default' => esc_html__('Facebook', 'imbuto-elementor-widgets'),
         ]);
 
+        $socials->add_control('url', [
+            'label' => esc_html__('URL', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::URL,
+            'default' => ['url' => '#'],
+        ]);
+
+        $socials->add_control('short_label', [
+            'label' => esc_html__('Short Label', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::TEXT,
+            'default' => 'F',
+        ]);
+
+        $this->add_control('social_links', [
+            'label' => esc_html__('Social Links', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::REPEATER,
+            'fields' => $socials->get_controls(),
+            'default' => [
+                ['label' => 'Facebook', 'short_label' => 'F', 'url' => ['url' => '#']],
+                ['label' => 'Instagram', 'short_label' => 'I', 'url' => ['url' => '#']],
+                ['label' => 'YouTube', 'short_label' => 'Y', 'url' => ['url' => '#']],
+                ['label' => 'LinkedIn', 'short_label' => 'L', 'url' => ['url' => '#']],
+                ['label' => 'X', 'short_label' => 'X', 'url' => ['url' => '#']],
+            ],
+            'title_field' => '{{{ label }}}',
+        ]);
+
+        $this->add_control('copyright', [
+            'label' => esc_html__('Copyright', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::TEXT,
+            'default' => '© 2026 Imbuto Hubs. All Rights Reserved.',
+        ]);
+
+        $this->end_controls_section();
+
+        $this->start_controls_section('style_section', [
+            'label' => esc_html__('Style', 'imbuto-elementor-widgets'),
+            'tab' => Controls_Manager::TAB_STYLE,
+        ]);
+
+        $this->add_control('section_background', ['label' => esc_html__('Section Background', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer' => 'background-color: {{VALUE}};']]);
+        $this->add_control('card_background', ['label' => esc_html__('Card Background', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__intro, {{WRAPPER}} .imbuto-site-footer__connect' => 'background: {{VALUE}};']]);
+        $this->add_control('card_border_color', ['label' => esc_html__('Card Border Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__intro, {{WRAPPER}} .imbuto-site-footer__connect' => 'border-color: {{VALUE}};']]);
+        $this->add_responsive_control('section_padding', ['label' => esc_html__('Section Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em', '%'], 'selectors' => ['{{WRAPPER}} .imbuto-site-footer' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_responsive_control('card_padding', ['label' => esc_html__('Card Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em'], 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__intro, {{WRAPPER}} .imbuto-site-footer__connect' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_responsive_control('logo_height', ['label' => esc_html__('Logo Height', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 20, 'max' => 120]], 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__brand img' => 'height: {{SIZE}}{{UNIT}};']]);
+        $this->add_control('title_color', ['label' => esc_html__('Title Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer h2' => 'color: {{VALUE}};']]);
+        $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'title_typography', 'label' => esc_html__('Title Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-site-footer h2']);
+        $this->add_control('description_color', ['label' => esc_html__('Description Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__intro p' => 'color: {{VALUE}};']]);
+        $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'description_typography', 'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-site-footer__intro p']);
+        $this->add_control('accent_color', ['label' => esc_html__('Accent Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer h3, {{WRAPPER}} .imbuto-site-footer__connect a:hover' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-site-footer__socials a:hover' => 'background: {{VALUE}};']]);
         $this->end_controls_section();
     }
 
@@ -73,75 +141,39 @@ class Footer_Widget extends Widget_Base
     {
         enqueue_frontend_assets();
         $settings = $this->get_settings_for_display();
-        $groups = [
-            [
-                'title' => 'About',
-                'items' => ['About Imbuto Hubs', 'Our Model', 'Vision & Mission', 'Impact Stories'],
-            ],
-            [
-                'title' => 'Programmes',
-                'items' => ['Early Childhood Development', 'Education & Personal Development', 'Digital Literacy & Innovation', 'Health & Wellbeing', 'Sports & Recreation', 'Creative Arts & Culture'],
-            ],
-            [
-                'title' => 'Explore',
-                'items' => ['Kigali Imbuto Hub', 'Musanze Imbuto Hub', 'Huye Imbuto Hub', 'Rubavu Imbuto Hub', 'Nyagatare Imbuto Hub', 'Bugesera Imbuto Hub'],
-            ],
-        ];
+        $social_links = !empty($settings['social_links']) && is_array($settings['social_links']) ? $settings['social_links'] : [];
+        $logo = $settings['logo']['url'] ?? image_url('updated-IMBUTO LOGO-03.png');
         ?>
         <footer class="imbuto-site-footer">
             <div class="imbuto-container">
                 <div class="imbuto-site-footer__grid">
                     <div class="imbuto-site-footer__intro">
                         <div class="imbuto-site-footer__brand">
-                            <span>IH</span>
-                            Imbuto Foundation
+                            <?php if ($logo) : ?><img src="<?php echo esc_url($logo); ?>" alt="<?php echo esc_attr__('Imbuto Hub Logo', 'imbuto-elementor-widgets'); ?>"><?php endif; ?>
                         </div>
                         <h2><?php echo esc_html($settings['title']); ?></h2>
                         <p><?php echo esc_html($settings['description']); ?></p>
-                        <div class="imbuto-site-footer__actions">
-                            <a class="imbuto-button imbuto-button--orange" href="/hubs#hub-map">Find a Hub</a>
-                            <a class="imbuto-button imbuto-button--ghost" href="/get-involved">Get Involved</a>
-                        </div>
                     </div>
 
-                    <div class="imbuto-site-footer__content">
-                        <div class="imbuto-site-footer__links">
-                            <?php foreach ($groups as $group) : ?>
-                                <section>
-                                    <h3><?php echo esc_html($group['title']); ?></h3>
-                                    <ul>
-                                        <?php foreach ($group['items'] as $item) : ?>
-                                            <li><?php echo esc_html($item); ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </section>
-                            <?php endforeach; ?>
+                    <div class="imbuto-site-footer__connect">
+                        <div>
+                            <h3><?php echo esc_html($settings['connect_label']); ?></h3>
+                            <?php if (!empty($settings['email'])) : ?>
+                                <p><a href="mailto:<?php echo esc_attr($settings['email']); ?>"><?php echo esc_html($settings['email']); ?></a></p>
+                            <?php endif; ?>
                         </div>
-
-                        <div class="imbuto-site-footer__connect">
-                            <div>
-                                <h3>Connect</h3>
-                                <p>Imbuto Foundation</p>
-                                <p>Kigali, Rwanda</p>
-                                <p><?php echo esc_html($settings['email']); ?></p>
-                                <p><?php echo esc_html($settings['phone']); ?></p>
-                            </div>
-                            <div class="imbuto-site-footer__socials" aria-label="<?php echo esc_attr__('Social links', 'imbuto-elementor-widgets'); ?>">
-                                <?php foreach (['F', 'I', 'Y', 'L', 'X'] as $social) : ?>
-                                    <span><?php echo esc_html($social); ?></span>
-                                <?php endforeach; ?>
-                            </div>
+                        <div class="imbuto-site-footer__socials" aria-label="<?php echo esc_attr__('Social links', 'imbuto-elementor-widgets'); ?>">
+                            <?php foreach ($social_links as $social) : ?>
+                                <?php if (!empty($social['short_label'])) : ?>
+                                    <a href="<?php echo esc_url($social['url']['url'] ?? '#'); ?>" aria-label="<?php echo esc_attr($social['label'] ?? $social['short_label']); ?>"><?php echo esc_html($social['short_label']); ?></a>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="imbuto-site-footer__bottom">
-                    <div>
-                        <span>Privacy Policy</span>
-                        <span>Terms of Use</span>
-                        <span>Accessibility Statement</span>
-                    </div>
-                    <div>© <?php echo esc_html((string) gmdate('Y')); ?> Imbuto Hubs. All Rights Reserved.</div>
+                    <div><?php echo esc_html($settings['copyright']); ?></div>
                 </div>
             </div>
         </footer>

@@ -7,14 +7,14 @@ const buttonClass =
   "inline-flex w-fit items-center gap-2 rounded-full bg-[#E16A3D] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#ed9b37]/25 transition hover:-translate-y-0.5 hover:bg-[#c05d24]";
 
 const featuredStory = {
-  title: "A Life Shaped by Imbuto",
+  title: "The Journey of Keza",
   person: "Keza",
-  role: "Doctor & Imbuto Hub Mentor",
-  image: "/images/54945400951_90ba3d130b_k.jpg",
+  role: "Medical Student & Imbuto Hub Mentor",
+  image: "/images/gallery/55271389639_c61707ed44_k.jpg",
   summary:
-    "Keza first entered the hub library as a child with a quiet dream of becoming a doctor. Through reading, ICT access, wellness support, sports, and mentorship, that dream became a plan. Today, she returns to the hub as a mentor for the next generation.",
+    "Keza's story follows a child with big dreams through early learning, education, health support, mental wellbeing, youth empowerment, and mentorship, showing how Imbuto Hubs can shape a life from childhood to adulthood.",
   quote:
-    "The hub did not just give me knowledge. It gave me the belief that my future was worth building.",
+    "Once upon a time I was you, and one day you will be me.",
 };
 
 const additionalStories = [
@@ -97,7 +97,7 @@ export function ImpactStories() {
                 {featuredStory.person}, {featuredStory.role}
               </p>
               <Link
-                href="#"
+                href="/impact/keza"
                 className={`mt-6 ${buttonClass}`}
               >
                 Read Story
@@ -107,7 +107,7 @@ export function ImpactStories() {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
+        {/* <div className="mt-6 grid gap-5 md:grid-cols-2">
           {additionalStories.map((story) => {
             const Icon = story.icon;
 
@@ -154,7 +154,7 @@ export function ImpactStories() {
               </article>
             );
           })}
-        </div>
+        </div> */}
       </Container>
     </section>
   );

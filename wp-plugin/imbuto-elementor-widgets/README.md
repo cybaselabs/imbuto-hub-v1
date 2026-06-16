@@ -2,7 +2,7 @@
 
 Custom Elementor widgets for the Imbuto Hub WordPress build.
 
-Current version: `0.1.24`
+Current version: `0.1.28`
 
 ## Widgets
 
@@ -14,6 +14,7 @@ Current version: `0.1.24`
 - Imbuto Life Stages
 - Imbuto Stats
 - Imbuto Hubs Map
+- Imbuto Partners
 - Imbuto CTA
 - Imbuto Footer
 

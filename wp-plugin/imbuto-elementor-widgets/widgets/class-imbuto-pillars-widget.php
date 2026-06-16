@@ -44,6 +44,12 @@ class Pillars_Widget extends Widget_Base
             'label' => esc_html__('Content', 'imbuto-elementor-widgets'),
         ]);
 
+        $this->add_control('eyebrow', [
+            'label' => esc_html__('Eyebrow', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::TEXT,
+            'default' => 'Programmes',
+        ]);
+
         $this->add_control('title', [
             'label' => esc_html__('Title', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
@@ -53,7 +59,16 @@ class Pillars_Widget extends Widget_Base
         $this->add_control('description', [
             'label' => esc_html__('Description', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXTAREA,
-            'default' => 'A brighter, more energetic way to browse the Imbuto Hubs experience.',
+            'default' => '',
+        ]);
+
+        $this->add_control('show_description', [
+            'label' => esc_html__('Show Description', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => '',
         ]);
 
         $this->add_control('link_url', [
@@ -65,7 +80,16 @@ class Pillars_Widget extends Widget_Base
         $this->add_control('section_button_text', [
             'label' => esc_html__('Section Button Text', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
-            'default' => 'Explore All Programmes',
+            'default' => '',
+        ]);
+
+        $this->add_control('show_section_button', [
+            'label' => esc_html__('Show Section Button', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => '',
         ]);
 
         $this->add_control('source', [
@@ -84,7 +108,7 @@ class Pillars_Widget extends Widget_Base
             'min' => 1,
             'max' => 24,
             'step' => 1,
-            'default' => 8,
+            'default' => 4,
             'condition' => [
                 'source' => 'Programmes',
             ],
@@ -118,6 +142,112 @@ class Pillars_Widget extends Widget_Base
             'max' => 500,
             'step' => 5,
             'default' => 120,
+        ]);
+
+        $this->end_controls_section();
+
+        $this->start_controls_section('header_style_section', [
+            'label' => esc_html__('Section Header Style', 'imbuto-elementor-widgets'),
+            'tab' => Controls_Manager::TAB_STYLE,
+        ]);
+
+        $this->add_responsive_control('section_padding', [
+            'label' => esc_html__('Section Padding', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', 'em', '%'],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('header_bottom_spacing', [
+            'label' => esc_html__('Header Bottom Spacing', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'range' => ['px' => ['min' => 0, 'max' => 120]],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_control('eyebrow_background', [
+            'label' => esc_html__('Eyebrow Background', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-kicker' => 'background: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('eyebrow_color', [
+            'label' => esc_html__('Eyebrow Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-kicker' => 'color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('eyebrow_border_color', [
+            'label' => esc_html__('Eyebrow Border Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-kicker' => 'border-color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'eyebrow_typography',
+            'label' => esc_html__('Eyebrow Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-pillars .imbuto-kicker',
+        ]);
+
+        $this->add_control('heading_color', [
+            'label' => esc_html__('Title Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head h2' => 'color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'heading_typography',
+            'label' => esc_html__('Title Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-pillars .imbuto-section-head h2',
+        ]);
+
+        $this->add_control('header_description_color', [
+            'label' => esc_html__('Description Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head p' => 'color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'header_description_typography',
+            'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-pillars .imbuto-section-head p',
+        ]);
+
+        $this->add_control('section_button_background', [
+            'label' => esc_html__('Button Background', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head .imbuto-button' => 'background: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_control('section_button_color', [
+            'label' => esc_html__('Button Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head .imbuto-button' => 'color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'section_button_typography',
+            'label' => esc_html__('Button Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-pillars .imbuto-section-head .imbuto-button',
         ]);
 
         $this->end_controls_section();
@@ -527,11 +657,15 @@ class Pillars_Widget extends Widget_Base
             <div class="imbuto-container">
                 <div class="imbuto-section-head imbuto-section-head--dark">
                     <div>
-                        <div class="imbuto-kicker">Programmes</div>
+                        <?php if (!empty($settings['eyebrow'])) : ?>
+                            <div class="imbuto-kicker"><?php echo esc_html($settings['eyebrow']); ?></div>
+                        <?php endif; ?>
                         <h2><?php echo esc_html($settings['title']); ?></h2>
-                        <p><?php echo esc_html($settings['description']); ?></p>
+                        <?php if (($settings['show_description'] ?? '') === 'yes' && !empty($settings['description'])) : ?>
+                            <p><?php echo esc_html($settings['description']); ?></p>
+                        <?php endif; ?>
                     </div>
-                    <?php if (!empty($settings['section_button_text'])) : ?>
+                    <?php if (($settings['show_section_button'] ?? '') === 'yes' && !empty($settings['section_button_text'])) : ?>
                         <a class="imbuto-button imbuto-button--light" href="<?php echo esc_url($link); ?>"><?php echo esc_html($settings['section_button_text']); ?></a>
                     <?php endif; ?>
                 </div>

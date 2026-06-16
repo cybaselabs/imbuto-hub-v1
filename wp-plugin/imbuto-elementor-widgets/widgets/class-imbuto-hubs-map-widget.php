@@ -5,6 +5,7 @@ namespace Imbuto\ElementorWidgets;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
+use Elementor\Repeater;
 use Elementor\Widget_Base;
 
 if (!defined('ABSPATH')) {
@@ -64,48 +65,127 @@ class Hubs_Map_Widget extends Widget_Base
         $this->add_control('description', [
             'label' => esc_html__('Description', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXTAREA,
-            'default' => 'Explore the growing Imbuto Hub network across Rwanda and discover where learning, wellbeing, creativity, and opportunity are taking root.',
+            'default' => 'Two hubs are currently operational in Bugesera and Nyarugenge (Maison de Jeunes), with three more hubs in development across Rwanda.',
+        ]);
+
+        $this->add_control('show_summary_badges', [
+            'label' => esc_html__('Show Summary Badges', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => 'yes',
+        ]);
+
+        $summary_badges = new Repeater();
+
+        $summary_badges->add_control('text', [
+            'label' => esc_html__('Text', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::TEXT,
+            'default' => esc_html__('2 operational', 'imbuto-elementor-widgets'),
+            'label_block' => true,
+        ]);
+
+        $summary_badges->add_control('background', [
+            'label' => esc_html__('Background', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#dff5f2',
+        ]);
+
+        $summary_badges->add_control('color', [
+            'label' => esc_html__('Text Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#0f5b58',
+        ]);
+
+        $this->add_control('summary_badges', [
+            'label' => esc_html__('Summary Badges', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::REPEATER,
+            'fields' => $summary_badges->get_controls(),
+            'default' => [
+                [
+                    'text' => '2 operational',
+                    'background' => '#dff5f2',
+                    'color' => '#0f5b58',
+                ],
+                [
+                    'text' => '3 in development',
+                    'background' => '#fff1e3',
+                    'color' => '#a6511f',
+                ],
+            ],
+            'title_field' => '{{{ text }}}',
+            'condition' => [
+                'show_summary_badges' => 'yes',
+            ],
+        ]);
+
+        $this->add_control('show_buttons', [
+            'label' => esc_html__('Show Buttons', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => '',
         ]);
 
         $this->add_control('primary_label', [
             'label' => esc_html__('Primary Button Text', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
-            'default' => 'Explore all hubs',
+            'default' => '',
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('primary_url', [
             'label' => esc_html__('Primary Button URL', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::URL,
             'default' => ['url' => '/hubs'],
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('primary_icon', [
             'label' => esc_html__('Primary Button Icon', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::ICONS,
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('secondary_label', [
             'label' => esc_html__('Secondary Button Text', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::TEXT,
-            'default' => 'Find a Hub',
+            'default' => '',
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('secondary_url', [
             'label' => esc_html__('Secondary Button URL', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::URL,
             'default' => ['url' => '/hubs#hub-map'],
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('secondary_icon', [
             'label' => esc_html__('Secondary Button Icon', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::ICONS,
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->add_control('show_status', [
             'label' => esc_html__('Show Hub Status Badge', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::SWITCHER,
             'return_value' => 'yes',
-            'default' => '',
+            'default' => 'yes',
         ]);
 
         $this->end_controls_section();
@@ -129,6 +209,13 @@ class Hubs_Map_Widget extends Widget_Base
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'description_typography', 'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-hubs__copy > p']);
         $this->end_controls_section();
 
+        $this->start_controls_section('summary_badges_style', ['label' => esc_html__('Summary Badges', 'imbuto-elementor-widgets'), 'tab' => Controls_Manager::TAB_STYLE]);
+        $this->add_responsive_control('summary_badges_gap', ['label' => esc_html__('Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 40]], 'selectors' => ['{{WRAPPER}} .imbuto-hubs-summary-badges' => 'gap: {{SIZE}}{{UNIT}};']]);
+        $this->add_responsive_control('summary_badges_padding', ['label' => esc_html__('Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em'], 'selectors' => ['{{WRAPPER}} .imbuto-hubs-summary-badge' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_responsive_control('summary_badges_radius', ['label' => esc_html__('Border Radius', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', '%'], 'selectors' => ['{{WRAPPER}} .imbuto-hubs-summary-badge' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'summary_badges_typography', 'label' => esc_html__('Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-hubs-summary-badge']);
+        $this->end_controls_section();
+
         $this->start_controls_section('button_style', ['label' => esc_html__('Buttons', 'imbuto-elementor-widgets'), 'tab' => Controls_Manager::TAB_STYLE]);
         $this->add_responsive_control('button_gap', ['label' => esc_html__('Button Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 60]], 'selectors' => ['{{WRAPPER}} .imbuto-hubs__buttons' => 'gap: {{SIZE}}{{UNIT}};']]);
         $this->add_responsive_control('button_padding', ['label' => esc_html__('Button Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em'], 'selectors' => ['{{WRAPPER}} .imbuto-hubs__buttons .imbuto-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
@@ -147,8 +234,11 @@ class Hubs_Map_Widget extends Widget_Base
         $this->add_control('hub_text_color', ['label' => esc_html__('Hub Text Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-hub-item strong' => 'color: {{VALUE}};']]);
         $this->add_control('hub_active_text_color', ['label' => esc_html__('Active Text Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-hub-item.is-active strong, {{WRAPPER}} .imbuto-hub-item.is-active em' => 'color: {{VALUE}};']]);
         $this->add_control('hub_meta_color', ['label' => esc_html__('Hub Meta Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-hub-item em' => 'color: {{VALUE}};']]);
+        $this->add_control('hub_status_background', ['label' => esc_html__('Status Background', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-hub-status' => 'background: {{VALUE}};']]);
+        $this->add_control('hub_status_color', ['label' => esc_html__('Status Text Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-hub-status' => 'color: {{VALUE}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'hub_title_typography', 'label' => esc_html__('Hub Title Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-hub-item strong']);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'hub_meta_typography', 'label' => esc_html__('Hub Meta Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-hub-item em']);
+        $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'hub_status_typography', 'label' => esc_html__('Hub Status Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-hub-status']);
         $this->add_responsive_control('hub_padding', ['label' => esc_html__('Hub Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em'], 'selectors' => ['{{WRAPPER}} .imbuto-hub-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
         $this->add_responsive_control('hub_radius', ['label' => esc_html__('Hub Radius', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', '%'], 'selectors' => ['{{WRAPPER}} .imbuto-hub-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
         $this->end_controls_section();
@@ -168,6 +258,7 @@ class Hubs_Map_Widget extends Widget_Base
         $settings = $this->get_settings_for_display();
         $hubs = get_hubs();
         $map_id = 'imbuto-map-' . $this->get_id();
+        $summary_badges = $this->get_summary_badges($settings);
         ?>
         <section class="imbuto-hubs-map-section">
             <div class="imbuto-container">
@@ -177,16 +268,25 @@ class Hubs_Map_Widget extends Widget_Base
                             <div class="imbuto-hubs__eyebrow"><?php echo esc_html($settings['eyebrow']); ?></div>
                             <h2><?php echo esc_html($settings['title']); ?></h2>
                             <p><?php echo esc_html($settings['description']); ?></p>
-                            <div class="imbuto-hubs__buttons">
-                                <?php if (!empty($settings['primary_label'])) : ?><a class="imbuto-button imbuto-button--teal imbuto-hubs__primary" href="<?php echo esc_url($settings['primary_url']['url'] ?? '#'); ?>"><?php echo esc_html($settings['primary_label']); ?><?php Icons_Manager::render_icon($settings['primary_icon'], ['aria-hidden' => 'true']); ?></a><?php endif; ?>
-                                <?php if (!empty($settings['secondary_label'])) : ?><a class="imbuto-button imbuto-button--outline-teal imbuto-hubs__secondary" href="<?php echo esc_url($settings['secondary_url']['url'] ?? '#'); ?>"><?php echo esc_html($settings['secondary_label']); ?><?php Icons_Manager::render_icon($settings['secondary_icon'], ['aria-hidden' => 'true']); ?></a><?php endif; ?>
-                            </div>
+                            <?php if (($settings['show_summary_badges'] ?? 'yes') === 'yes') : ?>
+                                <div class="imbuto-hubs-summary-badges">
+                                    <?php foreach ($summary_badges as $badge) : ?>
+                                        <?php if (!empty($badge['text'])) : ?><span class="imbuto-hubs-summary-badge" style="<?php echo esc_attr($this->get_summary_badge_style($badge)); ?>"><?php echo esc_html($badge['text']); ?></span><?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (($settings['show_buttons'] ?? '') === 'yes') : ?>
+                                <div class="imbuto-hubs__buttons">
+                                    <?php if (!empty($settings['primary_label'])) : ?><a class="imbuto-button imbuto-button--teal imbuto-hubs__primary" href="<?php echo esc_url($settings['primary_url']['url'] ?? '#'); ?>"><?php echo esc_html($settings['primary_label']); ?><?php Icons_Manager::render_icon($settings['primary_icon'], ['aria-hidden' => 'true']); ?></a><?php endif; ?>
+                                    <?php if (!empty($settings['secondary_label'])) : ?><a class="imbuto-button imbuto-button--outline-teal imbuto-hubs__secondary" href="<?php echo esc_url($settings['secondary_url']['url'] ?? '#'); ?>"><?php echo esc_html($settings['secondary_label']); ?><?php Icons_Manager::render_icon($settings['secondary_icon'], ['aria-hidden' => 'true']); ?></a><?php endif; ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="imbuto-hubs-list">
                                 <?php foreach ($hubs as $index => $hub) : ?>
                                     <button class="imbuto-hub-item <?php echo $index === 0 ? 'is-active' : ''; ?>" type="button" data-hub-id="<?php echo esc_attr($hub['id']); ?>" data-map-id="<?php echo esc_attr($map_id); ?>">
-                                        <?php if (($settings['show_status'] ?? '') === 'yes') : ?><span><?php echo esc_html($hub['status'] ?: 'Hub'); ?></span><?php endif; ?>
                                         <strong><?php echo esc_html($hub['name']); ?></strong>
                                         <em><?php echo esc_html($this->get_hub_location($hub)); ?></em>
+                                        <?php if (($settings['show_status'] ?? 'yes') === 'yes') : ?><span class="imbuto-hub-status <?php echo esc_attr($this->get_status_class($hub['status'] ?? '')); ?>"><?php echo esc_html($hub['status'] ?: 'Hub'); ?></span><?php endif; ?>
                                     </button>
                                 <?php endforeach; ?>
                             </div>
@@ -208,5 +308,47 @@ class Hubs_Map_Widget extends Widget_Base
         }
 
         return trim(($hub['district'] ?? '') . ', ' . ($hub['province'] ?? ''), ', ');
+    }
+
+    private function get_status_class(string $status): string
+    {
+        return sanitize_html_class('imbuto-hub-status--' . strtolower(str_replace(' ', '-', $status)));
+    }
+
+    private function get_summary_badges(array $settings): array
+    {
+        if (!empty($settings['summary_badges']) && is_array($settings['summary_badges'])) {
+            return $settings['summary_badges'];
+        }
+
+        return [
+            [
+                'text' => '2 operational',
+                'background' => '#dff5f2',
+                'color' => '#0f5b58',
+            ],
+            [
+                'text' => '3 in development',
+                'background' => '#fff1e3',
+                'color' => '#a6511f',
+            ],
+        ];
+    }
+
+    private function get_summary_badge_style(array $badge): string
+    {
+        $styles = [];
+        $background = !empty($badge['background']) ? sanitize_hex_color($badge['background']) : '';
+        $color = !empty($badge['color']) ? sanitize_hex_color($badge['color']) : '';
+
+        if ($background) {
+            $styles[] = 'background: ' . $background;
+        }
+
+        if ($color) {
+            $styles[] = 'color: ' . $color;
+        }
+
+        return implode('; ', $styles);
     }
 }

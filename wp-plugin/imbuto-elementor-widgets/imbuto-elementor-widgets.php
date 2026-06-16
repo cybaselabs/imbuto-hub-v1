@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imbuto Elementor Widgets
  * Description: Custom Elementor widgets for the Imbuto Hub website.
- * Version: 0.1.24
+ * Version: 0.1.28
  * Author: Imbuto
  * Text Domain: imbuto-elementor-widgets
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('IMBUTO_WIDGETS_VERSION', '0.1.24');
+define('IMBUTO_WIDGETS_VERSION', '0.1.28');
 define('IMBUTO_WIDGETS_FILE', __FILE__);
 define('IMBUTO_WIDGETS_PATH', plugin_dir_path(__FILE__));
 define('IMBUTO_WIDGETS_URL', plugin_dir_url(__FILE__));
@@ -80,6 +80,7 @@ function imbuto_widgets_register($widgets_manager): void
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-life-stages-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-stats-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-hubs-map-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-partners-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-cta-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-footer-widget.php';
 
@@ -91,6 +92,7 @@ function imbuto_widgets_register($widgets_manager): void
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Life_Stages_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Stats_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Hubs_Map_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Partners_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Cta_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Footer_Widget());
 }

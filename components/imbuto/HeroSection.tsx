@@ -24,7 +24,7 @@ function HeroStats() {
 
         <div className="min-h-[165px] rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.06))] p-6 shadow-2xl backdrop-blur-md">
           <div className="text-center text-5xl font-black leading-none text-white">
-            12
+            20+
           </div>
           <div className="mt-3 text-center text-base text-white/75">
             Planned Hubs

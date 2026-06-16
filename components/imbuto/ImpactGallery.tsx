@@ -16,67 +16,23 @@ const galleryItems = [
   },
   {
     title: "Gallery 03",
-    image: "/images/gallery/55270243927_c03172e4db_k.jpg",
-  },
-  {
-    title: "Gallery 04",
     image: "/images/gallery/55270244022_af6d12cfa8_k.jpg",
   },
   {
-    title: "Gallery 05",
-    image: "/images/gallery/55270247032_959f5cdf93_k.jpg",
-  },
-  {
-    title: "Gallery 06",
-    image: "/images/gallery/55271155091_6d4af2592d_k.jpg",
-  },
-  {
-    title: "Gallery 07",
-    image: "/images/gallery/55271155416_4f2ced31ee_k.jpg",
-  },
-  {
-    title: "Gallery 08",
+    title: "Gallery 04",
     image: "/images/gallery/55271156911_4b28732802_6k.jpg",
   },
   {
-    title: "Gallery 09",
+    title: "Gallery 05",
     image: "/images/gallery/55271161021_b50277f8b3_k.jpg",
   },
   {
-    title: "Gallery 10",
+    title: "Gallery 06",
     image: "/images/gallery/55271161526_942df49b81_k.jpg",
-  },
-  {
-    title: "Gallery 11",
-    image: "/images/gallery/55271288843_036382434d_k.jpg",
-  },
-  {
-    title: "Gallery 12",
-    image: "/images/gallery/55271290113_2c0970d501_k.jpg",
-  },
-  {
-    title: "Gallery 13",
-    image: "/images/gallery/55271290738_148fbbb5cb_k.jpg",
   },
   {
     title: "Gallery 14",
     image: "/images/gallery/55271291243_45ec2e250e_k.jpg",
-  },
-  {
-    title: "Gallery 15",
-    image: "/images/gallery/55271386409_9ea9f85483_k.jpg",
-  },
-  {
-    title: "Gallery 16",
-    image: "/images/gallery/55271386784_668efc3eb6_k.jpg",
-  },
-  {
-    title: "Gallery 17",
-    image: "/images/gallery/55271386979_b31ba24b7e_k.jpg",
-  },
-  {
-    title: "Gallery 18",
-    image: "/images/gallery/55271387454_2049631a0c_k.jpg",
   },
   {
     title: "Gallery 19",
@@ -91,10 +47,6 @@ const galleryItems = [
     image: "/images/gallery/55271391719_b0b65dbf4c_k.jpg",
   },
   {
-    title: "Gallery 22",
-    image: "/images/gallery/55271392754_cff5c5bf22_k.jpg",
-  },
-  {
     title: "Gallery 23",
     image: "/images/gallery/55271392924_a1247a06ed_k.jpg",
   },
@@ -102,13 +54,22 @@ const galleryItems = [
     title: "Gallery 24",
     image: "/images/gallery/55271554100_90f68fe6ac_k.jpg",
   },
+
   {
-    title: "Gallery 25",
-    image: "/images/gallery/55271554820_65e5db3ed7_k.jpg",
+    title: "Gallery 27",
+    image: "/images/gallery/WhatsApp Image 2026-06-16 at 12.06.34 PM (1).jpeg",
   },
   {
-    title: "Gallery 26",
-    image: "/images/gallery/55271563510_75dc1f389e_k%20(1).jpg",
+    title: "Gallery 28",
+    image: "/images/gallery/WhatsApp Image 2026-06-16 at 12.06.34 PM (2).jpeg",
+  },
+  {
+    title: "Gallery 29",
+    image: "/images/gallery/WhatsApp Image 2026-06-16 at 12.06.34 PM.jpeg",
+  },
+  {
+    title: "Gallery 30",
+    image: "/images/gallery/WhatsApp Image 2026-06-16 at 12.06.36 PM.jpeg",
   },
 ];
 

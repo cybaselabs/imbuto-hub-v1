@@ -81,7 +81,8 @@ export const ages = [
 export const stats = [
   { value: "2", label: "Operational Hubs" },
   { value: "3", label: "Hubs In Development" },
-  { value: "926,824", label: "Mentorship sessions delivered" },
+  { value: "20+", label: "Planned Hubs" },
+  // { value: "926,824", label: "Mentorship sessions delivered" },
   // { value: "150+", label: "Community events hosted" },
 ];
 
