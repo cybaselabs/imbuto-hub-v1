@@ -4,6 +4,7 @@ namespace Imbuto\ElementorWidgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 
@@ -90,10 +91,13 @@ class Footer_Widget extends Widget_Base
             'default' => ['url' => '#'],
         ]);
 
-        $socials->add_control('short_label', [
-            'label' => esc_html__('Short Label', 'imbuto-elementor-widgets'),
-            'type' => Controls_Manager::TEXT,
-            'default' => 'F',
+        $socials->add_control('icon', [
+            'label' => esc_html__('Icon', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::ICONS,
+            'default' => [
+                'value' => 'fab fa-facebook-f',
+                'library' => 'fa-brands',
+            ],
         ]);
 
         $this->add_control('social_links', [
@@ -101,11 +105,11 @@ class Footer_Widget extends Widget_Base
             'type' => Controls_Manager::REPEATER,
             'fields' => $socials->get_controls(),
             'default' => [
-                ['label' => 'Facebook', 'short_label' => 'F', 'url' => ['url' => '#']],
-                ['label' => 'Instagram', 'short_label' => 'I', 'url' => ['url' => '#']],
-                ['label' => 'YouTube', 'short_label' => 'Y', 'url' => ['url' => '#']],
-                ['label' => 'LinkedIn', 'short_label' => 'L', 'url' => ['url' => '#']],
-                ['label' => 'X', 'short_label' => 'X', 'url' => ['url' => '#']],
+                ['label' => 'Facebook', 'icon' => ['value' => 'fab fa-facebook-f', 'library' => 'fa-brands'], 'url' => ['url' => '#']],
+                ['label' => 'Instagram', 'icon' => ['value' => 'fab fa-instagram', 'library' => 'fa-brands'], 'url' => ['url' => '#']],
+                ['label' => 'YouTube', 'icon' => ['value' => 'fab fa-youtube', 'library' => 'fa-brands'], 'url' => ['url' => '#']],
+                ['label' => 'LinkedIn', 'icon' => ['value' => 'fab fa-linkedin-in', 'library' => 'fa-brands'], 'url' => ['url' => '#']],
+                ['label' => 'X', 'icon' => ['value' => 'fab fa-x-twitter', 'library' => 'fa-brands'], 'url' => ['url' => '#']],
             ],
             'title_field' => '{{{ label }}}',
         ]);
@@ -134,6 +138,7 @@ class Footer_Widget extends Widget_Base
         $this->add_control('description_color', ['label' => esc_html__('Description Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__intro p' => 'color: {{VALUE}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'description_typography', 'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-site-footer__intro p']);
         $this->add_control('accent_color', ['label' => esc_html__('Accent Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-site-footer h3, {{WRAPPER}} .imbuto-site-footer__connect a:hover' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-site-footer__socials a:hover' => 'background: {{VALUE}};']]);
+        $this->add_responsive_control('social_icon_size', ['label' => esc_html__('Social Icon Size', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 12, 'max' => 48]], 'selectors' => ['{{WRAPPER}} .imbuto-site-footer__socials svg, {{WRAPPER}} .imbuto-site-footer__socials i' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; font-size: {{SIZE}}{{UNIT}};']]);
         $this->end_controls_section();
     }
 
@@ -164,8 +169,14 @@ class Footer_Widget extends Widget_Base
                         </div>
                         <div class="imbuto-site-footer__socials" aria-label="<?php echo esc_attr__('Social links', 'imbuto-elementor-widgets'); ?>">
                             <?php foreach ($social_links as $social) : ?>
-                                <?php if (!empty($social['short_label'])) : ?>
-                                    <a href="<?php echo esc_url($social['url']['url'] ?? '#'); ?>" aria-label="<?php echo esc_attr($social['label'] ?? $social['short_label']); ?>"><?php echo esc_html($social['short_label']); ?></a>
+                                <?php if (!empty($social['icon']['value']) || !empty($social['short_label'])) : ?>
+                                    <a href="<?php echo esc_url($social['url']['url'] ?? '#'); ?>" aria-label="<?php echo esc_attr($social['label'] ?? 'Social link'); ?>">
+                                        <?php if (!empty($social['icon']['value'])) : ?>
+                                            <?php Icons_Manager::render_icon($social['icon'], ['aria-hidden' => 'true']); ?>
+                                        <?php else : ?>
+                                            <?php echo esc_html($social['short_label']); ?>
+                                        <?php endif; ?>
+                                    </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>

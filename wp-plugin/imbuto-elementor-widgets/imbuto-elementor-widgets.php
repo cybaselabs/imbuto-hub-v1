@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imbuto Elementor Widgets
  * Description: Custom Elementor widgets for the Imbuto Hub website.
- * Version: 0.1.28
+ * Version: 0.1.29
  * Author: Imbuto
  * Text Domain: imbuto-elementor-widgets
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('IMBUTO_WIDGETS_VERSION', '0.1.28');
+define('IMBUTO_WIDGETS_VERSION', '0.1.29');
 define('IMBUTO_WIDGETS_FILE', __FILE__);
 define('IMBUTO_WIDGETS_PATH', plugin_dir_path(__FILE__));
 define('IMBUTO_WIDGETS_URL', plugin_dir_url(__FILE__));

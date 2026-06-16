@@ -1574,6 +1574,19 @@
   transition: transform 180ms ease, background 180ms ease;
 }
 
+.imbuto-site-footer__socials svg,
+.imbuto-site-footer__socials i {
+  display: block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: currentColor;
+}
+
+.imbuto-site-footer__socials svg path {
+  fill: currentColor;
+}
+
 .imbuto-site-footer__socials a:hover {
   transform: translateY(-2px);
   background: var(--imbuto-orange);
