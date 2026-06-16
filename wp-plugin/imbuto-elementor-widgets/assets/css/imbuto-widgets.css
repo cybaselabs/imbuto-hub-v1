@@ -335,6 +335,89 @@
   gap: 18px;
 }
 
+.imbuto-page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 240px 0 180px;
+  background: var(--imbuto-dark);
+  color: var(--imbuto-white);
+}
+
+.imbuto-page-hero__bg,
+.imbuto-page-hero__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.imbuto-page-hero__bg {
+  z-index: -3;
+  background-position: center;
+  background-size: cover;
+}
+
+.imbuto-page-hero__overlay {
+  z-index: -2;
+}
+
+.imbuto-page-hero__copy {
+  position: relative;
+  max-width: 896px;
+}
+
+.imbuto-page-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  backdrop-filter: blur(12px);
+}
+
+.imbuto-page-hero__eyebrow svg,
+.imbuto-page-hero__eyebrow i {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  color: currentColor;
+}
+
+.imbuto-page-hero h1 {
+  max-width: 900px;
+  margin: 24px 0 0;
+  color: rgba(245, 195, 70, 0.95);
+  font-size: clamp(56px, 8vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.imbuto-page-hero p {
+  max-width: 760px;
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.imbuto-page-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.imbuto-page-hero__buttons .imbuto-button svg,
+.imbuto-page-hero__buttons .imbuto-button i {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  color: currentColor;
+}
+
 .imbuto-stat-card {
   display: flex;
   flex-direction: column;
@@ -422,6 +505,88 @@
   z-index: 2;
   padding: 32px 0 48px;
   background: var(--imbuto-cream);
+}
+
+.imbuto-about-philosophy {
+  padding: 96px 0;
+  background: var(--imbuto-cream);
+  color: var(--imbuto-text);
+}
+
+.imbuto-about-philosophy__grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 40px;
+}
+
+.imbuto-about-philosophy__media {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(16, 44, 53, 0.1);
+  border-radius: 32px;
+  background: var(--imbuto-text);
+  box-shadow: 0 24px 80px rgba(16, 44, 53, 0.1);
+}
+
+.imbuto-about-philosophy__media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 35%;
+  background: linear-gradient(180deg, transparent, rgba(16, 44, 53, 0.32));
+}
+
+.imbuto-about-philosophy__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+}
+
+.imbuto-about-philosophy__eyebrow {
+  color: #c05d24;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.imbuto-about-philosophy h2 {
+  max-width: 640px;
+  margin: 16px 0 0;
+  color: var(--imbuto-text);
+  font-size: clamp(38px, 4.5vw, 56px);
+  line-height: 1.08;
+}
+
+.imbuto-about-philosophy__description {
+  max-width: 680px;
+  margin: 24px 0 0;
+  color: rgba(51, 65, 85, 0.92);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.imbuto-about-philosophy blockquote {
+  max-width: 700px;
+  margin: 32px 0 0;
+  border-left: 4px solid var(--imbuto-orange);
+  padding-left: 24px;
+  color: var(--imbuto-text);
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.imbuto-about-philosophy__attribution {
+  max-width: 580px;
+  margin: 24px 0 0;
+  color: var(--imbuto-primary, #2b6274);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.8;
 }
 
 .imbuto-actions {
@@ -1604,6 +1769,7 @@
 
 @media (max-width: 1024px) {
   .imbuto-hero__inner,
+  .imbuto-about-philosophy__grid,
   .imbuto-hubs-map-layout {
     grid-template-columns: 1fr;
   }
@@ -1704,7 +1870,16 @@
     padding: 92px 0 72px;
   }
 
+  .imbuto-page-hero {
+    padding: 132px 0 84px;
+  }
+
+  .imbuto-page-hero h1 {
+    font-size: clamp(44px, 13vw, 64px);
+  }
+
   .imbuto-hero__copy p,
+  .imbuto-page-hero p,
   .imbuto-cta p {
     font-size: 16px;
   }

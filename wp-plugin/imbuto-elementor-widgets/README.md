@@ -2,15 +2,17 @@
 
 Custom Elementor widgets for the Imbuto Hub WordPress build.
 
-Current version: `0.1.29`
+Current version: `0.1.30`
 
 ## Widgets
 
 - Imbuto Hero
+- Imbuto Page Hero
 - Imbuto Header
 - Imbuto Pillars
 - Imbuto Actions
 - Imbuto About
+- Imbuto About Philosophy
 - Imbuto Life Stages
 - Imbuto Stats
 - Imbuto Hubs Map

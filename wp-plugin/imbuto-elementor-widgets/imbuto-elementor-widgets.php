@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imbuto Elementor Widgets
  * Description: Custom Elementor widgets for the Imbuto Hub website.
- * Version: 0.1.29
+ * Version: 0.1.30
  * Author: Imbuto
  * Text Domain: imbuto-elementor-widgets
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('IMBUTO_WIDGETS_VERSION', '0.1.29');
+define('IMBUTO_WIDGETS_VERSION', '0.1.30');
 define('IMBUTO_WIDGETS_FILE', __FILE__);
 define('IMBUTO_WIDGETS_PATH', plugin_dir_path(__FILE__));
 define('IMBUTO_WIDGETS_URL', plugin_dir_url(__FILE__));
@@ -73,10 +73,12 @@ function imbuto_widgets_register($widgets_manager): void
     }
 
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-hero-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-page-hero-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-header-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-actions-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-pillars-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-about-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-about-philosophy-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-life-stages-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-stats-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-hubs-map-widget.php';
@@ -86,9 +88,11 @@ function imbuto_widgets_register($widgets_manager): void
 
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Header_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Hero_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Page_Hero_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Actions_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Pillars_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\About_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\About_Philosophy_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Life_Stages_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Stats_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Hubs_Map_Widget());
