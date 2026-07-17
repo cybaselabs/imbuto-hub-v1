@@ -70,6 +70,8 @@ class About_Philosophy_Widget extends Widget_Base
         $this->add_control('quote_border_color', ['label' => esc_html__('Quote Border Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-about-philosophy blockquote' => 'border-color: {{VALUE}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'quote_typography', 'label' => esc_html__('Quote Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-about-philosophy blockquote']);
         $this->add_control('attribution_color', ['label' => esc_html__('Attribution Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-about-philosophy__attribution' => 'color: {{VALUE}};']]);
+        $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'attribution_typography', 'label' => esc_html__('Attribution Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-about-philosophy__attribution']);
+        $this->add_responsive_control('attribution_spacing', ['label' => esc_html__('Attribution Top Spacing', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px', 'em'], 'range' => ['px' => ['min' => 0, 'max' => 100], 'em' => ['min' => 0, 'max' => 8, 'step' => 0.1]], 'selectors' => ['{{WRAPPER}} .imbuto-about-philosophy__attribution' => 'margin-top: {{SIZE}}{{UNIT}};']]);
         $this->end_controls_section();
     }
 

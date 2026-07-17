@@ -39,7 +39,7 @@ export function StatsSection({
                 isLight ? "text-[#102c35]" : "text-white"
               }`}
             >
-              Planned reach. Human impact.
+              The Journey so far
             </h2>
           </div>
           <p
@@ -53,7 +53,7 @@ export function StatsSection({
           </p>
         </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+        <div className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
           {stats.map((stat) => (
             <div
               key={stat.label}

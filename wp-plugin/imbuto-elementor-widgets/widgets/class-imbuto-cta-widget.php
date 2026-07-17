@@ -4,6 +4,7 @@ namespace Imbuto\ElementorWidgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use Elementor\Widget_Base;
 
@@ -96,14 +97,20 @@ class Cta_Widget extends Widget_Base
             ],
         ]);
 
+        $buttons->add_control('icon', [
+            'label' => esc_html__('Icon', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::ICONS,
+            'default' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid'],
+        ]);
+
         $this->add_control('buttons', [
             'label' => esc_html__('Buttons', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::REPEATER,
             'fields' => $buttons->get_controls(),
             'default' => [
-                ['label' => 'Join a Hub', 'url' => ['url' => '/apply'], 'style' => 'light'],
-                ['label' => 'Volunteer or Mentor', 'url' => ['url' => '/get-involved#volunteer'], 'style' => 'ghost'],
-                ['label' => 'Partner With Us', 'url' => ['url' => '/get-involved#partner'], 'style' => 'ghost'],
+                ['label' => 'Join a Hub', 'url' => ['url' => '/apply'], 'style' => 'light', 'icon' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid']],
+                ['label' => 'Volunteer or Mentor', 'url' => ['url' => '/get-involved#volunteer'], 'style' => 'ghost', 'icon' => ['value' => 'far fa-handshake', 'library' => 'fa-regular']],
+                ['label' => 'Partner With Us', 'url' => ['url' => '/get-involved#partner'], 'style' => 'ghost', 'icon' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid']],
             ],
             'title_field' => '{{{ label }}}',
         ]);
@@ -124,7 +131,11 @@ class Cta_Widget extends Widget_Base
         $this->add_control('description_color', ['label' => esc_html__('Description Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-cta p' => 'color: {{VALUE}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'description_typography', 'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-cta p']);
         $this->add_responsive_control('button_gap', ['label' => esc_html__('Button Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 60]], 'selectors' => ['{{WRAPPER}} .imbuto-cta__actions' => 'gap: {{SIZE}}{{UNIT}};']]);
+        $this->add_responsive_control('button_icon_gap', ['label' => esc_html__('Button Text/Icon Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 40]], 'selectors' => ['{{WRAPPER}} .imbuto-cta__actions .imbuto-button' => 'gap: {{SIZE}}{{UNIT}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'button_typography', 'label' => esc_html__('Button Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-cta__actions .imbuto-button']);
+        $this->add_control('button_icon_color', ['label' => esc_html__('Button Icon Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-cta__actions .imbuto-button svg, {{WRAPPER}} .imbuto-cta__actions .imbuto-button i' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-cta__actions .imbuto-button svg path' => 'fill: {{VALUE}};']]);
+        $this->add_control('button_hover_icon_color', ['label' => esc_html__('Button Hover Icon Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-cta__actions .imbuto-button:hover svg, {{WRAPPER}} .imbuto-cta__actions .imbuto-button:hover i' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-cta__actions .imbuto-button:hover svg path' => 'fill: {{VALUE}};']]);
+        $this->add_responsive_control('button_icon_size', ['label' => esc_html__('Button Icon Size', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 10, 'max' => 40]], 'selectors' => ['{{WRAPPER}} .imbuto-cta__actions .imbuto-button svg, {{WRAPPER}} .imbuto-cta__actions .imbuto-button i' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; font-size: {{SIZE}}{{UNIT}};']]);
         $this->end_controls_section();
     }
 
@@ -143,7 +154,12 @@ class Cta_Widget extends Widget_Base
                 <div class="imbuto-cta__actions">
                     <?php foreach ($buttons as $button) : ?>
                         <?php if (!empty($button['label'])) : ?>
-                            <a class="imbuto-button imbuto-button--<?php echo esc_attr($button['style'] ?? 'ghost'); ?>" href="<?php echo esc_url($button['url']['url'] ?? '#'); ?>"><?php echo esc_html($button['label']); ?></a>
+                            <a class="imbuto-button imbuto-button--<?php echo esc_attr($button['style'] ?? 'ghost'); ?>" href="<?php echo esc_url($button['url']['url'] ?? '#'); ?>">
+                                <?php echo esc_html($button['label']); ?>
+                                <?php if (!empty($button['icon']['value'])) : ?>
+                                    <?php Icons_Manager::render_icon($button['icon'], ['aria-hidden' => 'true']); ?>
+                                <?php endif; ?>
+                            </a>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>

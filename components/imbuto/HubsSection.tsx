@@ -41,13 +41,12 @@ export function HubsSection() {
               </div>
 
               <h2 className="mt-4 text-4xl leading-tight tracking-[-0.04em] text-[#102c35] md:text-5xl">
-                Find an Imbuto Hub near you.
+                Find an Imbuto Hub Near you:
               </h2>
 
               <p className="mt-5 text-base leading-8 text-slate-600 md:text-lg">
-                Two hubs are currently operational in Bugesera and Nyarugenge
-                (Maison de Jeunes), with three more hubs in development across
-                Rwanda.
+                The 4 hubs in development are: Imbuto Hub Kicukiro, Imbuto Hub
+                Muhanga, Imbuto Hub Rwamagana, and Imbuto Hub Gasabo.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -55,7 +54,7 @@ export function HubsSection() {
                   2 operational
                 </span>
                 <span className="rounded-full bg-[#fff1e3] px-3 py-1 text-xs font-semibold text-[#a6511f]">
-                  3 in development
+                  4 in development
                 </span>
               </div>
 

@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     "Explore Imbuto Hubs programmes across early childhood and family, sports and recreation, digital literacy and innovation, and health and wellbeing.",
 };
 
+const heroCtaLinks = [
+  {
+    href: "/apply",
+    label: "Register for a programme",
+    variant: "solid" as const,
+  },
+];
+
 function CtaLink({
   href,
   children,
@@ -56,10 +64,6 @@ export default function ProgrammesPage() {
 
         <Container className="relative">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/85 backdrop-blur-md">
-              <Sparkles className="h-4 w-4" />
-              Programmes
-            </div>
             <h1 className="mt-6 max-w-4xl text-5xl leading-[0.98] tracking-[-0.04em] text-[#f5c346]/95 md:text-7xl lg:text-[84px]">
               Explore Imbuto Hubs programmes.
             </h1>
@@ -69,14 +73,19 @@ export default function ProgrammesPage() {
               designed to support the whole person, at every stage of life,
               across every area of human development.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <CtaLink href="/apply">Register for a programme</CtaLink>
-            </div>
+            {heroCtaLinks.length > 0 ? (
+              <div className="mt-9 flex flex-wrap gap-4">
+                {heroCtaLinks.map((link) => (
+                  <CtaLink key={link.href} href={link.href} variant={link.variant}>
+                    {link.label}
+                  </CtaLink>
+                ))}
+              </div>
+            ) : null}
           </div>
         </Container>
       </section>
 
-    
       <section className="relative overflow-hidden bg-white py-20 text-[#102c35] md:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(82,179,169,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(237,155,55,0.14),transparent_32%)]" />
         <Container>

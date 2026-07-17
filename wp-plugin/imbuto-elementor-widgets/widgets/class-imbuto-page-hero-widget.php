@@ -83,9 +83,19 @@ class Page_Hero_Widget extends Widget_Base
             ],
         ]);
 
+        $this->add_control('show_buttons', [
+            'label' => esc_html__('Show CTA Buttons', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => '',
+        ]);
+
         $buttons = new Repeater();
         $buttons->add_control('label', ['label' => esc_html__('Label', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::TEXT, 'default' => 'Register Interest']);
         $buttons->add_control('url', ['label' => esc_html__('URL', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::URL, 'default' => ['url' => '#']]);
+        $buttons->add_control('icon', ['label' => esc_html__('Icon', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::ICONS, 'default' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid']]);
         $buttons->add_control('style', [
             'label' => esc_html__('Style', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::SELECT,
@@ -96,14 +106,18 @@ class Page_Hero_Widget extends Widget_Base
                 'ghost' => esc_html__('Ghost', 'imbuto-elementor-widgets'),
             ],
         ]);
-        $buttons->add_control('icon', ['label' => esc_html__('Icon', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::ICONS, 'default' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid']]);
 
         $this->add_control('buttons', [
             'label' => esc_html__('Buttons', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::REPEATER,
             'fields' => $buttons->get_controls(),
-            'default' => [],
+            'default' => [
+                ['label' => 'Register for a programme', 'url' => ['url' => '/apply'], 'style' => 'orange', 'icon' => ['value' => 'fas fa-arrow-right', 'library' => 'fa-solid']],
+            ],
             'title_field' => '{{{ label }}}',
+            'condition' => [
+                'show_buttons' => 'yes',
+            ],
         ]);
 
         $this->end_controls_section();
@@ -127,6 +141,17 @@ class Page_Hero_Widget extends Widget_Base
         $this->start_controls_section('button_style', ['label' => esc_html__('Buttons', 'imbuto-elementor-widgets'), 'tab' => Controls_Manager::TAB_STYLE]);
         $this->add_responsive_control('button_gap', ['label' => esc_html__('Button Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 60]], 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons' => 'gap: {{SIZE}}{{UNIT}};']]);
         $this->add_responsive_control('button_padding', ['label' => esc_html__('Button Padding', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', 'em'], 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_responsive_control('button_radius', ['label' => esc_html__('Button Border Radius', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::DIMENSIONS, 'size_units' => ['px', '%'], 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_control('button_background', ['label' => esc_html__('Button Background', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'background: {{VALUE}};']]);
+        $this->add_control('button_color', ['label' => esc_html__('Button Text Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'color: {{VALUE}};']]);
+        $this->add_control('button_border_color', ['label' => esc_html__('Button Border Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'border-color: {{VALUE}};']]);
+        $this->add_control('button_hover_background', ['label' => esc_html__('Button Hover Background', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover' => 'background: {{VALUE}};']]);
+        $this->add_control('button_hover_color', ['label' => esc_html__('Button Hover Text Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover' => 'color: {{VALUE}};']]);
+        $this->add_control('button_hover_border_color', ['label' => esc_html__('Button Hover Border Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover' => 'border-color: {{VALUE}};']]);
+        $this->add_responsive_control('button_icon_gap', ['label' => esc_html__('Button Text/Icon Gap', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 0, 'max' => 40]], 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button' => 'gap: {{SIZE}}{{UNIT}};']]);
+        $this->add_control('button_icon_color', ['label' => esc_html__('Button Icon Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button svg, {{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button i' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button svg path' => 'fill: {{VALUE}};']]);
+        $this->add_control('button_hover_icon_color', ['label' => esc_html__('Button Hover Icon Color', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::COLOR, 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover svg, {{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover i' => 'color: {{VALUE}};', '{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button:hover svg path' => 'fill: {{VALUE}};']]);
+        $this->add_responsive_control('button_icon_size', ['label' => esc_html__('Button Icon Size', 'imbuto-elementor-widgets'), 'type' => Controls_Manager::SLIDER, 'size_units' => ['px'], 'range' => ['px' => ['min' => 10, 'max' => 40]], 'selectors' => ['{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button svg, {{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button i' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; font-size: {{SIZE}}{{UNIT}};']]);
         $this->add_group_control(Group_Control_Typography::get_type(), ['name' => 'button_typography', 'label' => esc_html__('Button Typography', 'imbuto-elementor-widgets'), 'selector' => '{{WRAPPER}} .imbuto-page-hero__buttons .imbuto-button']);
         $this->end_controls_section();
     }
@@ -137,6 +162,7 @@ class Page_Hero_Widget extends Widget_Base
         $settings = $this->get_settings_for_display();
         $image = $settings['background_image']['url'] ?? image_url('gallery/55271389639_c61707ed44_k.jpg');
         $buttons = !empty($settings['buttons']) && is_array($settings['buttons']) ? $settings['buttons'] : [];
+        $show_buttons = ($settings['show_buttons'] ?? '') === 'yes';
         ?>
         <section class="imbuto-page-hero">
             <div class="imbuto-page-hero__bg" style="background-image: url('<?php echo esc_url($image); ?>');"></div>
@@ -151,13 +177,15 @@ class Page_Hero_Widget extends Widget_Base
                     <?php endif; ?>
                     <h1><?php echo esc_html($settings['title']); ?></h1>
                     <p><?php echo esc_html($settings['description']); ?></p>
-                    <?php if ($buttons) : ?>
+                    <?php if ($show_buttons && $buttons) : ?>
                         <div class="imbuto-page-hero__buttons">
                             <?php foreach ($buttons as $button) : ?>
                                 <?php if (!empty($button['label'])) : ?>
                                     <a class="imbuto-button imbuto-button--<?php echo esc_attr($button['style'] ?? 'orange'); ?>" href="<?php echo esc_url($button['url']['url'] ?? '#'); ?>">
                                         <?php echo esc_html($button['label']); ?>
-                                        <?php Icons_Manager::render_icon($button['icon'], ['aria-hidden' => 'true']); ?>
+                                        <?php if (!empty($button['icon']['value'])) : ?>
+                                            <?php Icons_Manager::render_icon($button['icon'], ['aria-hidden' => 'true']); ?>
+                                        <?php endif; ?>
                                     </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>

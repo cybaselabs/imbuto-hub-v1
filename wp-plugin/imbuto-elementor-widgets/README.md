@@ -2,7 +2,7 @@
 
 Custom Elementor widgets for the Imbuto Hub WordPress build.
 
-Current version: `0.1.30`
+Current version: `0.1.63`
 
 ## Widgets
 
@@ -10,12 +10,24 @@ Current version: `0.1.30`
 - Imbuto Page Hero
 - Imbuto Header
 - Imbuto Pillars
+- Imbuto Programme Detail
 - Imbuto Actions
 - Imbuto About
 - Imbuto About Philosophy
+- Imbuto Statement Cards
+- Imbuto Icon Cards Grid
+- Imbuto Split Feature Panel
+- Imbuto Media Feature
 - Imbuto Life Stages
 - Imbuto Stats
 - Imbuto Hubs Map
+- Imbuto Impact Stories
+- Imbuto Impact Gallery
+- Imbuto Impact Story Detail
+- Imbuto Volunteer & Mentor
+- Imbuto Support / Donate
+- Imbuto Impact Partnerships
+- Imbuto Story CTA
 - Imbuto Partners
 - Imbuto CTA
 - Imbuto Footer
@@ -34,8 +46,10 @@ The Imbuto Pillars widget reads published `program` posts first. It uses:
 
 - Featured image
 - Title
-- Excerpt
-- ACF `short_description` when available
+- ACF `short_summary` for the card subtitle
+- ACF `short_description` for the card summary
+- Excerpt as a fallback
+- Sort controls for date, alphabetical title, or menu order in ASC/DESC direction
 
 Optional per-program ACF color overrides:
 
@@ -54,6 +68,20 @@ The Hubs Map widget reads published `hub` posts and these ACF fields when availa
 - `summary`
 
 If no hub posts are available, the widget falls back to default Rwanda hub data.
+
+The Impact Stories and Impact Story Detail widgets can read published `impact_story` posts dynamically. Add the detail widget to an Elementor Single template for the Impact Story post type, just like the Programme Detail widget is used for program posts. They use:
+
+- Featured image
+- Title
+- Post content for the story body
+- ACF `person_name`
+- ACF `location`
+- ACF `related_program`
+- ACF `quote`
+- ACF `story_summary`
+- Optional ACF `attribution`, `person_role`, `read_time`, `path_label`, and `path_summary`
+
+If attribution is not set, the widgets fall back to `person_name` plus `person_role`, `role`, or `impact_metric`.
 
 ## Assets
 

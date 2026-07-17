@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEventHandler } from "react";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, HandHeart, Sparkles, X } from "lucide-react";
 import { Header } from "../../components/imbuto/Header";
@@ -11,6 +11,15 @@ import { heroImage, hubs, pillars } from "../../components/imbuto/data";
 type FormType = "volunteer" | "partner" | "support" | "registration";
 
 const hubOptions = hubs.map((hub) => hub.name);
+const registrationHubOptions = ["Imbuto Hub Bugesera"];
+const registrationTrainingByHub: Record<string, string[]> = {
+  "Imbuto Hub Bugesera": [
+    "Hairdressing and Beauty",
+    "Tailoring and Fashion",
+    "IT and Computer Applications",
+    "Childcare and Playground Activities",
+  ],
+};
 const programmeOptions = pillars.map((pillar) => pillar.title);
 
 const volunteerWays = [
@@ -99,6 +108,13 @@ const inputClass =
 const textAreaClass =
   "mt-2 w-full rounded-[24px] border border-slate-200 bg-white px-4 py-3 text-sm text-[#102c35] outline-none transition focus:border-[#52b3a9]";
 
+function fieldName(label: string) {
+  return label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
     <div className="text-sm uppercase tracking-[0.28em] text-[#c05d24]">
@@ -147,10 +163,12 @@ function TextField({
   label,
   type = "text",
   optional = false,
+  name,
 }: {
   label: string;
   type?: string;
   optional?: boolean;
+  name?: string;
 }) {
   return (
     <label className="block">
@@ -158,7 +176,11 @@ function TextField({
         {label}
         {optional ? " (optional)" : ""}
       </FieldLabel>
-      <input type={type} className={inputClass} />
+      <input
+        type={type}
+        name={name ?? fieldName(label)}
+        className={inputClass}
+      />
     </label>
   );
 }
@@ -167,10 +189,16 @@ function SelectField({
   label,
   options,
   optional = false,
+  name,
+  value,
+  onChange,
 }: {
   label: string;
   options: string[];
   optional?: boolean;
+  name?: string;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
 }) {
   return (
     <label className="block">
@@ -178,7 +206,12 @@ function SelectField({
         {label}
         {optional ? " (optional)" : ""}
       </FieldLabel>
-      <select className={inputClass}>
+      <select
+        name={name ?? fieldName(label)}
+        value={value}
+        onChange={onChange}
+        className={inputClass}
+      >
         {options.map((option) => (
           <option key={option}>{option}</option>
         ))}
@@ -191,10 +224,12 @@ function TextAreaField({
   label,
   rows = 5,
   optional = false,
+  name,
 }: {
   label: string;
   rows?: number;
   optional?: boolean;
+  name?: string;
 }) {
   return (
     <label className="block">
@@ -202,7 +237,11 @@ function TextAreaField({
         {label}
         {optional ? " (optional)" : ""}
       </FieldLabel>
-      <textarea rows={rows} className={textAreaClass} />
+      <textarea
+        rows={rows}
+        name={name ?? fieldName(label)}
+        className={textAreaClass}
+      />
     </label>
   );
 }
@@ -210,10 +249,14 @@ function TextAreaField({
 function CheckboxGroup({
   label,
   options,
+  name,
 }: {
   label: string;
   options: string[];
+  name?: string;
 }) {
+  const groupName = name ?? fieldName(label);
+
   return (
     <fieldset className="block">
       <FieldLabel>{label}</FieldLabel>
@@ -223,7 +266,12 @@ function CheckboxGroup({
             key={option}
             className="flex items-center gap-3 text-sm text-slate-700"
           >
-            <input type="checkbox" className="h-4 w-4 shrink-0" />
+            <input
+              type="checkbox"
+              name={groupName}
+              value={option}
+              className="h-4 w-4 shrink-0"
+            />
             <span>{option}</span>
           </label>
         ))}
@@ -232,10 +280,21 @@ function CheckboxGroup({
   );
 }
 
-function Consent({ children }: { children: React.ReactNode }) {
+function Consent({
+  children,
+  name,
+}: {
+  children: React.ReactNode;
+  name?: string;
+}) {
   return (
     <label className="flex gap-3 text-sm leading-6 text-slate-700">
-      <input type="checkbox" className="mt-1 h-4 w-4 shrink-0" />
+      <input
+        type="checkbox"
+        name={name}
+        value="yes"
+        className="mt-1 h-4 w-4 shrink-0"
+      />
       <span>{children}</span>
     </label>
   );
@@ -336,8 +395,9 @@ function SupportForm() {
       <TextField label="Name" />
       <TextField label="Email" type="email" />
       <TextField label="Phone" optional />
-      <SelectField
+      <CheckboxGroup
         label="Contribution type"
+        name="contribution-type"
         options={[
           "Equipment",
           "Programme funding",
@@ -347,8 +407,9 @@ function SupportForm() {
           "Other",
         ]}
       />
-      <SelectField
+      <CheckboxGroup
         label="Programme or area to support"
+        name="programme-or-area-to-support"
         options={programmeOptions}
       />
       <SelectField label="Preferred hub" options={hubOptions} />
@@ -369,36 +430,22 @@ function SupportForm() {
 }
 
 export function RegistrationForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [savedReference, setSavedReference] = useState("");
+  const [selectedHub, setSelectedHub] = useState(registrationHubOptions[0]);
+  const selectedHubTrainingOptions =
+    registrationTrainingByHub[selectedHub] ?? [];
   const steps = [
     {
       title: "Personal details",
       description: "Start with the participant's basic information.",
       content: (
         <>
-          <TextField label="Registration number" optional />
-          <TextField label="Date of registration" type="date" />
           <TextField label="Full name" />
           <TextField label="Age" type="number" />
-          <SelectField label="Gender" options={["Female", "Male", "Other"]} />
+          <SelectField label="Gender" options={["Female", "Male"]} />
           <TextField label="Phone number" />
           <TextField label="National ID number" optional />
-        </>
-      ),
-    },
-    {
-      title: "Address and hub",
-      description:
-        "Tell us where the participant lives and which hub they prefer.",
-      content: (
-        <>
-          <SelectField
-            label="District"
-            options={["Bugesera", "Nyarugenge", "Musanze", "Huye", "Rubavu"]}
-          />
-          <TextField label="Sector" />
-          <TextField label="Cell" />
-          <TextField label="Village" />
-          <SelectField label="Hub of interest" options={hubOptions} />
         </>
       ),
     },
@@ -409,14 +456,28 @@ export function RegistrationForm() {
         <>
           <CheckboxGroup
             label="Tick one"
-            options={["Student", "School Dropout"]}
+            name="education-status"
+            options={["In school", "Not in School"]}
           />
           <TextField label="If student, name of school" optional />
           <TextField label="Current class/level" optional />
           <div className="md:col-span-2">
-            <TextAreaField
-              label="If school dropout, what was the last year/grade completed?"
-              rows={3}
+            <SelectField
+              label="If you did not complete senior 6, what was the last year of school completed"
+              options={[
+                "P1",
+                "P2",
+                "P3",
+                "P4",
+                "P5",
+                "P6",
+                "S1",
+                "S2",
+                "S3",
+                "S4",
+                "S5",
+                "S6",
+              ]}
               optional
             />
           </div>
@@ -424,39 +485,48 @@ export function RegistrationForm() {
       ),
     },
     {
-      title: "Training interest",
-      description: "Choose the preferred vocational training path.",
+      title: "Hub selection",
+      description: "Choose the hub where the participant wants to register.",
       content: (
         <>
-          <CheckboxGroup
-            label="Tick one"
-            options={[
-              "Hairdressing and Beauty",
-              "Tailoring and Fashion",
-              "IT and Computer Applications",
-            ]}
+          <SelectField
+            label="Hub of interest"
+            name="hub-of-interest"
+            options={registrationHubOptions}
+            value={selectedHub}
+            onChange={(event) => setSelectedHub(event.target.value)}
           />
-          <CheckboxGroup
-            label="Preferred training schedule"
-            options={["Morning", "Afternoon"]}
-          />
-          <div className="md:col-span-2">
-            <TextAreaField
-              label="Why are you interested in this training?"
-              rows={4}
-            />
+          <div className="rounded-[24px] bg-white p-4 text-sm leading-7 text-slate-700 ring-1 ring-slate-200">
+            Training options in the next step will be filtered to programmes
+            currently available at this hub.
           </div>
         </>
       ),
     },
     {
+      title: "Training interest",
+      description: `Choose from opportunities currently available at ${selectedHub}.`,
+      content: (
+        <>
+          <CheckboxGroup
+            label="Training or activity interest"
+            name="training-interest"
+            options={selectedHubTrainingOptions}
+          />
+          <CheckboxGroup
+            label="Preferred training schedule"
+            name="preferred-training-schedule"
+            options={["Morning", "Afternoon"]}
+          />
+        </>
+      ),
+    },
+    {
       title: "Contacts",
-      description:
-        "Add guardian information where applicable and an emergency contact.",
+      description: "Add essential guardian and emergency contact details.",
       content: (
         <>
           <TextField label="Parent/guardian name" optional />
-          <TextField label="Relationship to participant" optional />
           <TextField label="Parent/guardian phone number" optional />
           <TextField label="Emergency contact name" />
           <TextField label="Emergency contact phone number" />
@@ -464,12 +534,12 @@ export function RegistrationForm() {
       ),
     },
     {
-      title: "Consent and declaration",
+      title: "Consent & declaration",
       description: "Confirm accuracy and photography or videography consent.",
       content: (
         <>
           <div className="md:col-span-2">
-            <Consent>
+            <Consent name="accuracy-confirmed">
               I confirm that the information provided above is accurate.
             </Consent>
           </div>
@@ -486,10 +556,11 @@ export function RegistrationForm() {
           </div>
           <CheckboxGroup
             label="Consent choice"
+            name="media-consent"
             options={["I consent", "I do not consent"]}
           />
-          <TextField label="Consent signature" />
-          <TextField label="Consent date" type="date" />
+          <TextField label="Consent signature" optional />
+          <TextField label="Consent date" type="date" optional />
         </>
       ),
     },
@@ -500,8 +571,45 @@ export function RegistrationForm() {
   const isLastStep = currentStep === steps.length - 1;
 
   return (
-    <div>
-      <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <form
+      className="mt-7"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const values = Array.from(formData.entries()).reduce<
+          Record<string, FormDataEntryValue | FormDataEntryValue[]>
+        >((accumulator, [key, value]) => {
+          const existingValue = accumulator[key];
+
+          if (Array.isArray(existingValue)) {
+            existingValue.push(value);
+          } else if (existingValue) {
+            accumulator[key] = [existingValue, value];
+          } else {
+            accumulator[key] = value;
+          }
+
+          return accumulator;
+        }, {});
+        const savedRecord = {
+          id: `YTH-${Date.now().toString(36).toUpperCase()}`,
+          createdAt: new Date().toISOString(),
+          status: "mock-saved",
+          ...values,
+        };
+        const existingRecords = JSON.parse(
+          window.localStorage.getItem("imbutoYouthRegistrations") ?? "[]",
+        );
+
+        window.localStorage.setItem(
+          "imbutoYouthRegistrations",
+          JSON.stringify([...existingRecords, savedRecord]),
+        );
+        setSavedReference(savedRecord.id);
+        setSubmitted(true);
+      }}
+    >
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
         {steps.map((step, index) => {
           const isActive = index === currentStep;
           const isComplete = index < currentStep;
@@ -519,7 +627,9 @@ export function RegistrationForm() {
                     : "bg-[#f7f7f2] text-slate-500 ring-1 ring-slate-200"
               }`}
             >
-              <span className="block font-semibold">Step {index + 1}</span>
+              <span className="block font-sans font-black uppercase tracking-[0.16em]">
+                Step {index + 1}
+              </span>
               <span className="mt-1 block leading-5">{step.title}</span>
             </button>
           );
@@ -549,9 +659,16 @@ export function RegistrationForm() {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {activeStep.content}
-        </div>
+        {steps.map((step, index) => (
+          <div
+            key={step.title}
+            className={`mt-6 gap-4 md:grid-cols-2 ${
+              index === currentStep ? "grid" : "hidden"
+            }`}
+          >
+            {step.content}
+          </div>
+        ))}
       </div>
 
       <div
@@ -583,7 +700,14 @@ export function RegistrationForm() {
           </button>
         )}
       </div>
-    </div>
+      {submitted ? (
+        <div className="mt-5 rounded-[24px] bg-[#dff5f2] p-4 text-sm leading-6 text-[#0f5b58] ring-1 ring-[#52b3a9]/30">
+          Youth registration saved for demo purposes.
+          {savedReference ? ` Reference: ${savedReference}.` : ""} The hub team
+          will review the information and follow up with the participant.
+        </div>
+      ) : null}
+    </form>
   );
 }
 
@@ -646,12 +770,15 @@ function FormModal({
           </button>
         </div>
 
-        <form className="mt-7">
-          {activeForm === "volunteer" ? <VolunteerForm /> : null}
-          {activeForm === "partner" ? <PartnerForm /> : null}
-          {activeForm === "support" ? <SupportForm /> : null}
-          {activeForm === "registration" ? <RegistrationForm /> : null}
-        </form>
+        {activeForm === "registration" ? (
+          <RegistrationForm />
+        ) : (
+          <form className="mt-7">
+            {activeForm === "volunteer" ? <VolunteerForm /> : null}
+            {activeForm === "partner" ? <PartnerForm /> : null}
+            {activeForm === "support" ? <SupportForm /> : null}
+          </form>
+        )}
       </div>
     </div>
   );

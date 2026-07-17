@@ -42,9 +42,7 @@ const statusMeta = {
 const provinceOptions = [
   "All provinces",
   "Kigali City",
-  "Northern Province",
   "Southern Province",
-  "Western Province",
   "Eastern Province",
 ];
 const statusOptions = [

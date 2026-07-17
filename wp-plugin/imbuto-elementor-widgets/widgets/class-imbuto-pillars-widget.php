@@ -92,6 +92,45 @@ class Pillars_Widget extends Widget_Base
             'default' => '',
         ]);
 
+        $this->add_control('header_layout', [
+            'label' => esc_html__('Header Layout', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'stacked',
+            'options' => [
+                'stacked' => esc_html__('Stacked', 'imbuto-elementor-widgets'),
+                'split' => esc_html__('Split Description Right', 'imbuto-elementor-widgets'),
+            ],
+        ]);
+
+        $this->add_control('show_background_glow', [
+            'label' => esc_html__('Show Background Glow', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Show', 'imbuto-elementor-widgets'),
+            'label_off' => esc_html__('Hide', 'imbuto-elementor-widgets'),
+            'return_value' => 'yes',
+            'default' => '',
+        ]);
+
+        $this->add_control('layout', [
+            'label' => esc_html__('Layout', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'rail',
+            'options' => [
+                'rail' => esc_html__('Horizontal Rail', 'imbuto-elementor-widgets'),
+                'grid' => esc_html__('Programme Page Grid', 'imbuto-elementor-widgets'),
+            ],
+        ]);
+
+        $this->add_control('tone', [
+            'label' => esc_html__('Tone', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'dark',
+            'options' => [
+                'dark' => esc_html__('Dark', 'imbuto-elementor-widgets'),
+                'light' => esc_html__('Light', 'imbuto-elementor-widgets'),
+            ],
+        ]);
+
         $this->add_control('source', [
             'label' => esc_html__('Card Source', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::SELECT,
@@ -109,6 +148,33 @@ class Pillars_Widget extends Widget_Base
             'max' => 24,
             'step' => 1,
             'default' => 4,
+            'condition' => [
+                'source' => 'Programmes',
+            ],
+        ]);
+
+        $this->add_control('program_orderby', [
+            'label' => esc_html__('Sort By', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'menu_order',
+            'options' => [
+                'menu_order' => esc_html__('Menu Order', 'imbuto-elementor-widgets'),
+                'date' => esc_html__('Date', 'imbuto-elementor-widgets'),
+                'title' => esc_html__('Alphabetical', 'imbuto-elementor-widgets'),
+            ],
+            'condition' => [
+                'source' => 'Programmes',
+            ],
+        ]);
+
+        $this->add_control('program_order', [
+            'label' => esc_html__('Order', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SELECT,
+            'default' => 'ASC',
+            'options' => [
+                'ASC' => esc_html__('ASC', 'imbuto-elementor-widgets'),
+                'DESC' => esc_html__('DESC', 'imbuto-elementor-widgets'),
+            ],
             'condition' => [
                 'source' => 'Programmes',
             ],
@@ -144,6 +210,15 @@ class Pillars_Widget extends Widget_Base
             'default' => 120,
         ]);
 
+        $this->add_control('subtitle_length', [
+            'label' => esc_html__('Subtitle Character Limit', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::NUMBER,
+            'min' => 20,
+            'max' => 300,
+            'step' => 5,
+            'default' => 110,
+        ]);
+
         $this->end_controls_section();
 
         $this->start_controls_section('header_style_section', [
@@ -167,6 +242,26 @@ class Pillars_Widget extends Widget_Base
             'range' => ['px' => ['min' => 0, 'max' => 120]],
             'selectors' => [
                 '{{WRAPPER}} .imbuto-pillars .imbuto-section-head' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('header_column_gap', [
+            'label' => esc_html__('Header Column Gap', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'range' => ['px' => ['min' => 0, 'max' => 120]],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-pillars .imbuto-section-head' => 'gap: {{SIZE}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('grid_gap', [
+            'label' => esc_html__('Card Gap', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'range' => ['px' => ['min' => 0, 'max' => 80]],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-programme-rail' => 'gap: {{SIZE}}{{UNIT}};',
             ],
         ]);
 
@@ -304,7 +399,7 @@ class Pillars_Widget extends Widget_Base
             'size_units' => ['px', 'em', '%'],
             'selectors' => [
                 '{{WRAPPER}} .imbuto-programme-card__image strong' => 'left: {{LEFT}}{{UNIT}}; right: {{RIGHT}}{{UNIT}};',
-                '{{WRAPPER}} .imbuto-programme-card > span:not(.imbuto-programme-card__image, .imbuto-programme-card__label)' => 'margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}};',
+                '{{WRAPPER}} .imbuto-programme-card__subtitle, {{WRAPPER}} .imbuto-programme-card__summary' => 'margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}};',
                 '{{WRAPPER}} .imbuto-programme-card em' => 'margin-left: {{LEFT}}{{UNIT}}; margin-right: {{RIGHT}}{{UNIT}}; margin-bottom: {{BOTTOM}}{{UNIT}};',
             ],
         ]);
@@ -377,38 +472,22 @@ class Pillars_Widget extends Widget_Base
             ],
         ]);
 
-        $this->add_control('description_color', [
-            'label' => esc_html__('Description Color', 'imbuto-elementor-widgets'),
+        $this->add_control('subtitle_color', [
+            'label' => esc_html__('Subtitle Color', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .imbuto-programme-card > span:not(.imbuto-programme-card__image, .imbuto-programme-card__label)' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .imbuto-programme-card__subtitle' => 'color: {{VALUE}};',
             ],
         ]);
 
         $this->add_group_control(Group_Control_Typography::get_type(), [
-            'name' => 'description_typography',
-            'label' => esc_html__('Description Typography', 'imbuto-elementor-widgets'),
-            'selector' => '{{WRAPPER}} .imbuto-programme-card > span:not(.imbuto-programme-card__image, .imbuto-programme-card__label)',
+            'name' => 'subtitle_typography',
+            'label' => esc_html__('Subtitle Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-programme-card__subtitle',
         ]);
 
-        $this->add_responsive_control('description_size', [
-            'label' => esc_html__('Description Size', 'imbuto-elementor-widgets'),
-            'type' => Controls_Manager::SLIDER,
-            'size_units' => ['px'],
-            'range' => [
-                'px' => [
-                    'min' => 12,
-                    'max' => 32,
-                    'step' => 1,
-                ],
-            ],
-            'selectors' => [
-                '{{WRAPPER}} .imbuto-programme-card > span:not(.imbuto-programme-card__image, .imbuto-programme-card__label)' => 'font-size: {{SIZE}}{{UNIT}};',
-            ],
-        ]);
-
-        $this->add_responsive_control('description_spacing', [
-            'label' => esc_html__('Description Top Spacing', 'imbuto-elementor-widgets'),
+        $this->add_responsive_control('subtitle_spacing', [
+            'label' => esc_html__('Subtitle Top Spacing', 'imbuto-elementor-widgets'),
             'type' => Controls_Manager::SLIDER,
             'size_units' => ['px'],
             'range' => [
@@ -419,7 +498,53 @@ class Pillars_Widget extends Widget_Base
                 ],
             ],
             'selectors' => [
-                '{{WRAPPER}} .imbuto-programme-card > span:not(.imbuto-programme-card__image, .imbuto-programme-card__label)' => 'margin-top: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .imbuto-programme-card__subtitle' => 'margin-top: {{SIZE}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_control('description_color', [
+            'label' => esc_html__('Summary Color', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-programme-card__summary' => 'color: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'description_typography',
+            'label' => esc_html__('Summary Typography', 'imbuto-elementor-widgets'),
+            'selector' => '{{WRAPPER}} .imbuto-programme-card__summary',
+        ]);
+
+        $this->add_responsive_control('description_size', [
+            'label' => esc_html__('Summary Size', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'range' => [
+                'px' => [
+                    'min' => 12,
+                    'max' => 32,
+                    'step' => 1,
+                ],
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-programme-card__summary' => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('description_spacing', [
+            'label' => esc_html__('Summary Top Spacing', 'imbuto-elementor-widgets'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+            ],
+            'selectors' => [
+                '{{WRAPPER}} .imbuto-programme-card__summary' => 'margin-top: {{SIZE}}{{UNIT}};',
             ],
         ]);
 
@@ -649,24 +774,39 @@ class Pillars_Widget extends Widget_Base
         enqueue_frontend_assets();
         $settings = $this->get_settings_for_display();
         $limit = isset($settings['posts_per_page']) ? (int) $settings['posts_per_page'] : 8;
-        $pillars = ($settings['source'] ?? 'Programmes') === 'Programmes' ? get_Programmes($limit) : default_pillars();
+        $orderby = isset($settings['program_orderby']) ? (string) $settings['program_orderby'] : 'menu_order';
+        $order = isset($settings['program_order']) ? (string) $settings['program_order'] : 'ASC';
+        $pillars = ($settings['source'] ?? 'Programmes') === 'Programmes' ? get_Programmes($limit, $orderby, $order) : default_pillars();
         $link = !empty($settings['link_url']['url']) ? $settings['link_url']['url'] : '/Programmes';
         $summary_length = isset($settings['summary_length']) ? (int) $settings['summary_length'] : 120;
+        $subtitle_length = isset($settings['subtitle_length']) ? (int) $settings['subtitle_length'] : 110;
+        $layout = ($settings['layout'] ?? 'rail') === 'grid' ? 'grid' : 'rail';
+        $tone = ($settings['tone'] ?? 'dark') === 'light' ? 'light' : 'dark';
+        $header_layout = ($settings['header_layout'] ?? 'stacked') === 'split' ? 'split' : 'stacked';
+        $glow = ($settings['show_background_glow'] ?? '') === 'yes' ? ' imbuto-pillars--glow' : '';
+        $section_classes = 'imbuto-pillars imbuto-pillars--' . $layout . ' imbuto-pillars--' . $tone . ' imbuto-pillars--header-' . $header_layout . $glow;
         ?>
-        <section class="imbuto-pillars">
+        <section class="<?php echo esc_attr($section_classes); ?>">
             <div class="imbuto-container">
                 <div class="imbuto-section-head imbuto-section-head--dark">
-                    <div>
+                    <div class="imbuto-section-head__main">
                         <?php if (!empty($settings['eyebrow'])) : ?>
                             <div class="imbuto-kicker"><?php echo esc_html($settings['eyebrow']); ?></div>
                         <?php endif; ?>
                         <h2><?php echo esc_html($settings['title']); ?></h2>
-                        <?php if (($settings['show_description'] ?? '') === 'yes' && !empty($settings['description'])) : ?>
+                        <?php if ($header_layout === 'stacked' && ($settings['show_description'] ?? '') === 'yes' && !empty($settings['description'])) : ?>
                             <p><?php echo esc_html($settings['description']); ?></p>
                         <?php endif; ?>
                     </div>
-                    <?php if (($settings['show_section_button'] ?? '') === 'yes' && !empty($settings['section_button_text'])) : ?>
-                        <a class="imbuto-button imbuto-button--light" href="<?php echo esc_url($link); ?>"><?php echo esc_html($settings['section_button_text']); ?></a>
+                    <?php if (($header_layout === 'split' && ($settings['show_description'] ?? '') === 'yes' && !empty($settings['description'])) || (($settings['show_section_button'] ?? '') === 'yes' && !empty($settings['section_button_text']))) : ?>
+                        <div class="imbuto-section-head__side">
+                            <?php if ($header_layout === 'split' && !empty($settings['description'])) : ?>
+                                <p><?php echo esc_html($settings['description']); ?></p>
+                            <?php endif; ?>
+                            <?php if (($settings['show_section_button'] ?? '') === 'yes' && !empty($settings['section_button_text'])) : ?>
+                                <a class="imbuto-button imbuto-button--light" href="<?php echo esc_url($link); ?>"><?php echo esc_html($settings['section_button_text']); ?></a>
+                            <?php endif; ?>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="imbuto-programme-rail">
@@ -676,7 +816,8 @@ class Pillars_Widget extends Widget_Base
                                 <span class="imbuto-programme-card__label"><?php echo esc_html($settings['card_label']); ?></span>
                                 <strong><?php echo esc_html($pillar['title']); ?></strong>
                             </span>
-                            <span><?php echo esc_html($this->trim_summary((string) $pillar['blurb'], $summary_length)); ?></span>
+                            <?php if (!empty($pillar['subtitle'])) : ?><span class="imbuto-programme-card__subtitle"><?php echo esc_html($this->trim_summary((string) $pillar['subtitle'], $subtitle_length)); ?></span><?php endif; ?>
+                            <span class="imbuto-programme-card__summary"><?php echo esc_html($this->trim_summary((string) $pillar['blurb'], $summary_length)); ?></span>
                             <em>
                                 <?php echo esc_html($settings['cta_label']); ?>
                                 <?php Icons_Manager::render_icon($settings['cta_icon'], ['aria-hidden' => 'true']); ?>

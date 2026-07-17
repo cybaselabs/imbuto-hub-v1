@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Imbuto Elementor Widgets
  * Description: Custom Elementor widgets for the Imbuto Hub website.
- * Version: 0.1.30
+ * Version: 0.1.63
  * Author: Imbuto
  * Text Domain: imbuto-elementor-widgets
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('IMBUTO_WIDGETS_VERSION', '0.1.30');
+define('IMBUTO_WIDGETS_VERSION', '0.1.63');
 define('IMBUTO_WIDGETS_FILE', __FILE__);
 define('IMBUTO_WIDGETS_PATH', plugin_dir_path(__FILE__));
 define('IMBUTO_WIDGETS_URL', plugin_dir_url(__FILE__));
@@ -77,11 +77,23 @@ function imbuto_widgets_register($widgets_manager): void
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-header-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-actions-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-pillars-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-programme-detail-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-about-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-about-philosophy-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-statement-cards-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-icon-cards-grid-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-split-feature-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-media-feature-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-life-stages-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-stats-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-hubs-map-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-impact-stories-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-impact-gallery-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-impact-story-article-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-involve-volunteer-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-involve-support-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-involve-partnerships-widget.php';
+    require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-involve-story-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-partners-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-cta-widget.php';
     require_once IMBUTO_WIDGETS_PATH . 'widgets/class-imbuto-footer-widget.php';
@@ -91,11 +103,23 @@ function imbuto_widgets_register($widgets_manager): void
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Page_Hero_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Actions_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Pillars_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Programme_Detail_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\About_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\About_Philosophy_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Statement_Cards_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Icon_Cards_Grid_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Split_Feature_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Media_Feature_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Life_Stages_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Stats_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Hubs_Map_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Impact_Stories_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Impact_Gallery_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Impact_Story_Article_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Involve_Volunteer_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Involve_Support_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Involve_Partnerships_Widget());
+    $widgets_manager->register(new \Imbuto\ElementorWidgets\Involve_Story_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Partners_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Cta_Widget());
     $widgets_manager->register(new \Imbuto\ElementorWidgets\Footer_Widget());
