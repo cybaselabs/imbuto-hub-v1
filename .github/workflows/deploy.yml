@@ -7,6 +7,11 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE: ghcr.io/cybaselabs/imbuto-site
+  VPS_HOST: 147.182.164.106
+  APP_NAME: imbuto-site
+  APP_PORT: 3000
+  HOST_PORT: 1014
+  NPM_NETWORK: npm_proxy
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
@@ -40,17 +45,25 @@ jobs:
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
+          host: ${{ env.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
+
+            docker network inspect "${{ env.NPM_NETWORK }}" >/dev/null 2>&1 || docker network create "${{ env.NPM_NETWORK }}"
+
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-            docker pull ghcr.io/cybaselabs/imbuto-site:latest
-            docker stop imbuto-site 2>/dev/null || true
-            docker rm imbuto-site 2>/dev/null || true
+            docker pull "${{ env.IMAGE }}:latest"
+            docker stop "${{ env.APP_NAME }}" 2>/dev/null || true
+            docker rm "${{ env.APP_NAME }}" 2>/dev/null || true
             docker run -d \
-              --name imbuto-site \
+              --name "${{ env.APP_NAME }}" \
               --restart unless-stopped \
-              -p 1014:3000 \
-              ghcr.io/cybaselabs/imbuto-site:latest
+              --network "${{ env.NPM_NETWORK }}" \
+              -e NODE_ENV=production \
+              -e PORT="${{ env.APP_PORT }}" \
+              -e HOSTNAME=0.0.0.0 \
+              -p 127.0.0.1:${{ env.HOST_PORT }}:${{ env.APP_PORT }} \
+              "${{ env.IMAGE }}:latest"
             docker image prune -f
