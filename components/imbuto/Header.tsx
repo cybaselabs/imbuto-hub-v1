@@ -1,5 +1,4 @@
 import { Container } from "./Container";
-import Image from "next/image";
 import Link from "next/link";
 
 export function Header() {
@@ -18,13 +17,10 @@ export function Header() {
       <Container className="mt-4">
         <div className="flex items-center justify-between rounded-full border border-white/20 bg-[#102c35]/80 px-4 py-3 text-white shadow-2xl backdrop-blur-xl md:px-6">
           <Link href="/" aria-label="Imbuto Hubs home">
-            <Image
+            <img
               src="/images/updated-IMBUTO LOGO-03.png"
               alt="Imbuto Hub Logo"
-              width={100}
-              height={40}
-              className="w-auto"
-              priority
+              className="h-10 w-auto"
             />
           </Link>
 

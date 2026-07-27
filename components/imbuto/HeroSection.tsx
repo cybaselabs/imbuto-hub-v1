@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "./Container";
@@ -28,11 +27,9 @@ function HubsImpactCard() {
           </p>
         </div>
         <div className="relative mx-auto w-full max-w-[300px]">
-          <Image
+          <img
             src="/images/rw-04.png"
             alt=""
-            width={1000}
-            height={468}
             aria-hidden="true"
             className="h-auto w-full object-contain"
           />
