@@ -20,7 +20,9 @@ export function Header() {
             <img
               src="/images/updated-IMBUTO LOGO-03.png"
               alt="Imbuto Hub Logo"
-              className="h-10 w-auto"
+              className=""
+              width={170}
+              height={100}
             />
           </Link>
 
