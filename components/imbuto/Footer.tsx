@@ -74,9 +74,9 @@ export function Footer() {
               <Image
                 src="/images/updated-IMBUTO LOGO-03.png"
                 alt="Imbuto Hub Logo"
-                width={130}
+                width={170}
                 height={52}
-                className="h-10 w-auto"
+                className=""
               />
             </div>
             <h3 className="mt-6 max-w-md text-4xl leading-tight tracking-[-0.04em] text-white md:text-5xl">
