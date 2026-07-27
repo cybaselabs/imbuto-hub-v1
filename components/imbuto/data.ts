@@ -1,9 +1,4 @@
-import {
-  Compass,
-  HandHeart,
-  MapPinned,
-  Sparkles,
-} from "lucide-react";
+import { Compass, HandHeart, MapPinned, Sparkles } from "lucide-react";
 import { programmes } from "./programmes";
 
 export const heroImage = "/images/55271563510_75dc1f389e_k.jpg";
@@ -79,8 +74,15 @@ export const ages = [
 ];
 
 export const stats = [
-  { value: "2", label: "Operational Hubs (Imbuto Hub Bugesera and Imbuto Hub Nyarugenge; Maison de jeunes)." },
-  { value: "4", label: "Hubs in development (Kicukiro, Muhanga, Rwamagana, and Gasabo)" },
+  {
+    value: "2",
+    label:
+      "Operational Hubs (Imbuto Hub Bugesera and Imbuto Hub Nyarugenge; Maison de jeunes).",
+  },
+  {
+    value: "4",
+    label: "Hubs in development (Kicukiro, Muhanga, Rwamagana, and Gasabo)",
+  },
   { value: "30", label: "Hubs envisioned" },
   // { value: "926,824", label: "Mentorship sessions delivered" },
   // { value: "150+", label: "Community events hosted" },
@@ -101,7 +103,7 @@ export const hubs = [
   },
   {
     id: "nyarugenge",
-    name: "Imbuto Hub Nyarugenge (Maison de Jeunes)",
+    name: "Kimisagara Maison de Jeunes by Imbuto Hubs",
     location: "Kigali City",
     region: "Kigali, Rwanda",
     lat: -1.9507,
@@ -163,8 +165,8 @@ export const hubs = [
 
 export const partners = [
   {
-    name: "Partner 1",
-    logo: "/images/partners/Coat_of_arms_of_Rwanda.svg",
+    name: "Republic of Rwanda",
+    logo: "/images/partners/rwanda-gov-logo-horizontal.png",
   },
   {
     name: "Partner 2",

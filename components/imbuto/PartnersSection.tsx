@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { partners } from "./data";
 import { Reveal, StaggerGrid, StaggerItem } from "./motion";
 
@@ -26,15 +27,17 @@ export function PartnersSection() {
               {partners.map((partner) => (
                 <StaggerItem
                   key={partner.name}
-                  className="w-full max-w-[240px] flex-none"
+                  className="w-full max-w-[300px] flex-none"
                 >
                   <div
                     className="flex min-h-[150px] items-center justify-center rounded-[26px] bg-white p-6 shadow-sm ring-1 ring-slate-200/80 transition hover:-translate-y-1 hover:shadow-md"
                     title={partner.name}
                   >
-                    <img
+                    <Image
                       src={partner.logo}
                       alt={partner.name}
+                      width={260}
+                      height={96}
                       className="max-h-20 w-auto max-w-full object-contain"
                     />
                   </div>
