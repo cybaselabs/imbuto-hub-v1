@@ -29,7 +29,7 @@ export function PillarsSection() {
           </div>
 
           {/* <Link
-            href="/Programmes"
+            href="/programmes"
             className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm text-[#043E52] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#f8f4e7]"
           >
             Explore All Programmes

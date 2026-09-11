@@ -29,7 +29,7 @@ export function LifeStageSection() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="/Programmes"
+                  href="/programmes"
                   className="rounded-full bg-[#016A6D] px-5 py-3 text-sm text-white shadow-sm transition hover:bg-[#01585a]"
                 >
                   Explore age groups

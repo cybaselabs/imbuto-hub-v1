@@ -24,8 +24,7 @@ import { color } from "framer-motion";
 // export const heroImage = "images/55137473511_81bbe538ab_k.jpg";
 export const heroImage = "images/imbutohub.png";
 export const aboutImage = "images/55137475546_055ffa64da_k.jpg";
-export const featureImage =
-  "`https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/205.jpg";
+export const featureImage = "images/55271563510_75dc1f389e_k.jpg";
 export const lifeStageImage = "images/55137476261_97dc06c8bf_k.jpg";
 export const lifeStagImage_2 = "images/54513810799_7d0c00742c_k.jpg";
 ("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop");
@@ -154,31 +153,31 @@ export const stats = [
 export const partners = [
   {
     name: "Partner 1",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview.webp",
+    logo: "images/partners/rwanda-gov-logo-horizontal.png",
   },
   {
     name: "Partner 2",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-1.webp",
+    logo: "images/partners/RSSBlogo.png",
   },
   {
     name: "Partner 3",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-2.webp",
+    logo: "images/partners/imbutofoundationlogo.png",
   },
   {
     name: "Partner 4",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-3.webp",
+    logo: "images/Logo-09.png",
   },
   {
     name: "Partner 5",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-4.webp",
+    logo: "images/Logo-08.png",
   },
   {
     name: "Partner 6",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-5.webp",
+    logo: "images/Logo-05.png",
   },
   {
     name: "Partner 7",
-    logo: "https://webtesting.co.rw/obproperties/wp-content/uploads/2026/03/preview-6.webp",
+    logo: "images/Logo-06.png",
   },
 ];
 

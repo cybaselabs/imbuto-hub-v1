@@ -19,7 +19,7 @@ export const quickActions = [
   },
   {
     title: "Explore Programmes",
-    href: "/Programmes",
+    href: "/programmes",
     icon: Compass,
     subtitle: "Browse opportunities for learning, wellbeing, and growth.",
   },
@@ -43,7 +43,7 @@ export const pillars = programmes.map((programme) => ({
   blurb: programme.summary,
   icon: programme.icon,
   image: programme.image,
-  href: `/Programmes/${programme.slug}`,
+  href: `/programmes/${programme.slug}`,
 }));
 
 export const ages = [

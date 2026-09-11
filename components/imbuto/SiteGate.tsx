@@ -45,7 +45,7 @@ export function SiteGate({ children }: { children: React.ReactNode }) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(237,155,55,0.28),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(82,179,169,0.22),transparent_32%)]" />
       <div className="relative w-full max-w-md rounded-[34px] border border-white/12 bg-white/10 p-7 shadow-2xl backdrop-blur-xl md:p-8">
         <Image
-          src="/images/updated-IMBUTO LOGO-03.png"
+          src="/images/imbuto-hubs-logo.png"
           alt="Imbuto Hub Logo"
           width={150}
           height={60}

@@ -51,7 +51,7 @@ export function ProgrammeCard({
   icon: Icon,
   accent = programmeCardAccents[0],
   layout = "carousel",
-  href = "/Programmes",
+  href = "/programmes",
   tone = "dark",
 }: ProgrammeCardProps) {
   const sizeClass =

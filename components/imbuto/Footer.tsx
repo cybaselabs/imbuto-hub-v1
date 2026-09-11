@@ -72,7 +72,7 @@ export function Footer() {
           <div className="rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10">
             <div className="inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2">
               <Image
-                src="/images/updated-IMBUTO LOGO-03.png"
+                src="/images/imbuto-hubs-logo.png"
                 alt="Imbuto Hub Logo"
                 width={170}
                 height={52}
@@ -95,10 +95,10 @@ export function Footer() {
             </div>
             <div className="mt-6 space-y-2 text-base leading-8 text-white/78">
               <a
-                href="mailto:Info@imbutohubs.com"
+                href="mailto:info@imbutohubs.com"
                 className="inline-flex text-white transition hover:text-[#FFA45D]"
               >
-                Info@imbutohubs.com
+                info@imbutohubs.com
               </a>
             </div>
 

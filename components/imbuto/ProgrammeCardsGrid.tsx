@@ -32,7 +32,7 @@ export function ProgrammeCardsGrid({
           image={programme.image}
           icon={programme.icon}
           layout="grid"
-          href={`/Programmes/${programme.slug}`}
+          href={`/programmes/${programme.slug}`}
           tone={tone}
           accent={programmeCardAccents[index % programmeCardAccents.length]}
         />

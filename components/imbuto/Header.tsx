@@ -5,7 +5,7 @@ export function Header() {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Programmes", href: "/Programmes" },
+    { label: "Programmes", href: "/programmes" },
     { label: "Hubs", href: "/hubs" },
     { label: "Impact", href: "/impact" },
     // { label: "Events", href: "/events" },
@@ -18,7 +18,7 @@ export function Header() {
         <div className="flex items-center justify-between rounded-full border border-white/20 bg-[#102c35]/80 px-4 py-3 text-white shadow-2xl backdrop-blur-xl md:px-6">
           <Link href="/" aria-label="Imbuto Hubs home">
             <img
-              src="/images/updated-IMBUTO LOGO-03.png"
+              src="/images/imbuto-hubs-logo.png"
               alt="Imbuto Hub Logo"
               className=""
               width={170}
