@@ -1,5 +1,6 @@
 import { submitLocalMock } from "./local-form-mock.cjs";
 
+export const productionSiteOnlyForms = process.env.NEXT_PUBLIC_IMBUTO_SITE_ONLY === "true";
 export const localFormMocks = process.env.NEXT_PUBLIC_IMBUTO_LOCAL_ONLY !== "false";
 export const developmentSheetForms = process.env.NEXT_PUBLIC_IMBUTO_DEV_SHEETS === "true";
 export type MockScenario = "success" | "error" | "network-error";
@@ -9,6 +10,7 @@ export async function submitForm(
   payload: Record<string, unknown>,
   scenario: MockScenario,
 ): Promise<{ reference: string; mock: boolean }> {
+  if (productionSiteOnlyForms) throw new Error("Submissions are temporarily unavailable. Nothing was sent or saved.");
   if (localFormMocks) {
     if (typeof window === "undefined" || !["127.0.0.1", "localhost", "[::1]"].includes(window.location.hostname)) {
       throw new Error("Local form mocks require a loopback preview.");

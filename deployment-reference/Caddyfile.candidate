@@ -1,0 +1,5 @@
+# Candidate only. Do not apply until the website-only container passes checks.
+imbutohub.com, www.imbutohub.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:1014
+}

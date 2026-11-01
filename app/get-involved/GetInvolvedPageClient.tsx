@@ -8,7 +8,7 @@ import { Footer } from "../../components/imbuto/Footer";
 import { Container } from "../../components/imbuto/Container";
 import { TurnstileWidget } from "../../components/imbuto/TurnstileWidget";
 import { LocalFormMockNotice } from "../../components/imbuto/LocalFormMockNotice";
-import { localFormMocks, developmentSheetForms, submitForm, type MockScenario } from "../../lib/form-submission";
+import { localFormMocks, developmentSheetForms, productionSiteOnlyForms, submitForm, type MockScenario } from "../../lib/form-submission";
 import { heroImage, hubs, pillars } from "../../components/imbuto/data";
 
 type FormType = "volunteer" | "partner" | "support" | "registration";
@@ -24,7 +24,7 @@ const registrationTrainingByHub: Record<string, string[]> = {
   ],
 };
 const programmeOptions = pillars.map((pillar) => pillar.title);
-const turnstileSiteKey = localFormMocks || developmentSheetForms ? "" : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+const turnstileSiteKey = productionSiteOnlyForms || localFormMocks || developmentSheetForms ? "" : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
 const volunteerWays = [
   {
@@ -555,6 +555,7 @@ function ConnectedGetInvolvedForm({
       noValidate
       onSubmit={async (event) => {
         event.preventDefault();
+        if (productionSiteOnlyForms) return;
         const form = event.currentTarget;
         const requiredGroups = form.querySelectorAll<HTMLFieldSetElement>(
           '[data-required-group="true"]',
@@ -664,6 +665,7 @@ function ConnectedGetInvolvedForm({
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
       <LocalFormMockNotice scenario={mockScenario} onChange={setMockScenario} />
+      <fieldset disabled={productionSiteOnlyForms} className="contents">
       {formType === "volunteer" ? <VolunteerForm /> : null}
       {formType === "partner" ? <PartnerForm /> : null}
       {formType === "support" ? <SupportForm /> : null}
@@ -681,7 +683,7 @@ function ConnectedGetInvolvedForm({
       ) : null}
       <div className="mt-5">
         <SubmitButton
-          disabled={submitting || Boolean(turnstileSiteKey && !turnstileToken)}
+          disabled={productionSiteOnlyForms || submitting || Boolean(turnstileSiteKey && !turnstileToken)}
         >
           {submitting ? "Submitting…" : labels.button}
         </SubmitButton>
@@ -694,6 +696,7 @@ function ConnectedGetInvolvedForm({
           {submissionError}
         </div>
       ) : null}
+      </fieldset>
     </form>
   );
 }
@@ -1117,6 +1120,7 @@ export function RegistrationForm() {
       noValidate
       onSubmit={async (event) => {
         event.preventDefault();
+        if (productionSiteOnlyForms) return;
 
         for (let stepIndex = 0; stepIndex < steps.length; stepIndex += 1) {
           if (!validateStep(stepIndex, false)) {
@@ -1198,6 +1202,7 @@ export function RegistrationForm() {
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
       <LocalFormMockNotice scenario={mockScenario} onChange={setMockScenario} />
+      <fieldset disabled={productionSiteOnlyForms} className="contents">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
         {steps.map((step, index) => {
           const isActive = index === currentStep;
@@ -1301,7 +1306,7 @@ export function RegistrationForm() {
         ) : null}
         {isLastStep ? (
           <SubmitButton
-            disabled={submitting || Boolean(turnstileSiteKey && !turnstileToken)}
+            disabled={productionSiteOnlyForms || submitting || Boolean(turnstileSiteKey && !turnstileToken)}
           >
             {submitting ? "Submitting…" : "Submit Youth Registration"}
           </SubmitButton>
@@ -1330,6 +1335,7 @@ export function RegistrationForm() {
           {submissionError}
         </div>
       ) : null}
+      </fieldset>
     </form>
   );
 }

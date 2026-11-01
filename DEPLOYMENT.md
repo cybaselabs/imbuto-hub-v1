@@ -1,50 +1,33 @@
-# Deployment recovery — preparation only
+# Deployment recovery
 
-The confirmed replacement server is `201.79.35.46` (live production), with intended domain `imbutohub.com` shown in the supplied dashboard. DNS/proxy routing has not been independently verified. No server
-access or deployment has been performed. The old server address, production
-Sheet destination and secret-loading instructions are not current configuration.
+Intended live server: `201.79.35.46`; domains: `imbutohub.com` and `www.imbutohub.com`.
+See `PRODUCTION_SITE.md` for the reviewed website-only candidate and its checks.
+No server configuration, deployment, production credentials or applicant Sheet
+was accessed by this change.
 
-## Implemented validation
+The root Dockerfile produces a non-root website-only image with submissions and
+external services disabled. It preserves the interface while explicitly showing
+that form submission is unavailable. Development mock/Sheets runtimes remain
+separate and protected by their existing launchers.
 
-`.github/workflows/build-validation.yml` is a manual, read-only-permission build
-workflow. It installs with a frozen npm lockfile and lifecycle scripts disabled,
-runs type/lint/regression checks, and builds directly with the local Next CLI.
-It does not publish images, use production secrets, SSH, or deploy. There are no
-push, pull-request or schedule triggers. Referenced GitHub actions use commit SHAs.
+The build workflow validates this security branch only (or can be dispatched
+manually once available); it has no image publishing, SSH or deployment steps.
+`main` is not a push trigger. The old push-to-main workflow remains inactive
+under `deployment-reference/deploy.yml.disabled` as historical evidence.
 
-`deployment-reference/Dockerfile.validation` is a Linux build candidate. It copies
-the reviewed vendor tarball before installation, disables lifecycle scripts,
-bypasses the macOS-only development launcher for compilation, uses matching
-Debian builder/runtime bases, and runs the standalone output as a non-root user.
-It is not the root Dockerfile and is not automatically built or deployed.
+Before any live deployment:
 
-## Confirmed remaining production blockers
+1. Obtain a passing Linux image build and container smoke check. Local Docker
+   verification was blocked by a BuildKit metadata input/output error; do not
+   reset or prune unrelated Docker data to bypass it.
+2. Publish or transfer the reviewed immutable image without embedding credentials.
+3. Review the inactive Compose/Caddy candidates. Proposed binding is
+   `127.0.0.1:1014` forwarding to container port 3000, with the app named `imbuto-site`.
+4. Validate the server-side configuration, start the isolated candidate, verify
+   readiness, then separately approve HTTPS proxy activation with a rollback path.
 
-- Confirm the public HTTPS domain and reverse-proxy arrangement, app container
-  name and unused host port on the new server. Do not assume the old settings.
-- Implement and test a separate explicit production runtime policy. The current
-  recovered source intentionally requires local hosts and verified development
-  Sheets flags. Simply shipping it to production will reject public requests.
-- Production submission mode must use real Turnstile verification, origin and
-  hostname checks, production-appropriate rate limits and separately provisioned
-  Sheet credentials. It must never use the local test verifier or development
-  credentials. No existing production secrets were read or changed.
-- Select the intended production Sheet privately; no live Sheet ID is embedded
-  as a default. Keep development and production destinations separate.
-- Validate the Linux container, including required native prebuilt modules;
-  fresh macOS installation success does not prove Linux compatibility.
-- Pin the final container image digest after the chosen image is reviewed.
-- Use a protected production environment and manually approved deployment of an
-  immutable image with health checks and a rollback path. Do not restore automatic
-  push-to-main SSH deployment or destructive container replacement/pruning.
-
-Keep `main`, production, local mock preview and development Sheets preview
-unchanged until the production candidate and deployment action are reviewed.
-The original disabled workflow/Dockerfile remain historical reference only.
-
-## Credential handling
-
-Never place private keys or base64 credentials in source, image build arguments,
-Docker build context, command history, or logs. Supply new designated runtime
-credentials through the deployment platform's secret mechanism only after the
-production configuration is approved. No local credential auto-discovery exists.
+Real submissions are intentionally not part of this website-only release. They
+require a separately approved production service identity/Sheet, CAPTCHA and
+abuse-protection implementation and tests. Do not supply those secrets to the
+current image: its launcher rejects service credentials. No credential defaults
+or automatic local key discovery are restored.

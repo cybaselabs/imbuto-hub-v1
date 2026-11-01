@@ -2,6 +2,8 @@ name: Recovery build validation (no deployment)
 
 'on':
   workflow_dispatch:
+  push:
+    branches: [security/sanitized-dev-sheets-20261101]
 
 permissions:
   contents: read
@@ -38,8 +40,17 @@ jobs:
       - name: Lint
         run: node node_modules/eslint/bin/eslint.js .
       - name: Reviewed offline regression checks
-        run: node --test tests/dev-sheets-boundary.test.mjs tests/local-forms.test.cjs tests/minimatch-compat.test.cjs
+        run: node --test tests/dev-sheets-boundary.test.mjs tests/local-forms.test.cjs tests/minimatch-compat.test.cjs tests/production-policy.test.cjs
       - name: Build with bundled fonts and no service credentials
         run: node node_modules/next/dist/bin/next build --webpack
       - name: Verify manifests remain unchanged
         run: git diff --exit-code -- package.json package-lock.json
+      - name: Build website-only Linux container (no publishing)
+        run: docker build --tag imbuto-site:validation .
+      - name: Verify Linux image without external network access
+        run: >-
+          docker run --rm --network none --read-only
+          --tmpfs /tmp:rw,nosuid,nodev,noexec,size=64m,uid=1000,gid=1000,mode=1777
+          --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128
+          --mount type=bind,src=${{ github.workspace }}/tests,dst=/verify,readonly
+          --entrypoint node imbuto-site:validation /verify/production-container-smoke.cjs

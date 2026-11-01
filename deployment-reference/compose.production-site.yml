@@ -1,0 +1,23 @@
+# Candidate only. Use a reviewed immutable image digest; no credentials required.
+services:
+  website:
+    image: ${IMBUTO_IMAGE:?Set the reviewed image digest}
+    container_name: imbuto-site
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:1014:3000"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,noexec,size=64m,uid=1000,gid=1000,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 768m
+    networks:
+      - website-isolated
+networks:
+  website-isolated:
+    internal: true
