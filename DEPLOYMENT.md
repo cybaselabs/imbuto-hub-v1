@@ -23,12 +23,15 @@ Before any live deployment:
 2. Download the checksummed release artifact and transfer its exact validated
    image without registry credentials. See `RELEASE_DELIVERY.md`.
 3. Review the inactive Compose/Caddy candidates. Proposed binding is
-   `127.0.0.1:1014` forwarding to container port 3000, with the app named `imbuto-site`.
+   the inspected private container address forwarding to container port 3000, with the app named `imbuto-site`.
 4. Validate the server-side configuration, start the isolated candidate, verify
-   readiness, then separately approve HTTPS proxy activation with a rollback path.
+   readiness through the inspected private container IP, then separately approve HTTPS proxy activation with a rollback path.
 
 Real submissions are intentionally not part of this website-only release. They
 require a separately approved production service identity/Sheet, CAPTCHA and
 abuse-protection implementation and tests. Do not supply those secrets to the
 current image: its launcher rejects service credentials. No credential defaults
 or automatic local key discovery are restored.
+
+For private-upstream discovery, validated proxy rendering and recreation handling,
+see the internal-network correction in `RELEASE_DELIVERY.md`.

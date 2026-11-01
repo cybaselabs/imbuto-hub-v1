@@ -9,8 +9,6 @@ services:
     environment:
       HOSTNAME: 0.0.0.0
       PORT: '3000'
-    ports:
-      - "127.0.0.1:1014:3000"
     read_only: true
     tmpfs:
       - /tmp:rw,nosuid,nodev,noexec,size=64m,uid=1000,gid=1000,mode=1777

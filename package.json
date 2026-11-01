@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/start-local.mjs dev",
-    "build": "node scripts/start-local.mjs build",
-    "start": "node scripts/start-local.mjs start",
+    "dev": "node init && node scripts/start-local.mjs dev",
+    "build": "node init && node scripts/start-local.mjs build",
+    "start": "node init && node scripts/start-local.mjs start",
     "typecheck": "node scripts/start-local.mjs typecheck",
     "lint": "node scripts/start-local.mjs lint",
     "check:dependencies": "node scripts/start-local.mjs dependencycheck",

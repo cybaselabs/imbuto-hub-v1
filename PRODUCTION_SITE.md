@@ -50,12 +50,12 @@ before downloading or deploying that release. See `RELEASE_DELIVERY.md`.
 ## Inactive deployment candidates
 
 `deployment-reference/compose.production-site.yml` expects a reviewed immutable
-image digest. It binds only `127.0.0.1:1014`, uses a non-root image, a read-only
+image digest. It publishes no host ports and uses a non-root image, a read-only
 root, restricted tmpfs/capabilities and an internal network without internet
 egress. Its networking and health behavior still require Linux validation.
 
-`deployment-reference/Caddyfile.candidate` serves both public domains over HTTPS
-and proxies to that loopback port. It has not replaced the server's default
+`scripts/render-production-caddy.py` renders the HTTPS proxy candidate for both
+public domains using the inspected private container IPv4 address on port 3000. It has not replaced the server's default
 Caddyfile. Back up the existing configuration, validate the candidate with Caddy,
 and approve activation only after the image and container checks succeed.
 
@@ -63,3 +63,6 @@ No SSH secrets, registry publishing or automatic main-branch deployment are
 restored. Real form submissions need a future separate review of production
 storage, CAPTCHA, privacy and rate limits. Do not put the development key or
 production applicant Sheet into this website-only runtime.
+
+For private-upstream discovery, validated proxy rendering and recreation handling,
+see the internal-network correction in `RELEASE_DELIVERY.md`.
