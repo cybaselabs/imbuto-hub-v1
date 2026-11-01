@@ -17,10 +17,11 @@ under `deployment-reference/deploy.yml.disabled` as historical evidence.
 
 Before any live deployment:
 
-1. Obtain a passing Linux image build and container smoke check. Local Docker
-   verification was blocked by a BuildKit metadata input/output error; do not
-   reset or prune unrelated Docker data to bypass it.
-2. Publish or transfer the reviewed immutable image without embedding credentials.
+1. Obtain the new passing release workflow, including Linux image/container and
+   Compose readiness checks. The earlier candidate passed Linux validation in
+   GitHub run 41356329208; the release update must pass its own run.
+2. Download the checksummed release artifact and transfer its exact validated
+   image without registry credentials. See `RELEASE_DELIVERY.md`.
 3. Review the inactive Compose/Caddy candidates. Proposed binding is
    `127.0.0.1:1014` forwarding to container port 3000, with the app named `imbuto-site`.
 4. Validate the server-side configuration, start the isolated candidate, verify

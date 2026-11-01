@@ -40,12 +40,12 @@ cover page responses for both domains, disabled registration controls, API/write
 rejection, unknown-host rejection, health readiness, CSP and the legacy Programmes
 redirect without a loop. Local HTTP checks are distinct from Linux verification.
 
-Local Linux image verification was blocked by Docker BuildKit storage reporting
-an input/output error in its metadata database after dependency installation.
-No Docker reset, pruning, existing-container restart or repair was performed.
-Do not deploy until the Linux build and container smoke test succeed in CI or
-another isolated build environment. Native macOS checks do not establish Linux
-image compatibility.
+The first local Linux image attempt hit a Docker BuildKit storage I/O error;
+no Docker reset or cleanup was performed. GitHub run 41356329208 subsequently
+passed the Linux build and network-isolated container tests for commit 7fe77ff.
+The release-packaging update adds a Compose readiness check, then exports the
+same validated image rather than rebuilding it. A new successful run is required
+before downloading or deploying that release. See `RELEASE_DELIVERY.md`.
 
 ## Inactive deployment candidates
 

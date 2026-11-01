@@ -1,4 +1,4 @@
-name: Recovery build validation (no deployment)
+name: Recovery validation and website release (no deployment)
 
 'on':
   workflow_dispatch:
@@ -46,7 +46,9 @@ jobs:
       - name: Verify manifests remain unchanged
         run: git diff --exit-code -- package.json package-lock.json
       - name: Build website-only Linux container (no publishing)
-        run: docker build --tag imbuto-site:validation .
+        env:
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: docker build --label "org.opencontainers.image.revision=$SOURCE_COMMIT" --tag imbuto-site:validation .
       - name: Verify Linux image without external network access
         run: >-
           docker run --rm --network none --read-only
@@ -54,3 +56,41 @@ jobs:
           --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128
           --mount type=bind,src=${{ github.workspace }}/tests,dst=/verify,readonly
           --entrypoint node imbuto-site:validation /verify/production-container-smoke.cjs
+      - name: Verify the isolated Compose deployment candidate
+        env:
+          IMBUTO_IMAGE: imbuto-site:validation
+        run: |
+          set -euo pipefail
+          docker compose --project-name imbuto-validation -f deployment-reference/compose.production-site.yml up -d --pull never --wait --wait-timeout 90
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:1014/healthz)" = 200
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' -H 'Host: imbutohub.com' http://127.0.0.1:1014/)" = 200
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' -H 'Host: attacker.invalid' http://127.0.0.1:1014/)" = 403
+      - name: Stop the CI-only Compose project
+        if: always()
+        env:
+          IMBUTO_IMAGE: imbuto-site:validation
+        run: docker compose --project-name imbuto-validation -f deployment-reference/compose.production-site.yml down
+      - name: Export the exact validated image and release metadata
+        env:
+          SOURCE_COMMIT: ${{ github.sha }}
+          RELEASE_DIRECTORY: ${{ runner.temp }}/imbuto-website-release
+        run: |
+          set -euo pipefail
+          mkdir -p "$RELEASE_DIRECTORY"
+          docker image inspect imbuto-site:validation --format '{{.Id}}' > "$RELEASE_DIRECTORY/image-id.txt"
+          printf '%s\n' "$SOURCE_COMMIT" > "$RELEASE_DIRECTORY/source-commit.txt"
+          docker tag imbuto-site:validation "imbuto-site:recovery-$SOURCE_COMMIT"
+          docker image save "imbuto-site:recovery-$SOURCE_COMMIT" | gzip -1 > "$RELEASE_DIRECTORY/imbuto-site.tar.gz"
+          cp deployment-reference/compose.production-site.yml "$RELEASE_DIRECTORY/compose.production-site.yml"
+          cp deployment-reference/Caddyfile.candidate "$RELEASE_DIRECTORY/Caddyfile.candidate"
+          cp tests/production-container-smoke.cjs "$RELEASE_DIRECTORY/production-container-smoke.cjs"
+          cd "$RELEASE_DIRECTORY"
+          sha256sum imbuto-site.tar.gz image-id.txt source-commit.txt compose.production-site.yml Caddyfile.candidate production-container-smoke.cjs > SHA256SUMS
+      - name: Upload verified website-only release (no credentials)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: imbuto-website-release-${{ github.sha }}
+          path: ${{ runner.temp }}/imbuto-website-release/
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
