@@ -1,20 +1,14 @@
 import type { NextConfig } from "next";
+import { isLocalOnly, localPreviewCsp } from "./lib/local-preview-policy.cjs";
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  async redirects() {
-    return [
-      {
-        source: "/Programmes",
-        destination: "/programmes",
-        permanent: true,
-      },
-      {
-        source: "/Programmes/:path*",
-        destination: "/programmes/:path*",
-        permanent: true,
-      },
-    ];
+  async headers() {
+    return isLocalOnly() ? [{ source: "/:path*", headers: [
+      { key: "Content-Security-Policy", value: localPreviewCsp() },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "no-referrer" },
+    ] }] : [];
   },
   images: {
     unoptimized: true,

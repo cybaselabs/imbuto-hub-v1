@@ -88,7 +88,7 @@ export default function KezaStoryPage() {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,62,82,0.04),rgba(4,62,82,0.42))]" />
                   <div className="absolute bottom-5 left-5 right-5 rounded-[24px] border border-white/15 bg-[#043E52]/78 p-5 text-white backdrop-blur-md">
                     <p className="text-sm uppercase tracking-[0.22em] text-[#f5c346]">
-                      Keza's path
+                      Keza&apos;s path
                     </p>
                     <p className="mt-2 text-lg leading-7 text-white/86">
                       From early learning to mentorship, her story follows what
@@ -124,7 +124,7 @@ export default function KezaStoryPage() {
                             <Quote className="h-5 w-5" />
                           </div>
                           <blockquote className="mt-5 text-3xl leading-10 tracking-[-0.04em] text-[#102c35]">
-                            "Once upon a time I was you, and one day you will be me."
+                            &quot;Once upon a time I was you, and one day you will be me.&quot;
                           </blockquote>
                           <p className="mt-4 text-xs uppercase tracking-[0.18em] text-[#2b6274]">
                             Keza, medical student & mentor
@@ -140,7 +140,7 @@ export default function KezaStoryPage() {
                     Where potential meets opportunity.
                   </h2>
                   <p className="mt-4 text-base leading-8 text-slate-700">
-                    Keza's story is a reminder that transformation rarely comes
+                    Keza&apos;s story is a reminder that transformation rarely comes
                     from one moment alone. It is built through care, structure,
                     mentorship, and spaces that allow young people to grow.
                   </p>

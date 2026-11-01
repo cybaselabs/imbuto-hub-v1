@@ -61,9 +61,11 @@ export function HubsMap({
       scrollWheelZoom: false,
     }).setView(rwandaCenter, rwandaZoom);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors",
-    }).addTo(map);
+    if (process.env.NEXT_PUBLIC_IMBUTO_LOCAL_ONLY === "false") {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+    }
 
     markersLayerRef.current = L.layerGroup().addTo(map);
     mapRef.current = map;

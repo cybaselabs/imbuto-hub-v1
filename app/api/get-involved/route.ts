@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { submissionsAllowed } from "../../../lib/local-preview-policy.cjs";
 import { appendRowToGoogleSheet } from "../../../lib/google-sheets";
 import { checkRateLimit } from "../../../lib/rate-limit";
 import { verifyTurnstileToken } from "../../../lib/turnstile";
+import { validateLocalMock } from "../../../lib/local-form-mock.cjs";
 
 export const runtime = "nodejs";
 
@@ -114,13 +116,14 @@ function wordCount(value: string) {
 }
 
 function createReference(prefix: string) {
-  return `${prefix}-${Date.now().toString(36).toUpperCase()}-${crypto
+  return `DEV-${prefix}-${Date.now().toString(36).toUpperCase()}-${crypto
     .randomUUID()
     .slice(0, 6)
     .toUpperCase()}`;
 }
 
 export async function POST(request: Request) {
+  if (!submissionsAllowed()) return NextResponse.json({ error: "Submissions are disabled in local preview.", preview: true }, { status: 403 });
   const clientIp = getClientIp(request);
   const rateLimit = await checkRateLimit(clientIp, {
     limit: MAX_REQUESTS_PER_WINDOW,
@@ -157,6 +160,8 @@ export async function POST(request: Request) {
   }
 
   const formType = getText(payload.formType, 20);
+  const syntheticError = validateLocalMock("/api/get-involved", payload);
+  if (syntheticError) return NextResponse.json({ error: syntheticError }, { status: 400 });
 
   if (!VALID_FORM_TYPES.has(formType)) {
     return NextResponse.json({ error: "Invalid form type." }, { status: 400 });
@@ -178,8 +183,8 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-  } catch (error) {
-    console.error("Turnstile verification unavailable:", error);
+  } catch {
+    console.error("Development verification unavailable.");
     return NextResponse.json(
       { error: "Security verification is temporarily unavailable. Please try again." },
       { status: 503 },
@@ -248,7 +253,7 @@ export async function POST(request: Request) {
     values = [
       reference,
       submittedAt,
-      "New",
+      "Development test",
       name,
       email,
       phone,
@@ -257,7 +262,7 @@ export async function POST(request: Request) {
       availability,
       motivation,
       contactConsent,
-      "imbutohub.com/get-involved",
+      "http://127.0.0.1:3016/get-involved",
     ];
   } else if (type === "partner") {
     const organisation = getText(payload.organisation, 160);
@@ -292,14 +297,14 @@ export async function POST(request: Request) {
     values = [
       reference,
       submittedAt,
-      "New",
+      "Development test",
       organisation,
       contactName,
       email,
       interest,
       message,
       contactConsent,
-      "imbutohub.com/get-involved",
+      "http://127.0.0.1:3016/get-involved",
     ];
   } else {
     const name = getText(payload.name, 120);
@@ -340,7 +345,7 @@ export async function POST(request: Request) {
     values = [
       reference,
       submittedAt,
-      "New",
+      "Development test",
       name,
       email,
       phone,
@@ -349,7 +354,7 @@ export async function POST(request: Request) {
       preferredHub,
       message,
       contactConsent,
-      "imbutohub.com/get-involved",
+      "http://127.0.0.1:3016/get-involved",
     ];
   }
 
@@ -361,8 +366,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ ok: true, reference });
-  } catch (error) {
-    console.error(`${formType} form submission failed:`, error);
+  } catch {
+    console.error("Development form delivery failed; no credential or payload logged.");
     return NextResponse.json(
       { error: "We could not save your submission. Please try again." },
       { status: 502 },

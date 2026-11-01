@@ -1,28 +1,55 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState, useSyncExternalStore } from "react";
 
 const storageKey = "imbuto-site-access";
-const sitePassword = process.env.NEXT_PUBLIC_SITE_PASSWORD || "imbuto@2026";
+const accessChangedEvent = "imbuto-site-access-changed";
+// Cosmetic preview gate only: any NEXT_PUBLIC value is visible to the browser.
+const sitePassword = process.env.NEXT_PUBLIC_SITE_PASSWORD || "";
+
+function subscribeToAccess(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(accessChangedEvent, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(accessChangedEvent, onChange);
+  };
+}
+
+function getAccessSnapshot() {
+  if (!sitePassword) return true;
+  try {
+    return window.localStorage.getItem(storageKey) === "granted";
+  } catch {
+    return false;
+  }
+}
+
+function getServerAccessSnapshot() {
+  return null;
+}
 
 export function SiteGate({ children }: { children: React.ReactNode }) {
-  const [isReady, setIsReady] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useSyncExternalStore<boolean | null>(
+    subscribeToAccess,
+    getAccessSnapshot,
+    getServerAccessSnapshot,
+  );
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    setIsAuthenticated(window.localStorage.getItem(storageKey) === "granted");
-    setIsReady(true);
-  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (password.trim() === sitePassword) {
-      window.localStorage.setItem(storageKey, "granted");
-      setIsAuthenticated(true);
+    if (sitePassword && password.trim() === sitePassword) {
+      try {
+        window.localStorage.setItem(storageKey, "granted");
+      } catch {
+        setError("Preview access could not be stored in this browser.");
+        return;
+      }
+      window.dispatchEvent(new Event(accessChangedEvent));
       setError("");
       return;
     }
@@ -30,7 +57,7 @@ export function SiteGate({ children }: { children: React.ReactNode }) {
     setError("Please enter the correct access password.");
   }
 
-  if (!isReady) {
+  if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-[#043E52]" aria-hidden="true" />
     );

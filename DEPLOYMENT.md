@@ -92,3 +92,10 @@ Then create a Proxy Host:
 The workflow also binds the app to `127.0.0.1:1014` on the VPS. If Nginx Proxy
 Manager is installed directly on the same VPS, proxy to `127.0.0.1` on port
 `1014`.
+# Local-only workspace notice
+
+The deployment instructions below are retained as historical reference. Use
+`LOCAL_DEVELOPMENT.md` for this workspace. Deployment automation is inactive;
+do not use production credentials or deploy from this sanitized copy without a
+separate review.
+

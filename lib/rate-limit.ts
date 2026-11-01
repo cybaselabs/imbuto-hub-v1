@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { externalServicesEnabled } from "./local-preview-policy.cjs";
 
 type RateLimitOptions = {
   limit: number;
@@ -68,7 +69,7 @@ export async function checkRateLimit(
   const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.replace(/\/$/, "");
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-  if (!redisUrl || !redisToken) {
+  if (!externalServicesEnabled() || !redisUrl || !redisToken) {
     return checkMemoryRateLimit(key, now, options);
   }
 

@@ -1,3 +1,5 @@
+> Sanitized local-only workspace: read [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md) first. Do not use the compromised ordinary npm/npx installation or production credentials. The original setup notes below are reference only.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

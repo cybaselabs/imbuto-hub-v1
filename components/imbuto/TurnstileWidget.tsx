@@ -72,6 +72,10 @@ export function TurnstileWidget({
     }
   }, [onToken, resetSignal]);
 
+  if (process.env.NEXT_PUBLIC_IMBUTO_LOCAL_ONLY !== "false" || !siteKey) {
+    return <div className="min-h-[65px] w-full" aria-label="Security verification disabled in local preview" />;
+  }
+
   return (
     <>
       <Script

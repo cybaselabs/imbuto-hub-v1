@@ -7,6 +7,8 @@ import { Header } from "../../components/imbuto/Header";
 import { Footer } from "../../components/imbuto/Footer";
 import { Container } from "../../components/imbuto/Container";
 import { TurnstileWidget } from "../../components/imbuto/TurnstileWidget";
+import { LocalFormMockNotice } from "../../components/imbuto/LocalFormMockNotice";
+import { localFormMocks, developmentSheetForms, submitForm, type MockScenario } from "../../lib/form-submission";
 import { heroImage, hubs, pillars } from "../../components/imbuto/data";
 
 type FormType = "volunteer" | "partner" | "support" | "registration";
@@ -22,7 +24,7 @@ const registrationTrainingByHub: Record<string, string[]> = {
   ],
 };
 const programmeOptions = pillars.map((pillar) => pillar.title);
-const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+const turnstileSiteKey = localFormMocks || developmentSheetForms ? "" : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
 const volunteerWays = [
   {
@@ -189,7 +191,7 @@ function TextField({
         name={name ?? fieldName(label)}
         value={value}
         onChange={onChange}
-        autoComplete={autoComplete}
+        autoComplete={localFormMocks || developmentSheetForms ? "off" : autoComplete}
         required={!optional}
         min={type === "number" ? 1 : undefined}
         max={type === "number" ? 120 : undefined}
@@ -505,6 +507,7 @@ function ConnectedGetInvolvedForm({
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
   const labels = connectedFormLabels[formType];
+  const [mockScenario, setMockScenario] = useState<MockScenario>("success");
 
   if (submitted) {
     return (
@@ -514,11 +517,10 @@ function ConnectedGetInvolvedForm({
           aria-hidden="true"
         />
         <h3 className="mt-4 text-2xl tracking-[-0.03em] text-[#102c35]">
-          Submission received
+          {developmentSheetForms ? "Development test received" : localFormMocks ? "Local mock completed" : "Submission received"}
         </h3>
         <p className="mt-3 text-sm leading-7 text-slate-700">
-          {labels.confirmation} The Imbuto Hubs team will follow up using the
-          contact details provided.
+          {developmentSheetForms ? "Synthetic test saved to the separate development Google Sheet. No follow-up will occur." : localFormMocks ? "Test response only. Nothing was sent or saved, and no follow-up will occur." : `${labels.confirmation} The Imbuto Hubs team will follow up using the contact details provided.`}
         </p>
         <div className="mx-auto mt-5 max-w-sm rounded-2xl bg-white px-4 py-4 ring-1 ring-[#52b3a9]/25">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -549,6 +551,7 @@ function ConnectedGetInvolvedForm({
     <form
       ref={formRef}
       className="mt-7"
+      autoComplete={localFormMocks ? "off" : undefined}
       noValidate
       onSubmit={async (event) => {
         event.preventDefault();
@@ -639,19 +642,7 @@ function ConnectedGetInvolvedForm({
         setSubmissionError("");
 
         try {
-          const response = await fetch("/api/get-involved", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-          const result = (await response.json()) as {
-            error?: string;
-            reference?: string;
-          };
-
-          if (!response.ok || !result.reference) {
-            throw new Error(result.error || "We could not save your submission.");
-          }
+          const result = await submitForm("/api/get-involved", payload, mockScenario);
 
           setSavedReference(result.reference);
           setSubmitted(true);
@@ -672,6 +663,7 @@ function ConnectedGetInvolvedForm({
         Website
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
+      <LocalFormMockNotice scenario={mockScenario} onChange={setMockScenario} />
       {formType === "volunteer" ? <VolunteerForm /> : null}
       {formType === "partner" ? <PartnerForm /> : null}
       {formType === "support" ? <SupportForm /> : null}
@@ -707,6 +699,7 @@ function ConnectedGetInvolvedForm({
 }
 
 export function RegistrationForm() {
+  const [mockScenario, setMockScenario] = useState<MockScenario>("success");
   const formRef = useRef<HTMLFormElement>(null);
   const [submitted, setSubmitted] = useState(false);
   const [savedReference, setSavedReference] = useState("");
@@ -1066,17 +1059,16 @@ export function RegistrationForm() {
             <CheckCircle2 className="h-9 w-9" aria-hidden="true" />
           </span>
           <div className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#c05d24]">
-            Registration received
+            {developmentSheetForms ? "Development test received" : localFormMocks ? "Local mock completed" : "Registration received"}
           </div>
           <h3
             id="registration-confirmation-title"
             className="mt-3 text-3xl tracking-[-0.04em] text-[#102c35] sm:text-4xl"
           >
-            Thank you for registering
+            {developmentSheetForms ? "Development registration received" : localFormMocks ? "Test registration completed" : "Thank you for registering"}
           </h3>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-700 sm:text-base">
-            Your youth registration has been received. The hub team will review
-            it and follow up with the participant.
+            {developmentSheetForms ? "Synthetic test saved to the separate development Google Sheet. No follow-up will occur." : localFormMocks ? "Test response only. Nothing was sent or saved, and no follow-up will occur." : "Your youth registration has been received. The hub team will review it and follow up with the participant."}
           </p>
           <div className="mx-auto mt-7 max-w-md rounded-[24px] bg-white px-5 py-5 ring-1 ring-[#52b3a9]/30">
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
@@ -1087,7 +1079,7 @@ export function RegistrationForm() {
             </div>
           </div>
           <p className="mx-auto mt-4 max-w-xl text-xs leading-6 text-slate-600">
-            Please save this reference for any follow-up about the application.
+            {developmentSheetForms ? "This DEV reference identifies synthetic test data only." : localFormMocks ? "This MOCK reference is not a real registration." : "Please save this reference for any follow-up about the application."}
           </p>
           <button
             type="button"
@@ -1121,6 +1113,7 @@ export function RegistrationForm() {
     <form
       ref={formRef}
       className="mt-7"
+      autoComplete={localFormMocks ? "off" : undefined}
       noValidate
       onSubmit={async (event) => {
         event.preventDefault();
@@ -1183,21 +1176,7 @@ export function RegistrationForm() {
         };
 
         try {
-          const response = await fetch("/api/applications", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-          const result = (await response.json()) as {
-            error?: string;
-            reference?: string;
-          };
-
-          if (!response.ok || !result.reference) {
-            throw new Error(
-              result.error || "We could not save your application.",
-            );
-          }
+          const result = await submitForm("/api/applications", payload, mockScenario);
 
           setSavedReference(result.reference);
           setSubmitted(true);
@@ -1218,6 +1197,7 @@ export function RegistrationForm() {
         Website
         <input name="website" tabIndex={-1} autoComplete="off" />
       </label>
+      <LocalFormMockNotice scenario={mockScenario} onChange={setMockScenario} />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
         {steps.map((step, index) => {
           const isActive = index === currentStep;
