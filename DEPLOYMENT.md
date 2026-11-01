@@ -1,101 +1,50 @@
-# Deployment
+# Deployment recovery — preparation only
 
-Pushes to `main` build a Docker image, publish it to GitHub Container Registry,
-and deploy it to the VPS at `147.182.164.106`.
+The confirmed replacement server is `201.79.35.46` (live production), with intended domain `imbutohub.com` shown in the supplied dashboard. DNS/proxy routing has not been independently verified. No server
+access or deployment has been performed. The old server address, production
+Sheet destination and secret-loading instructions are not current configuration.
 
-## GitHub Secrets
+## Implemented validation
 
-Add these repository secrets in GitHub:
+`.github/workflows/build-validation.yml` is a manual, read-only-permission build
+workflow. It installs with a frozen npm lockfile and lifecycle scripts disabled,
+runs type/lint/regression checks, and builds directly with the local Next CLI.
+It does not publish images, use production secrets, SSH, or deploy. There are no
+push, pull-request or schedule triggers. Referenced GitHub actions use commit SHAs.
 
-- `VPS_USER`: SSH user on the VPS, for example `root` or `deploy`
-- `VPS_SSH_KEY`: private SSH key that can log in to the VPS
-- `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64`: the complete Google service account JSON
-  key encoded as base64
-- `TURNSTILE_SECRET_KEY`: the private secret for the Cloudflare Turnstile widget
-- `UPSTASH_REDIS_REST_URL`: the REST URL for the Upstash Redis database
-- `UPSTASH_REDIS_REST_TOKEN`: the REST token for the Upstash Redis database
+`deployment-reference/Dockerfile.validation` is a Linux build candidate. It copies
+the reviewed vendor tarball before installation, disables lifecycle scripts,
+bypasses the macOS-only development launcher for compilation, uses matching
+Debian builder/runtime bases, and runs the standalone output as a non-root user.
+It is not the root Dockerfile and is not automatically built or deployed.
 
-Add this repository variable under **Settings → Secrets and variables → Actions
-→ Variables**:
+## Confirmed remaining production blockers
 
-- `TURNSTILE_SITE_KEY`: the public Cloudflare Turnstile site key
+- Confirm the public HTTPS domain and reverse-proxy arrangement, app container
+  name and unused host port on the new server. Do not assume the old settings.
+- Implement and test a separate explicit production runtime policy. The current
+  recovered source intentionally requires local hosts and verified development
+  Sheets flags. Simply shipping it to production will reject public requests.
+- Production submission mode must use real Turnstile verification, origin and
+  hostname checks, production-appropriate rate limits and separately provisioned
+  Sheet credentials. It must never use the local test verifier or development
+  credentials. No existing production secrets were read or changed.
+- Select the intended production Sheet privately; no live Sheet ID is embedded
+  as a default. Keep development and production destinations separate.
+- Validate the Linux container, including required native prebuilt modules;
+  fresh macOS installation success does not prove Linux compatibility.
+- Pin the final container image digest after the chosen image is reviewed.
+- Use a protected production environment and manually approved deployment of an
+  immutable image with health checks and a rollback path. Do not restore automatic
+  push-to-main SSH deployment or destructive container replacement/pruning.
 
-The workflow uses the built-in `GITHUB_TOKEN` to publish and pull the image from
-GHCR during deployment.
+Keep `main`, production, local mock preview and development Sheets preview
+unchanged until the production candidate and deployment action are reviewed.
+The original disabled workflow/Dockerfile remain historical reference only.
 
-## Google Sheets application storage
+## Credential handling
 
-The `/apply` form sends registrations to the local server-side
-`/api/applications` route. The route authenticates directly with the Google
-Sheets API and appends each application to the `Applications` tab of the
-`Imbuto Youth Registration` workbook. No Apps Script or public webhook is used.
-
-The forms on `/get-involved` use the same private service-account connection
-and write to separate tabs in that workbook:
-
-- Volunteer applications → `Volunteers`
-- Partnership inquiries → `Partnerships`
-- Support interests → `Support Requests`
-
-The server creates a missing tab and its headers before writing the first row.
-All four public forms use server-side validation, the shared persistent rate
-limit, a honeypot, and Turnstile verification.
-
-To activate the connection:
-
-1. In Google Cloud, enable the Google Sheets API and create a service account.
-2. Create a JSON key for that service account. Keep the key private.
-3. Share the Google Sheet with the service account email as an **Editor**.
-4. Encode the complete JSON key file as base64 and add it as the GitHub Actions
-   secret listed above.
-5. Deploy the `main` branch.
-
-For local development, `npm run dev` automatically reads the ignored
-`imbuto-web-applications-308f8189cec8.json` key from the project root and passes
-it to the server process. Set `GOOGLE_SERVICE_ACCOUNT_JSON_PATH` to use a
-different local filename. The key file must never be committed.
-
-## Application abuse protection
-
-The application endpoint permits five requests per visitor IP in each ten-minute
-window. When the Upstash variables are configured, counters persist across
-container restarts and work across multiple app instances. If Redis is
-temporarily unavailable, the server logs the failure and retains an in-memory
-fallback limit for availability.
-
-The final registration step renders Cloudflare Turnstile when
-`TURNSTILE_SITE_KEY` is present. The server independently validates every token
-using `TURNSTILE_SECRET_KEY` before writing to Google Sheets. Create the widget
-for `imbutohub.com` and `www.imbutohub.com` in the Cloudflare dashboard. Add the
-site key and secret together: the endpoint deliberately rejects submissions if
-only one of the two Turnstile values is configured.
-
-## Nginx Proxy Manager
-
-The deployed app container is named `imbuto-site` and listens on port `3000`
-inside the Docker network `npm_proxy`.
-
-If Nginx Proxy Manager is running in Docker, attach it to the same network:
-
-```bash
-docker network connect npm_proxy nginx-proxy-manager
-```
-
-Then create a Proxy Host:
-
-- Forward Hostname / IP: `imbuto-site`
-- Forward Port: `3000`
-- Scheme: `http`
-- Enable Websockets Support
-- Request an SSL certificate in the SSL tab
-
-The workflow also binds the app to `127.0.0.1:1014` on the VPS. If Nginx Proxy
-Manager is installed directly on the same VPS, proxy to `127.0.0.1` on port
-`1014`.
-# Local-only workspace notice
-
-The deployment instructions below are retained as historical reference. Use
-`LOCAL_DEVELOPMENT.md` for this workspace. Deployment automation is inactive;
-do not use production credentials or deploy from this sanitized copy without a
-separate review.
-
+Never place private keys or base64 credentials in source, image build arguments,
+Docker build context, command history, or logs. Supply new designated runtime
+credentials through the deployment platform's secret mechanism only after the
+production configuration is approved. No local credential auto-discovery exists.

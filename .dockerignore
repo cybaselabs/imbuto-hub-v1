@@ -4,3 +4,12 @@ node_modules
 .env*
 imbuto-web-applications-*.json
 README.md
+
+.local-dev
+INTEGRATION_STATUS.*
+*.log
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+.github

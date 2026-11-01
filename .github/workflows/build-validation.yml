@@ -1,0 +1,45 @@
+name: Recovery build validation (no deployment)
+
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: imbuto-recovery-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HUSKY: '0'
+      npm_config_ignore_scripts: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      IMBUTO_LOCAL_ONLY: 'true'
+      IMBUTO_EXTERNAL_SERVICES: 'false'
+      IMBUTO_ENABLE_SUBMISSIONS: 'false'
+      NEXT_PUBLIC_IMBUTO_LOCAL_ONLY: 'true'
+      NEXT_PUBLIC_IMBUTO_DEV_SHEETS: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.2'
+          registry-url: https://registry.npmjs.org/
+      - name: Lockfile-enforced installation without lifecycle scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund --strict-ssl=true
+      - name: Type check
+        run: node node_modules/typescript/bin/tsc --noEmit --incremental false
+      - name: Lint
+        run: node node_modules/eslint/bin/eslint.js .
+      - name: Reviewed offline regression checks
+        run: node --test tests/dev-sheets-boundary.test.mjs tests/local-forms.test.cjs tests/minimatch-compat.test.cjs
+      - name: Build with bundled fonts and no service credentials
+        run: node node_modules/next/dist/bin/next build --webpack
+      - name: Verify manifests remain unchanged
+        run: git diff --exit-code -- package.json package-lock.json
