@@ -3,19 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/start-development.mjs",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "node init && node scripts/start-local.mjs dev",
+    "build": "node init && node scripts/start-local.mjs build",
+    "start": "node init && node scripts/start-local.mjs start",
+    "typecheck": "node scripts/start-local.mjs typecheck",
+    "lint": "node scripts/start-local.mjs lint",
+    "check:dependencies": "node scripts/start-local.mjs dependencycheck",
+    "check:forms": "node scripts/start-local.mjs formcheck"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.7.0",
-    "next": "16.2.1",
+    "next": "16.4.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-leaflet": "^5.0.0"
+  },
+  "overrides": {
+    "minimatch@^3.1.2": "file:./vendor/minimatch-legacy-compat-1.0.0.tgz",
+    "minimatch@^3.1.5": "file:./vendor/minimatch-legacy-compat-1.0.0.tgz",
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.3"
+    }
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -24,7 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.1",
+    "eslint-config-next": "16.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

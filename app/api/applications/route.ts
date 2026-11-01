@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { submissionsAllowed } from "../../../lib/local-preview-policy.cjs";
 import { appendApplicationToGoogleSheet } from "../../../lib/google-sheets";
 import { checkRateLimit } from "../../../lib/rate-limit";
 import { verifyTurnstileToken } from "../../../lib/turnstile";
+import { validateLocalMock } from "../../../lib/local-form-mock.cjs";
 
 export const runtime = "nodejs";
 
@@ -95,6 +97,7 @@ function namesMatch(signature: string, expectedName: string) {
 }
 
 export async function POST(request: Request) {
+  if (!submissionsAllowed()) return NextResponse.json({ error: "Submissions are disabled in local preview.", preview: true }, { status: 403 });
   const clientIp = getClientIp(request);
   const rateLimit = await checkRateLimit(clientIp, {
     limit: MAX_REQUESTS_PER_WINDOW,
@@ -134,6 +137,8 @@ export async function POST(request: Request) {
   }
 
   // Hidden honeypot field. Real applicants never see or fill this value.
+  const syntheticError = validateLocalMock("/api/applications", payload);
+  if (syntheticError) return NextResponse.json({ error: syntheticError }, { status: 400 });
   if (getText(payload.website, 200)) {
     return NextResponse.json({ ok: true });
   }
@@ -150,8 +155,8 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-  } catch (error) {
-    console.error("Turnstile verification unavailable:", error);
+  } catch {
+    console.error("Development verification unavailable.");
     return NextResponse.json(
       { error: "Security verification is temporarily unavailable. Please try again." },
       { status: 503 },
@@ -242,7 +247,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const reference = `YTH-${Date.now().toString(36).toUpperCase()}-${crypto
+  const reference = `DEV-YTH-${Date.now().toString(36).toUpperCase()}-${crypto
     .randomUUID()
     .slice(0, 6)
     .toUpperCase()}`;
@@ -252,8 +257,8 @@ export async function POST(request: Request) {
     await appendApplicationToGoogleSheet({
       reference,
       submittedAt,
-      status: "New",
-      submissionSource: "imbutohub.com/apply",
+      status: "Development test",
+      submissionSource: "http://127.0.0.1:3016/apply",
       ...application,
       declarationDate: submittedAt,
       consentDate:
@@ -269,8 +274,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ ok: true, reference });
-  } catch (error) {
-    console.error("Application submission failed:", error);
+  } catch {
+    console.error("Development application delivery failed; no credential or payload logged.");
     return NextResponse.json(
       { error: "We could not save your application. Please try again." },
       { status: 502 },

@@ -1,9 +1,9 @@
 import { createSign } from "node:crypto";
+import { submissionsAllowed } from "./local-preview-policy.cjs";
+import { googleDevFetch } from "./google-dev-fetch.cjs";
 
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GOOGLE_SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
-const DEFAULT_SPREADSHEET_ID =
-  "1_bW_2UZcd-f5AgR5sS6fZdVk7GDbxOAgmiuLLYM90qA";
 const DEFAULT_SHEET_NAME = "Applications";
 const APPLICATION_HEADERS = [
   "Reference",
@@ -90,6 +90,24 @@ export type ApplicationRow = {
 let cachedToken: CachedToken | null = null;
 const ensuredHeaderKeys = new Set<string>();
 
+export async function verifyDevelopmentSheet(config: {
+  spreadsheetId: string;
+  title: string;
+  marker: string;
+  tabs: string[];
+}) {
+  if (!submissionsAllowed()) throw new Error("Explicit development-only configuration required.");
+  const token = await getGoogleAccessToken();
+  const base = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}`;
+  const options = { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(15000) };
+  const response = await googleDevFetch(`${base}?fields=properties(title),sheets.properties(title)`, options);
+  if (!response.ok) throw new Error(`Development Sheet metadata denied (${response.status}).`);
+  const metadata = await response.json();
+  if (metadata.properties?.title !== config.title || !config.tabs.every((title) => metadata.sheets?.some((sheet: { properties?: { title?: string } }) => sheet.properties?.title === title))) throw new Error("Development Sheet identity/tabs mismatch.");
+  const marker = await googleDevFetch(`${base}/values/${encodeURIComponent("'Development Only'!B4")}`, options);
+  if (!marker.ok || (await marker.json()).values?.[0]?.[0] !== config.marker) throw new Error("Development Sheet marker mismatch.");
+}
+
 function encodeBase64Url(value: string) {
   return Buffer.from(value).toString("base64url");
 }
@@ -151,7 +169,7 @@ async function getGoogleAccessToken() {
     .sign(privateKey, "base64url");
   const assertion = `${unsignedToken}.${signature}`;
 
-  const response = await fetch(GOOGLE_TOKEN_URL, {
+  const response = await googleDevFetch(GOOGLE_TOKEN_URL, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
@@ -165,7 +183,7 @@ async function getGoogleAccessToken() {
 
   if (!response.ok || !result.access_token) {
     throw new Error(
-      result.error_description || result.error || "Google authentication failed.",
+      `Development Google authentication failed (${response.status}).`,
     );
   }
 
@@ -212,7 +230,7 @@ async function ensureSheetAndHeaders(
     "fields",
     "sheets.properties(sheetId,title,gridProperties(columnCount))",
   );
-  const metadataResponse = await fetch(metadataUrl, {
+  const metadataResponse = await googleDevFetch(metadataUrl, {
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: "no-store",
     signal: AbortSignal.timeout(15_000),
@@ -238,7 +256,7 @@ async function ensureSheetAndHeaders(
   );
 
   if (!sheet) {
-    const createResponse = await fetch(`${spreadsheetUrl}:batchUpdate`, {
+    const createResponse = await googleDevFetch(`${spreadsheetUrl}:batchUpdate`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -273,7 +291,7 @@ async function ensureSheetAndHeaders(
     const columnCount = sheet.properties?.gridProperties?.columnCount ?? 0;
 
     if (sheetId !== undefined && columnCount < headers.length) {
-      const expandResponse = await fetch(`${spreadsheetUrl}:batchUpdate`, {
+      const expandResponse = await googleDevFetch(`${spreadsheetUrl}:batchUpdate`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -311,7 +329,7 @@ async function ensureSheetAndHeaders(
   );
   url.searchParams.set("valueInputOption", "RAW");
 
-  const response = await fetch(url, {
+  const response = await googleDevFetch(url, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -339,12 +357,14 @@ export async function appendRowToGoogleSheet({
   headers: string[];
   values: Array<string | number | boolean>;
 }) {
+  if (!submissionsAllowed()) throw new Error("External submissions are disabled.");
   if (headers.length !== values.length) {
     throw new Error("Google Sheets headers and row values do not match.");
   }
 
   const spreadsheetId =
-    process.env.GOOGLE_SHEETS_SPREADSHEET_ID || DEFAULT_SPREADSHEET_ID;
+    process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+  if (!spreadsheetId) throw new Error("An explicitly configured development spreadsheet is required.");
   const accessToken = await getGoogleAccessToken();
   await ensureSheetAndHeaders(
     accessToken,
@@ -365,7 +385,7 @@ export async function appendRowToGoogleSheet({
   url.searchParams.set("valueInputOption", "RAW");
   url.searchParams.set("insertDataOption", "OVERWRITE");
 
-  const response = await fetch(url, {
+  const response = await googleDevFetch(url, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${accessToken}`,

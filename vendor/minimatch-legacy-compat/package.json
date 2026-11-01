@@ -1,0 +1,12 @@
+{
+  "name": "@imbuto/minimatch-legacy-compat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Project-local adapter for the reviewed ESLint consumers; not an upstream minimatch release",
+  "main": "index.cjs",
+  "license": "UNLICENSED",
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "minimatch-modern": "npm:minimatch@11.0.3"
+  }
+}

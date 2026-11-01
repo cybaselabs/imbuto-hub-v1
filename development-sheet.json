@@ -1,0 +1,12 @@
+{
+  "spreadsheetId": "CONFIGURE_SEPARATE_DEVELOPMENT_SHEET",
+  "title": "CONFIGURE_DEVELOPMENT_SHEET_TITLE",
+  "marker": "CONFIGURE_DEVELOPMENT_MARKER",
+  "port": 3016,
+  "tabs": [
+    "Applications",
+    "Volunteers",
+    "Partnerships",
+    "Support Requests"
+  ]
+}
